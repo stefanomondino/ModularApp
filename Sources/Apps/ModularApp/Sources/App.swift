@@ -1,14 +1,14 @@
-import SwiftUI
 import DesignSystem
-import UIKit
 import Onboarding
+import SwiftUI
+import UIKit
 
 @main
 struct App: SwiftUI.App {
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            OnboardingView()
+            OnboardingView(viewModel: OnboardingView.ViewModel())
                 .environment(\.design, Design.shared)
         }.onChange(of: scenePhase, initial: true) { _, newPhase in
             // Monitoring the app's lifecycle changes
@@ -23,14 +23,6 @@ struct App: SwiftUI.App {
             @unknown default:
                 print("Unknown state")
             }
-        }
-    }
-}
-
-public extension Design {
-    @MainActor func setup() {
-        typography.register(for: .onboardingCustomTitle) {
-            Typography(value: "Test value")
         }
     }
 }

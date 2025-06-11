@@ -30,13 +30,13 @@
 <text text-anchor="middle" x="240.12" y="-84.95" font-family="Times,serif" font-size="14.00">DesignSystem</text>
 </g>
 <!-- DesignSystem&#45;&gt;DataStructures -->
-<g id="edge1" class="edge">
+<g id="edge2" class="edge">
 <title>DesignSystem&#45;&gt;DataStructures</title>
 <path fill="none" stroke="black" d="M192.66,-71.7C165.59,-61.82 131.51,-49.4 103.25,-39.1"/>
 <polygon fill="black" stroke="black" points="104.75,-35.92 94.16,-35.78 102.35,-42.5 104.75,-35.92"/>
 </g>
 <!-- DesignSystem&#45;&gt;DependencyContainer -->
-<g id="edge2" class="edge">
+<g id="edge3" class="edge">
 <title>DesignSystem&#45;&gt;DependencyContainer</title>
 <path fill="none" stroke="black" d="M226.04,-71.7C219.48,-63.64 211.54,-53.89 204.28,-44.98"/>
 <polygon fill="black" stroke="black" points="207.04,-42.82 198.01,-37.28 201.61,-47.24 207.04,-42.82"/>
@@ -49,7 +49,7 @@
 <text text-anchor="middle" x="297.12" y="-12.95" font-family="Times,serif" font-size="14.00">Logger</text>
 </g>
 <!-- DesignSystem&#45;&gt;Logger -->
-<g id="edge3" class="edge">
+<g id="edge4" class="edge">
 <title>DesignSystem&#45;&gt;Logger</title>
 <path fill="none" stroke="black" d="M254.21,-71.7C260.77,-63.64 268.71,-53.89 275.97,-44.98"/>
 <polygon fill="black" stroke="black" points="278.64,-47.24 282.24,-37.28 273.21,-42.82 278.64,-47.24"/>
@@ -62,7 +62,7 @@
 <text text-anchor="middle" x="373.12" y="-12.95" font-family="Times,serif" font-size="14.00">Streams</text>
 </g>
 <!-- DesignSystem&#45;&gt;Streams -->
-<g id="edge4" class="edge">
+<g id="edge1" class="edge">
 <title>DesignSystem&#45;&gt;Streams</title>
 <path fill="none" stroke="black" d="M273.34,-71.52C291.39,-62.02 313.84,-50.2 332.88,-40.18"/>
 <polygon fill="black" stroke="black" points="334.49,-43.29 341.71,-35.53 331.23,-37.09 334.49,-43.29"/>

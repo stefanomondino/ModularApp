@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env sh
+#MISE description="Creates required sourcery files in the Sources directory"
 
 start_dir="Sources"
   if [ -z "$start_dir" ]; then

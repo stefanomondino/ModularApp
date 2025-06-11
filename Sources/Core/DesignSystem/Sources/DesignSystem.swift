@@ -23,7 +23,11 @@ public struct TestView: View {
     public init() {}
     public var body: some View {
         VStack {
-            Text(design.typography.test.temporaryValue)
+            Text("Ciao")
         }
     }
+}
+
+#Preview {
+    TestView()
 }
