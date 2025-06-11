@@ -1,22 +1,21 @@
-import SwiftUI
 import DependencyContainer
+import SwiftUI
 
 public final class Design: MainActorProvider {
     @MainActor public var provider: MainActorTypeProvider = [:]
-    
+
     var name: String { "Design system" }
     public static let shared = Design()
-    
-    private init() {          
-    }
-  
+
+    public init() {}
+
     @MainActor public var typography: Typography.Provider {
         resolve(default: .init())
     }
 }
 
 public extension EnvironmentValues {
-    @Entry var design: Design = Design.shared
+    @Entry var design: Design = .shared
 }
 
 public struct TestView: View {
