@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
-# mise description="Setup project structur and git hooks and create project with Tuist"
+#MISE description="Setup project structure and git hooks and create project with Tuist"
+#MISE depends=["sourcery"]
+#MISE alias="s"
 
 setupGit() {
   if [ -d ".git" ]; then
