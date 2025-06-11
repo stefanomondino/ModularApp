@@ -13,10 +13,12 @@ public protocol MainActorProvider: AnyObject, Sendable {
 public typealias MainActorTypeProvider = [ObjectIdentifier: () -> Any]
 
 public extension MainActorProvider {
-    
-    @MainActor func register<Value: Sendable>(for key: Key, callback: @Sendable @escaping @MainActor () -> Value) {
+    @discardableResult
+    @MainActor func register<Value: Sendable>(for key: Key, callback: @Sendable @escaping @MainActor () -> Value) -> Self {
         provider[key] = { callback() }
+        return self
     }
+
     @MainActor func resolve<Value: Sendable>(_ key: Key, default defaultValue: Value) -> Value {
         guard let value = (provider[key]?() as? Value) else {
             register(for: key) { defaultValue }
@@ -24,20 +26,23 @@ public extension MainActorProvider {
         }
         return value
     }
-    
+
     @MainActor func resolve<Value: Sendable>(_ key: Key) -> Value? {
         provider[key]?() as? Value
     }
 }
 
 public extension MainActorProvider where Key == ObjectIdentifier {
-    @MainActor func register<Value: Sendable>(for key: Value.Type = Value.self, callback: @Sendable @escaping @MainActor () -> Value) {
+    @discardableResult
+    @MainActor func register<Value: Sendable>(for key: Value.Type = Value.self, callback: @Sendable @escaping @MainActor () -> Value) -> Self {
         register(for: ObjectIdentifier(key), callback: callback)
+        return self
     }
-    
+
     @MainActor func resolve<Value: Sendable>(_ key: Value.Type = Value.self, default defaultValue: Value) -> Value {
         resolve(ObjectIdentifier(key), default: defaultValue)
     }
+
     @MainActor func resolve<Value: Sendable>(_ key: Value.Type = Value.self) -> Value? {
         resolve(ObjectIdentifier(key))
     }
@@ -48,30 +53,30 @@ public extension MainActorProvider where Key == ObjectIdentifier {
     public init(defaultValue: Value) {
         self.defaultValue = defaultValue
     }
-    
+
     public init() where Value: ExpressibleByNilLiteral {
-        self.defaultValue = nil
+        defaultValue = nil
     }
-    
+
     @available(*, unavailable,
-       message: "This property wrapper can only be applied to classes")
+               message: "This property wrapper can only be applied to classes")
     public var wrappedValue: Value {
-            get { fatalError() }
-            // swiftlint:disable unused_setter_value
-            set { fatalError() }
-        }
-        
+        get { fatalError() }
+        // swiftlint:disable unused_setter_value
+        set { fatalError() }
+    }
+
     public static subscript<Container: MainActorProvider>(
-            _enclosingInstance instance: Container,
-            wrapped wrappedKeyPath: ReferenceWritableKeyPath<Container, Value>,
-            storage storageKeyPath: ReferenceWritableKeyPath<Container, Self>
-        ) -> Value where Container.Key == ObjectIdentifier {
-            get {
-                if let value = instance.resolve(Value.self) {
-                    return value
-                }
-                return instance[keyPath: storageKeyPath].defaultValue
+        _enclosingInstance instance: Container,
+        wrapped _: ReferenceWritableKeyPath<Container, Value>,
+        storage storageKeyPath: ReferenceWritableKeyPath<Container, Self>
+    ) -> Value where Container.Key == ObjectIdentifier {
+        get {
+            if let value = instance.resolve(Value.self) {
+                return value
             }
-            set {}
+            return instance[keyPath: storageKeyPath].defaultValue
         }
+        set {}
+    }
 }

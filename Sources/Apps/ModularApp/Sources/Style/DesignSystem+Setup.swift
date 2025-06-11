@@ -12,5 +12,6 @@ import Foundation
 extension Design {
     @MainActor func setup() {
         setupTypography()
+        setupColor()
     }
 }

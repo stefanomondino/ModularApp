@@ -8,37 +8,75 @@
 import SwiftUI
 
 public struct PillButton: View {
+    let action: @Sendable () async -> Void
+    let title: String
+    let style: Style
+    public init(
+        _ title: String = "Button",
+        style: Style,
+        action: @Sendable @escaping () async -> Void = {}
+    ) {
+        self.action = action
+        self.title = title
+        self.style = style
+    }
+
     public var body: some View {
-        Button(action: {},
+        Button(action: { Task {
+                   await action()
+               } },
                label: {
                    Text("Button")
                })
-               .buttonStyle(Style(showArrow: true))
+               .buttonStyle(style)
     }
 }
 
 public extension PillButton {
-    struct Style {
+    struct Style: ButtonStyle {
+        @Environment(\.isEnabled) var isEnabled: Bool
+
+        public let foregroundColor: ColorConvertible
+        public let backgroundColor: ColorConvertible
         public let showArrow: Bool
-    }
-}
 
-extension PillButton.Style: ButtonStyle {
-    public func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            configuration.label
-            if showArrow {
-                Image(systemName: "chevron.right")
-            }
+        public init(
+            foregroundColor: ColorConvertible,
+            backgroundColor: ColorConvertible,
+            showArrow: Bool
+        ) {
+            self.foregroundColor = foregroundColor
+            self.backgroundColor = backgroundColor
+            self.showArrow = showArrow
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
-        .background(Color.blue)
-        .foregroundColor(.white)
-        .clipShape(Capsule())
+
+        public func makeBody(configuration: Configuration) -> some View {
+            HStack(spacing: 8) {
+                if configuration.isPressed {
+                    Text("\(isEnabled ? "Enabled" : "Disabled")")
+
+                } else {
+                    configuration.label
+                }
+                if showArrow {
+                    Image(systemName: "chevron.right")
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background { backgroundColor.swiftUIColor }
+            .foregroundColor(foregroundColor)
+            .clipShape(Capsule())
+        }
     }
 }
 
-#Preview {
-    PillButton()
+#Preview(traits: .design) {
+    @Previewable @Environment(\.design) var design
+    VStack {
+        PillButton(style: .init(foregroundColor: design.color.primary,
+                                backgroundColor: design.color.secondary,
+                                showArrow: true))
+//        PillButton().disabled(true)
+    }
 }

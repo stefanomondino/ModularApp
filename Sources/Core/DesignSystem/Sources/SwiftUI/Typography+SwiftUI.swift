@@ -9,18 +9,19 @@ import Foundation
 import SwiftUI
 
 public extension View {
-    func typography(_ typography: Typography) -> some View {
-        modifier(TypographyModifier(value: .value(typography), dynamic: true))
+    func typography(_ typography: Typography, dynamic: Bool = true) -> some View {
+        modifier(TypographyModifier(value: .value(typography), dynamic: dynamic))
     }
 
     func typography(_ keyPath: KeyPath<Typography.Provider, Typography>,
-                    provider: Typography.Provider) -> some View {
-        typography(provider[keyPath: keyPath])
+                    provider: Typography.Provider,
+                    dynamic: Bool = true) -> some View {
+        typography(provider[keyPath: keyPath], dynamic: dynamic)
     }
 }
 
 struct TypographyModifier: ViewModifier {
-    @MainActor enum AccessValue: Sendable {
+    @MainActor enum AccessValue {
         case value(Typography)
         case keyPath(KeyPath<Typography.Provider, Typography>)
         func extract(with design: Design) -> Typography {
@@ -43,6 +44,7 @@ struct TypographyModifier: ViewModifier {
         let typography = value.extract(with: design)
         return content
             .font(.init(typography.font(dynamic: dynamic) as CTFont))
+            .textCase(typography.textCase)
     }
 }
 

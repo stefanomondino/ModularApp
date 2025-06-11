@@ -12,10 +12,19 @@ public struct OnboardingView: View {
     public var body: some View {
         VStack {
             Text("Welcome to the Onboarding Screen")
+                .typography(design.typography.h1)
+                .foregroundColor(design.color.primary)
+                .accessibilityLabel("Welcome")
+                .accessibilityHidden(true)
 //            Text(design.typography.onboardingCustomTitle.temporaryValue)
             Text(viewModel.title)
-
-            Button(action: { viewModel.onTap() },
+                .typography(design.typography.h1)
+                .foregroundColor(design.color.background)
+            Button(action: {
+                       withAnimation {
+                           viewModel.onTap()
+                       }
+                   },
                    label: { Text("Tap Me") })
         }
     }
@@ -34,44 +43,21 @@ public extension OnboardingView {
         public init() {}
 
         public func onTap() {
-            title = ["Onboarding Title", "New Title"].randomElement() ?? "Default Title"
+            Design.shared.typography.register(for: .h1) {
+                Typography(family: .code,
+                           weight: .black,
+                           size: .init(integerLiteral: (24 ... 50).randomElement() ?? 24),
+                           textCase: .uppercase)
+            }
+
+//            title = ["Onboarding Title", "New Title"].randomElement() ?? "Default Title"
         }
     }
-}
-
-public extension Typography.Key {
-    static var onboardingCustomTitle: Self { "onboardingCustomTitle" }
 }
 
 #Preview(traits: .design) {
-    let viewModel = OnboardingViewModelMock()
-    viewModel.title = "Preview Title"
+    let viewModel = OnboardingView.ViewModel()
+//    viewModel.title = "Preview Title"
 
     return OnboardingView(viewModel: viewModel)
-}
-
-public extension PreviewTrait where T == Preview.ViewTraits {
-    static var design: Self {
-        if #available(iOS 18.0, *) {
-            .modifier(DesignPreviewModifier())
-        } else {
-            .sizeThatFitsLayout
-        }
-    }
-}
-
-public struct DesignPreviewModifier: PreviewModifier {
-    public static func makeSharedContext() async throws -> DesignSystem.Design {
-        let design = DesignSystem.Design()
-
-//        design.typography.register(for: .onboardingCustomTitle) {
-//            Typography(value: "Preview Custom Title from traits")
-//        }
-
-        return design
-    }
-
-    public func body(content: Content, context: Design) -> some View {
-        content.environment(\.design, context)
-    }
 }

@@ -17,6 +17,7 @@ public extension Typography {
         }
     }
 
+    @Observable
     @dynamicMemberLookup
     @MainActor final class Provider: MainActorProvider {
         public var provider: [Typography.Key: () -> Any] = [:]
@@ -31,5 +32,14 @@ public extension Typography {
         public subscript(dynamicMember key: Key) -> Typography {
             resolve(key, default: defaultValue)
         }
+
+        public func get(_ key: Key) -> Typography {
+            resolve(key, default: defaultValue)
+        }
     }
+}
+
+public extension Typography.Key {
+    static var h1: Self { "h1" }
+    static var body: Self { "body" }
 }
