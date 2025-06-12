@@ -41,7 +41,7 @@ public extension Skeleton {
                     destinations: Destinations,
                     deploymentTargets: DeploymentTargets,
                     product: ProjectDefinition.Product = .automaticFramework,
-                    swiftVersion: SwiftVersion = .default,
+                    swiftVersion: SwiftVersion = .v6,
                     dependencies: Dependencies = .init(),
                     testDependencies: TestDependencies = .init(),
                     settings: Settings? = nil,

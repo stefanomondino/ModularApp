@@ -29,12 +29,14 @@ struct App: SwiftUI.App {
     }
 }
 
-struct ContentView: View {
-    var body: some View {
-        TestView()
-    }
+#Preview(traits: .design(.app)) {
+    OnboardingView(viewModel: OnboardingView.ViewModel())
 }
 
-#Preview {
-    ContentView()
+public extension DesignPreviewModifier.Customization {
+    static var app: Self {
+        .init {
+            $0.setup()
+        }
+    }
 }

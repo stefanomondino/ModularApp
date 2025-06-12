@@ -14,7 +14,7 @@ public struct PillButton: View {
     public init(
         _ title: String = "Button",
         style: Style,
-        action: @Sendable @escaping () async -> Void = {}
+        action: @Sendable @escaping @MainActor () async -> Void = {}
     ) {
         self.action = action
         self.title = title
@@ -71,7 +71,7 @@ public extension PillButton {
     }
 }
 
-#Preview(traits: .design) {
+#Preview(traits: .design(.baseTypography)) {
     @Previewable @Environment(\.design) var design
     VStack {
         PillButton(style: .init(foregroundColor: design.color.primary,

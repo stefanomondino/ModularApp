@@ -19,27 +19,16 @@ public extension Color {
     }
 
     @Observable
-    @dynamicMemberLookup
-    @MainActor final class Provider: MainActorProvider {
+    final class Provider: DesignValueProvider {
         public var provider: [Color.Key: () -> Any] = [:]
-        public typealias Key = Color.Key
-        let defaultValue: ColorConvertible
-
+        public let defaultValue: ColorConvertible
         public init(defaultValue: ColorConvertible = "#000000") {
             self.defaultValue = defaultValue
-        }
-
-        public subscript(dynamicMember key: Key) -> ColorConvertible {
-            resolve(key, type: ColorConvertible.self, default: defaultValue)
-        }
-
-        public func get(_ key: Key) -> ColorConvertible {
-            resolve(key, type: ColorConvertible.self, default: defaultValue)
         }
     }
 }
 
-public extension Color.Provider.Key {
+public extension Color.Key {
     static var primary: Self { "primary" }
     static var secondary: Self { "secondary" }
     static var background: Self { "background" }

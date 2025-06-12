@@ -9,27 +9,32 @@ import Foundation
 import SwiftUI
 
 public extension View {
-    func typography(_ typography: Typography, dynamic: Bool = true) -> some View {
-        modifier(TypographyModifier(value: .value(typography), dynamic: dynamic))
+    func typography(_ typography: Typography,
+                    dynamic: Bool = true) -> some View {
+        modifier(TypographyModifier(value: .value(typography),
+                                    dynamic: dynamic,
+                                    provider: nil))
     }
 
-    func typography(_ keyPath: KeyPath<Typography.Provider, Typography>,
-                    provider: Typography.Provider,
-                    dynamic: Bool = true) -> some View {
-        typography(provider[keyPath: keyPath], dynamic: dynamic)
+    func typography(_ key: Typography.Provider.Key,
+                    dynamic: Bool = true,
+                    provider: Typography.Provider? = nil) -> some View {
+        modifier(TypographyModifier(value: .key(key),
+                                    dynamic: dynamic,
+                                    provider: provider))
     }
 }
 
 struct TypographyModifier: ViewModifier {
-    @MainActor enum AccessValue {
+    @MainActor fileprivate enum AccessValue {
         case value(Typography)
-        case keyPath(KeyPath<Typography.Provider, Typography>)
-        func extract(with design: Design) -> Typography {
+        case key(Typography.Key)
+        func extract(with provider: Typography.Provider) -> Typography {
             switch self {
             case let .value(value):
                 return value
-            case let .keyPath(keyPath):
-                return design.typography[keyPath: keyPath]
+            case let .key(key):
+                return provider.get(key)
             }
         }
     }
@@ -37,20 +42,29 @@ struct TypographyModifier: ViewModifier {
     @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.design) var design: Design
 
-    let value: AccessValue
-    let dynamic: Bool
-
+    fileprivate let value: AccessValue
+    fileprivate let dynamic: Bool
+    fileprivate let provider: Typography.Provider?
     func body(content: Content) -> some View {
-        let typography = value.extract(with: design)
+        let typography = value.extract(with: provider ?? design.typography)
         return content
             .font(.init(typography.font(dynamic: dynamic) as CTFont))
             .textCase(typography.textCase)
     }
 }
 
-#Preview {
+#Preview(traits: .design(.baseTypography)) {
     Text("Ciao")
-        .typography(.init(family: .system,
-                          weight: .black,
-                          size: 30))
+        .typography(.h1)
+    Text("Welcome to our DesignSystem")
+        .typography(.h2)
+}
+
+public extension DesignPreviewModifier.Customization {
+    static var baseTypography: Self {
+        .init {
+            $0.typography.h1 = Typography(family: .system, weight: .black, size: 48)
+            $0.typography.h2 = Typography(family: .system, weight: .bold, size: 20)
+        }
+    }
 }

@@ -6,10 +6,20 @@
 //
 import SwiftUI
 
+public typealias DesignPreview = PreviewTrait<Preview.ViewTraits>
+
 public extension PreviewTrait where T == Preview.ViewTraits {
-    static var design: Self {
+    static func design() -> Self {
+        design(.default)
+    }
+
+    static func design(_ customizations: DesignPreviewModifier.Customization...) -> Self {
+        design(customizations)
+    }
+
+    static func design(_ customizations: [DesignPreviewModifier.Customization]) -> Self {
         if #available(iOS 18.0, *) {
-            .modifier(DesignPreviewModifier())
+            .modifier(DesignPreviewModifier(customizations: customizations))
         } else {
             .sizeThatFitsLayout
         }
@@ -17,21 +27,32 @@ public extension PreviewTrait where T == Preview.ViewTraits {
 }
 
 public struct DesignPreviewModifier: PreviewModifier {
+    public struct Customization: Sendable {
+        let customization: @MainActor (DesignSystem.Design) -> Void
+        public init(customization: @MainActor @escaping (DesignSystem.Design) -> Void) {
+            self.customization = customization
+        }
+
+        @MainActor func callAsFunction(_ design: DesignSystem.Design) -> Design {
+            customization(design)
+            return design
+        }
+
+        public static var `default`: Self {
+            Customization { _ in }
+        }
+    }
+
+    fileprivate let customizations: [Customization]
     public static func makeSharedContext() async throws -> DesignSystem.Design {
-        let design = DesignSystem.Design()
+        DesignSystem.Design()
+    }
 
-        design.typography.register(for: .h1) {
-            Typography(family: .code, size: 25)
-        }
-
-        design.color.register(for: .primary) { "#00FF00" }
-        design.color.register(for: .secondary) {
-            ["#ff0000"]
-        }
-        return design
+    @MainActor private func customize(_ design: DesignSystem.Design) -> DesignSystem.Design {
+        customizations.reduce(design) { $1($0) }
     }
 
     public func body(content: Content, context: Design) -> some View {
-        content.environment(\.design, context)
+        content.environment(\.design, customize(context))
     }
 }

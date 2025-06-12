@@ -12,22 +12,21 @@ import SwiftUI
 
 extension Design {
     @MainActor func setupColor() {
-        let design = Design.shared
-        design.color
+        color
             .register(for: .primary) { Color.green }
             .register(for: .background) { Color.red }
             .register(for: .secondary, type: ColorConvertible.self) {
-                ["#ffcc00", "#00ffcc"]
-//                DesignSystem.LinearGradient(colors: [.red, Color.yellow],
-//                                            startPoint: .leading,
-//                                            endPoint: .trailing)
+                DesignSystem.RadialGradient(colors: [.red, Color.yellow],
+                                            center: .center,
+                                            startRadius: 0,
+                                            endRadius: 100)
             }
     }
 }
 
-extension Color {
-    static var green: ColorConvertible { "#00FF00" }
-    static var red: ColorConvertible { "#FF0000" }
-    static var blue: ColorConvertible { "#0000FF" }
-    static var yellow: ColorConvertible { "#FFFF00" }
-}
+// extension Color {
+//    static var green: ColorConvertible { "#00FF00" }
+//    static var red: ColorConvertible { "#FF0000" }
+//    static var blue: ColorConvertible { "#0000FF" }
+//    static var yellow: ColorConvertible { "#FFFF00" }
+// }

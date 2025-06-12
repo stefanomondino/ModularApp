@@ -30,7 +30,11 @@ public extension Typography {
         }
 
         public subscript(dynamicMember key: Key) -> Typography {
-            resolve(key, default: defaultValue)
+            get {
+                resolve(key, default: defaultValue)
+            } set {
+                register(for: key, callback: { newValue })
+            }
         }
 
         public func get(_ key: Key) -> Typography {
@@ -41,5 +45,6 @@ public extension Typography {
 
 public extension Typography.Key {
     static var h1: Self { "h1" }
+    static var h2: Self { "h2" }
     static var body: Self { "body" }
 }

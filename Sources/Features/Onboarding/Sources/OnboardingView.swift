@@ -12,13 +12,14 @@ public struct OnboardingView: View {
     public var body: some View {
         VStack {
             Text("Welcome to the Onboarding Screen")
-                .typography(design.typography.h1)
+                .typography(.h1)
                 .foregroundColor(design.color.primary)
+                .backgroundColor(design.color.secondary)
                 .accessibilityLabel("Welcome")
                 .accessibilityHidden(true)
 //            Text(design.typography.onboardingCustomTitle.temporaryValue)
             Text(viewModel.title)
-                .typography(design.typography.h1)
+                .typography(.h2)
                 .foregroundColor(design.color.background)
             PillButton("Try me",
                        style: .init(foregroundColor: design.color.primary,
@@ -58,7 +59,7 @@ public extension OnboardingView {
     }
 }
 
-#Preview(traits: .design) {
+#Preview(traits: .design(.baseTypography)) {
     let viewModel = OnboardingView.ViewModel()
 //    viewModel.title = "Preview Title"
 
