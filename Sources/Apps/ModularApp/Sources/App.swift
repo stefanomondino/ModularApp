@@ -8,8 +8,10 @@ struct App: SwiftUI.App {
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            OnboardingView(viewModel: OnboardingView.ViewModel())
-                .environment(\.design, Design.shared)
+            VStack {
+                OnboardingView(viewModel: OnboardingView.ViewModel())
+
+            }.environment(\.design, Design.shared)
         }.onChange(of: scenePhase, initial: true) { _, newPhase in
             // Monitoring the app's lifecycle changes
 //            guard oldPhase != newPhase else { return }

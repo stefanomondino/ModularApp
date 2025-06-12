@@ -14,12 +14,17 @@ public typealias MainActorTypeProvider = [ObjectIdentifier: () -> Any]
 
 public extension MainActorProvider {
     @discardableResult
-    @MainActor func register<Value: Sendable>(for key: Key, callback: @Sendable @escaping @MainActor () -> Value) -> Self {
+    @MainActor func register<Value: Sendable>(for key: Key,
+                                              type _: Value.Type = Value.self,
+                                              callback: @Sendable @escaping @MainActor () -> Value) -> Self {
         provider[key] = { callback() }
         return self
     }
 
-    @MainActor func resolve<Value: Sendable>(_ key: Key, default defaultValue: Value) -> Value {
+    @MainActor func resolve<Value: Sendable>(_ key: Key,
+                                             type _: Value.Type = Value.self,
+                                             default defaultValue: Value) -> Value {
+        print("\(Value.self) for \(key)")
         guard let value = (provider[key]?() as? Value) else {
             register(for: key) { defaultValue }
             return defaultValue

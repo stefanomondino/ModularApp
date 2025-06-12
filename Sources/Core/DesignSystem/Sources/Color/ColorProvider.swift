@@ -30,11 +30,11 @@ public extension Color {
         }
 
         public subscript(dynamicMember key: Key) -> ColorConvertible {
-            resolve(key, default: defaultValue)
+            resolve(key, type: ColorConvertible.self, default: defaultValue)
         }
 
         public func get(_ key: Key) -> ColorConvertible {
-            resolve(key, default: defaultValue)
+            resolve(key, type: ColorConvertible.self, default: defaultValue)
         }
     }
 }

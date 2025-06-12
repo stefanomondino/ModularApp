@@ -16,6 +16,12 @@ extension Design {
         design.color
             .register(for: .primary) { Color.green }
             .register(for: .background) { Color.red }
+            .register(for: .secondary, type: ColorConvertible.self) {
+                ["#ffcc00", "#00ffcc"]
+//                DesignSystem.LinearGradient(colors: [.red, Color.yellow],
+//                                            startPoint: .leading,
+//                                            endPoint: .trailing)
+            }
     }
 }
 

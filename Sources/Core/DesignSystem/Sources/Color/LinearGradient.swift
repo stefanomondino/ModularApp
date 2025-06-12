@@ -53,6 +53,16 @@ public struct LinearGradient: ColorConvertible {
         self.endPoint = endPoint
         self.stops = stops
     }
+
+    public init(colors: [ColorConvertible],
+                startPoint: UnitPoint,
+                endPoint: UnitPoint) {
+        self.startPoint = startPoint
+        self.endPoint = endPoint
+        stops = colors.enumerated().map { index, color in
+            Stop(location: Double(index) / Double(colors.count - 1), color: color)
+        }
+    }
 }
 
 public extension LinearGradient {

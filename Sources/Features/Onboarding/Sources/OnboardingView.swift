@@ -20,12 +20,15 @@ public struct OnboardingView: View {
             Text(viewModel.title)
                 .typography(design.typography.h1)
                 .foregroundColor(design.color.background)
-            Button(action: {
-                       withAnimation {
-                           viewModel.onTap()
-                       }
-                   },
-                   label: { Text("Tap Me") })
+            PillButton("Try me",
+                       style: .init(foregroundColor: design.color.primary,
+                                    backgroundColor: design.color.secondary,
+                                    showArrow: true),
+                       action: {
+                           withAnimation {
+                               viewModel.onTap()
+                           }
+                       })
         }
     }
 }
