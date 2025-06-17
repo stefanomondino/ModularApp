@@ -20,6 +20,9 @@ extension AppContainer {
                 DummyView().navigationStack()
             }
         }
+        await routeContainer.register(for: WebRouteDefinition.self) { definition in
+            SafariRoute(url: definition.url)
+        }
     }
 }
 

@@ -13,6 +13,7 @@ public extension EnvironmentValues {
 }
 
 public protocol SwiftUIRoute: Route, Sendable {
+    init(_ view: @MainActor @Sendable @escaping () -> any View)
     var view: @MainActor @Sendable () -> AnyView { get }
 }
 
@@ -30,11 +31,24 @@ extension Router {
         let routeDefinition: RouteDefinition
         var id: String { routeDefinition.identifier }
         init?(router: Router, routeDefinition: RouteDefinition) async {
-            guard let route = await router.resolve(routeDefinition) as? NavigationRoute else {
+            guard let route = await router.resolve(routeDefinition) else {
                 return nil
             }
             self.routeDefinition = routeDefinition
-            self.route = route
+            switch route {
+            case let navigationRoute as NavigationRoute:
+                self.route = navigationRoute
+            case let uiKit as UIKitRoute:
+                guard uiKit.presentationMode.swiftUIType == NavigationRoute.self,
+                      let viewController = await uiKit.createViewController()
+                else {
+                    return nil
+                }
+                self.route = NavigationRoute.init {
+                    ViewControllerWrapper(viewController: viewController)
+                }
+            default: return nil
+            }
         }
     }
 }

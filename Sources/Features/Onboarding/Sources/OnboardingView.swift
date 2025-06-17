@@ -65,3 +65,10 @@ public extension OnboardingView {
 
     return OnboardingView(viewModel: viewModel)
 }
+
+import Routes
+
+public struct OnboardingRouteDefinition: RouteDefinition, Equatable {
+    public let identifier: String = UUID().uuidString
+    public init() {}
+}

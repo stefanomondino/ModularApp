@@ -8,7 +8,13 @@
 import Foundation
 import SwiftUI
 
-public struct SwiftUINavigationRoute: SwiftUIRoute {
+public struct SwiftUINavigationRoute: SwiftUIRoute, RouteDefinition, Sendable {
+    public var identifier: String { UUID().uuidString }
+
+    public func isSameRoute(as _: any RouteDefinition) -> Bool {
+        false
+    }
+
     public let view: @MainActor @Sendable () -> AnyView
     public init(_ view: @MainActor @Sendable @escaping () -> any View) {
         self.view = { AnyView(view()) }
@@ -42,10 +48,13 @@ extension Router {
         func body(content: Content) -> some View {
             NavigationStack(path: $path) {
                 content
+
                     .navigationDestination(for: NavigationPath<SwiftUINavigationRoute>.self) { path in
                         path.route.view()
                             .environment(\.router, router)
                     }
+                    .uiKitNavigation()
+                    .environment(\.router, router)
             }
             .task {
                 for await route in await self.router.definitionStream {

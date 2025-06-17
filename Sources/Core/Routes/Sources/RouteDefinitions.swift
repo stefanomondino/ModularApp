@@ -54,4 +54,4 @@ public struct EmptyRoute: Route {
 }
 
 /// A Scene generically represents a "screen" of the app. On UIKit apps, it can be a `UIViewController`
-public protocol Scene {}
+// public protocol Scene {}

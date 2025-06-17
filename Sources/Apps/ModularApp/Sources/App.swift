@@ -1,5 +1,6 @@
 import DesignSystem
 import Onboarding
+import Routes
 import SwiftUI
 import UIKit
 
@@ -15,7 +16,8 @@ struct App: SwiftUI.App {
                     PillButton("Click me", style: .init(foregroundColor: "#FFCC00",
                                                         backgroundColor: Color.clear,
                                                         showArrow: true)) {
-                        await appState.router.send(NavigationRouteDefinition())
+//                        await appState.router.send(OnboardingRouteDefinition())
+                        await appState.router.send(WebRouteDefinition("https://www.google.com"))
                     }
                     // OnboardingView(viewModel: OnboardingView.ViewModel())
                 } else {

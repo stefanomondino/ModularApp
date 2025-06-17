@@ -8,7 +8,13 @@
 import Foundation
 import SwiftUI
 
-public struct SwiftUIModalRoute: SwiftUIRoute {
+public struct SwiftUIModalRoute: SwiftUIRoute, RouteDefinition {
+    public let identifier: String = UUID().uuidString
+
+    public func isSameRoute(as _: any RouteDefinition) -> Bool {
+        false
+    }
+
     public let view: @MainActor @Sendable () -> AnyView
     public init(_ view: @MainActor @Sendable @escaping () -> any View) {
         self.view = { AnyView(view()) }
@@ -28,6 +34,7 @@ extension Router {
 
         func body(content: Content) -> some View {
             content
+                .uiKitModal()
                 .task {
                     guard let router else { return }
                     for await route in await router.definitionStream {

@@ -37,7 +37,7 @@ public actor Router {
     let routes: Signal<RouteDefinition> = .init()
     let container: Container
 
-    public init(container: Container = .init(), name: String = "Auto-created Router") {
+    public init(container: Container, name: String = "Auto-created Router") {
         self.container = container
         Task {
             for await route in await definitionStream {
