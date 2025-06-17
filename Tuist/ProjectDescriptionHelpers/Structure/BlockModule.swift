@@ -30,6 +30,7 @@ public extension Skeleton {
         public var isTestable: Bool
         public var hasDemoApp: Bool
         public var supportsParallelTesting: Bool
+        public var hasMacros: Bool
         public init(name: String,
                     folderName: String? = nil,
                     destinations: Destinations,
@@ -43,8 +44,10 @@ public extension Skeleton {
                     useSourcery: Bool = true,
                     isTestable: Bool = true,
                     supportsParallelTesting: Bool = true,
-                    hasDemoApp: Bool = false) {
+                    hasDemoApp: Bool = false,
+                    hasMacros: Bool = false) {
             self.name = name
+            self.hasMacros = hasMacros
             self.product = product.product
             self.swiftVersion = swiftVersion
             self.folderName = folderName ?? name

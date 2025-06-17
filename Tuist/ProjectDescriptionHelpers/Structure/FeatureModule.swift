@@ -35,7 +35,7 @@ public extension Skeleton {
         public var isTestable: Bool
         public var supportsParallelTesting: Bool
         public var hasDemoApp: Bool
-
+        public var hasMacros: Bool
         public init(name: String,
                     folderName: String? = nil,
                     destinations: Destinations,
@@ -49,7 +49,8 @@ public extension Skeleton {
                     useSourcery: Bool = true,
                     isTestable: Bool = true,
                     supportsParallelTesting: Bool = true,
-                    hasDemoApp: Bool = false) {
+                    hasDemoApp: Bool = false,
+                    hasMacros: Bool = false) {
             self.name = name
             self.swiftVersion = swiftVersion
             self.product = product.product
@@ -64,6 +65,7 @@ public extension Skeleton {
             self.isTestable = isTestable
             self.supportsParallelTesting = supportsParallelTesting
             self.hasDemoApp = hasDemoApp
+            self.hasMacros = hasMacros
         }
 
         public func makeDependency() -> TargetDependency? {

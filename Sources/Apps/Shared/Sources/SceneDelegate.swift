@@ -6,12 +6,19 @@
 //  Copyright © 2025 Stefano Mondino. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import DesignSystem
+import Foundation
+import Observation
+import SwiftUI
+import UIKit
 
-// final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+@MainActor
+final class SceneDelegate: UIResponder, UISceneDelegate {
+    func scene(_: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
 //        Design.shared.setup()
-//    }
-// }
+    }
+
+    func scene(_: UIScene, restoreInteractionStateWith _: NSUserActivity) {}
+
+    func sceneDidBecomeActive(_: UIScene) {}
+}

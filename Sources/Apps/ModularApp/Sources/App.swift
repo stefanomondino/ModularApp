@@ -5,26 +5,29 @@ import UIKit
 
 @main
 struct App: SwiftUI.App {
-    @Environment(\.scenePhase) var scenePhase
+    @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
+    var appState: AppState { appDelegate.container.state }
+//    @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
             VStack {
-                OnboardingView(viewModel: OnboardingView.ViewModel())
-
-            }.environment(\.design, Design.shared)
-        }.onChange(of: scenePhase, initial: true) { _, newPhase in
-            // Monitoring the app's lifecycle changes
-//            guard oldPhase != newPhase else { return }
-            switch newPhase {
-            case .active:
-                Design.shared.setup()
-            case .inactive:
-                Design.shared.setup()
-            case .background:
-                print("App is in the background")
-            @unknown default:
-                print("Unknown state")
+                if appState.isConfigured {
+                    PillButton("Click me", style: .init(foregroundColor: "#FFCC00",
+                                                        backgroundColor: Color.clear,
+                                                        showArrow: true)) {
+                        await appState.router.send(NavigationRouteDefinition())
+                    }
+                    // OnboardingView(viewModel: OnboardingView.ViewModel())
+                } else {
+                    ZStack {
+                        LaunchScreenView().ignoresSafeArea()
+                        ProgressView()
+                    }
+                }
             }
+            .modal()
+            .navigationStack(router: appState.router)
+            .environment(\.design, Design.shared)
         }
     }
 }
@@ -38,5 +41,26 @@ public extension DesignPreviewModifier.Customization {
         .init {
             $0.setup()
         }
+    }
+}
+
+public struct LaunchScreenView: UIViewControllerRepresentable {
+    let name: String
+    let bundle: Bundle
+    var showLogo: Bool
+    public init(name: String = "LaunchScreen",
+                bundle: Bundle = .main,
+                showLogo: Bool = true) {
+        self.name = name
+        self.bundle = bundle
+        self.showLogo = showLogo
+    }
+
+    public func makeUIViewController(context _: Context) -> UIViewController {
+        UIStoryboard(name: name, bundle: bundle).instantiateInitialViewController() ?? .init()
+    }
+
+    public func updateUIViewController(_ viewController: UIViewController, context _: Context) {
+        viewController.view.subviews.last?.isHidden = !showLogo
     }
 }
