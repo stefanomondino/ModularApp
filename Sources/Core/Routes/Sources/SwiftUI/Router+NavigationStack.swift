@@ -9,14 +9,16 @@ import Foundation
 import SwiftUI
 
 public struct SwiftUINavigationRoute: SwiftUIRoute, RouteDefinition, Sendable {
-    public var identifier: String { UUID().uuidString }
+    public let identifier: String
 
     public func isSameRoute(as _: any RouteDefinition) -> Bool {
         false
     }
 
     public let view: @MainActor @Sendable () -> AnyView
-    public init(_ view: @MainActor @Sendable @escaping () -> any View) {
+    public init(identifier: String = UUID().uuidString,
+                _ view: @MainActor @Sendable @escaping () -> any View) {
+        self.identifier = identifier
         self.view = { AnyView(view()) }
     }
 }
@@ -48,7 +50,7 @@ extension Router {
         func body(content: Content) -> some View {
             NavigationStack(path: $path) {
                 content
-
+                    .modal()
                     .navigationDestination(for: NavigationPath<SwiftUINavigationRoute>.self) { path in
                         path.route.view()
                             .environment(\.router, router)
@@ -66,6 +68,10 @@ extension Router {
                         case .single:
                             guard !self.path.isEmpty else { return }
                             self.path.removeLast()
+                        case let .identifier(id):
+                            while self.path.isEmpty == false {
+                                self.path = .init()
+                            }
                         case .root:
                             self.path = .init()
                         case let .count(count):
@@ -84,6 +90,7 @@ public struct BackRouteDefinition: RouteDefinition, Equatable {
         case single
         case root
         case count(Int)
+        case identifier(String)
     }
 
     public let identifier: String = "back"

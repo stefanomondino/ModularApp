@@ -48,8 +48,10 @@ public struct OnboardingView: View {
 public extension OnboardingView {
     @Observable
     @MainActor final class ViewModel: OnboardingViewModel {
-        public var title: String = "Onboarding Title"
-        public init() {}
+        public var title: String
+        public init(message: String = "Onboarding Title") {
+            title = message
+        }
 
         public func onTap() {
             Design.shared.typography.register(for: .h1) {
@@ -75,5 +77,8 @@ import Routes
 
 public struct OnboardingRouteDefinition: RouteDefinition, Equatable {
     public let identifier: String = UUID().uuidString
-    public init() {}
+    let message: String
+    public init(message: String) {
+        self.message = message
+    }
 }

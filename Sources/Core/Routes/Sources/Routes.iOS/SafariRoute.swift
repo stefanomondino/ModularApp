@@ -41,6 +41,7 @@ public struct WebRouteDefinition: RouteDefinition, Equatable {
     public let identifier: String = UUID().uuidString
     public let url: URL
     public let external: Bool
+
     public init(_ string: String, external: Bool = false) {
         url = URL(string: string) ?? .homeDirectory
         self.external = external

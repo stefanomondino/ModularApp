@@ -26,11 +26,12 @@ extension App {
         var body: some View {
             VStack {
                 if appState.isConfigured {
-                    PillButton("Click me", style: .init(foregroundColor: "#FFCC00",
-                                                        backgroundColor: Color.clear,
-                                                        showArrow: true)) {
-                        await appState.router.send(OnboardingRouteDefinition())
-//                        await appState.router.send(WebRouteDefinition("https://www.google.com"))
+                    PillButton("Click me",
+                               style: .init(foregroundColor: "#FFCC00",
+                                            backgroundColor: Color.clear,
+                                            showArrow: true)) {
+//                        await appState.router.send(OnboardingRouteDefinition(message: "ciao dalla home"))
+                        await appState.router.send(WebRouteDefinition("https://www.google.com"))
 //                        await appState.router.send(.webRoute("https://www.google.com"))
                     }
                     // OnboardingView(viewModel: OnboardingView.ViewModel())
@@ -38,10 +39,13 @@ extension App {
                     ZStack {
                         LaunchScreenView().ignoresSafeArea()
                         ProgressView()
+                            .foregroundStyle(.white)
+                            .padding(32)
+                            .background(Color.black.opacity(0.5))
+                            .cornerRadius(8)
                     }
                 }
             }
-            .modal()
             .navigationStack(router: appState.router)
         }
     }

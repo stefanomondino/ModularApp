@@ -9,15 +9,17 @@ import Foundation
 import SwiftUI
 
 public struct SwiftUIModalRoute: SwiftUIRoute, RouteDefinition {
-    public let identifier: String = UUID().uuidString
+    public let identifier: String
 
     public func isSameRoute(as _: any RouteDefinition) -> Bool {
         false
     }
 
     public let view: @MainActor @Sendable () -> AnyView
-    public init(_ view: @MainActor @Sendable @escaping () -> any View) {
+    public init(identifier: String = UUID().uuidString,
+                _ view: @MainActor @Sendable @escaping () -> any View) {
         self.view = { AnyView(view()) }
+        self.identifier = identifier
     }
 }
 

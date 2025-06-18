@@ -16,12 +16,25 @@ public final class Feature<Container: FeatureContainer>: Routes.Feature {
     let dependencies: Container
     public let container: ObjectContainer
     public var services: [any Service] {
-        get async { [] }
+        get async { await [
+            unsafeResolve(TestService.self)
+        ]
+        }
     }
 
     public init(_ container: Container) async {
         dependencies = container
         self.container = await container.container
+        await register(for: TestService.self, scope: .singleton) {
+            TestService()
+        }
         await setupRoutes()
+    }
+}
+
+final class TestService: Service {
+    func didFinishLaunching(with _: LaunchDelegateOptions?) -> Bool {
+        print("TestService didFinishLaunching")
+        return true
     }
 }

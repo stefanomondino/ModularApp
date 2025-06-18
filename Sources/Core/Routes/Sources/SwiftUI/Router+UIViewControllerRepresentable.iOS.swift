@@ -26,7 +26,7 @@ struct UIViewControllerNavigationModifier<CustomRoute: SwiftUIRoute & RouteDefin
                 for await definition in await router.definitionStream {
                     if let definition = await router.resolve(definition) as? UIKitRoute,
                        let viewController = await definition.createViewController() {
-                        await router.send(CustomRoute {
+                        await router.send(CustomRoute(identifier: UUID().uuidString) {
                             ViewControllerWrapper(viewController: viewController)
                         })
                     }
