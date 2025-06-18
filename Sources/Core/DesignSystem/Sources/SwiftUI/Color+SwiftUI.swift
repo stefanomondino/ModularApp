@@ -18,8 +18,8 @@ public extension View {
         }
     }
 
-    func foregroundColor(_ key: Color.Key, provider: Color.Provider) -> some View {
-        foregroundColor(provider.get(key))
+    func foregroundColor(_ key: Color.Key, provider: Color.Provider? = nil) -> some View {
+        modifier(ForegroundColorModifier(key: key, provider: provider))
     }
 
     @ViewBuilder
@@ -27,11 +27,35 @@ public extension View {
         if let gradient = color.swiftUIGradient {
             background(gradient)
         } else {
-            backgroundStyle(color.swiftUIColor)
+            background {
+                color.swiftUIColor
+            }
         }
     }
 
-    func backgroundColor(_ key: Color.Key, provider: Color.Provider) -> some View {
-        backgroundColor(provider.get(key))
+    func backgroundColor(_ key: Color.Key, provider: Color.Provider? = nil) -> some View {
+        modifier(BackgroundColorModifier(key: key, provider: provider))
+    }
+}
+
+struct BackgroundColorModifier: ViewModifier {
+    @Environment(\.design) var design: Design
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
+    let key: Color.Key
+    let provider: Color.Provider?
+    func body(content: Content) -> some View {
+        content.backgroundColor((provider ?? design.color).get(key))
+    }
+}
+
+struct ForegroundColorModifier: ViewModifier {
+    @Environment(\.design) var design: Design
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
+    let key: Color.Key
+    let provider: Color.Provider?
+    func body(content: Content) -> some View {
+        content.foregroundColor((provider ?? design.color).get(key))
     }
 }

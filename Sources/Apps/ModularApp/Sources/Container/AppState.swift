@@ -11,9 +11,15 @@ import Observation
 import Routes
 
 @Observable final class AppState {
+    static var empty: AppState {
+        .init(router: .init(container: .init(), name: "Empty AppState Router"))
+    }
+
     var isConfigured: Bool = false
     let router: Router
 
+    /// Creates a new AppState instance.
+    /// - Parameter router: a router connected to the app state.
     init(router: Router) {
         self.router = router
     }

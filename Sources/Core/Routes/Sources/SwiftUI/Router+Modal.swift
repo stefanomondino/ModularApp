@@ -47,6 +47,7 @@ extension Router {
                     if let router = router {
                         let internalRouter = Router(container: router.container, name: "Modal presentation")
                         path.route.view()
+                            .ignoresSafeArea()
                             .modifier(DismissModifier())
                             .environment(\.router, internalRouter)
                     }

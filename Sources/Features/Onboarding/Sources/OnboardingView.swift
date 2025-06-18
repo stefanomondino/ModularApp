@@ -10,26 +10,31 @@ public struct OnboardingView: View {
     }
 
     public var body: some View {
-        VStack {
-            Text("Welcome to the Onboarding Screen")
-                .typography(.h1)
-                .foregroundColor(design.color.primary)
-                .backgroundColor(design.color.secondary)
-                .accessibilityLabel("Welcome")
-                .accessibilityHidden(true)
-//            Text(design.typography.onboardingCustomTitle.temporaryValue)
-            Text(viewModel.title)
-                .typography(.h2)
-                .foregroundColor(design.color.background)
-            PillButton("Try me",
-                       style: .init(foregroundColor: design.color.primary,
-                                    backgroundColor: design.color.secondary,
-                                    showArrow: true),
-                       action: {
-                           withAnimation {
-                               viewModel.onTap()
-                           }
-                       })
+        ZStack {
+            Color.clear
+                .backgroundColor(.background)
+                .ignoresSafeArea()
+            VStack {
+                Text("Welcome to the Onboarding Screen")
+                    .typography(.h1)
+                    .foregroundColor(.primary)
+                    .backgroundColor(.secondary)
+                    .accessibilityLabel("Welcome")
+                    .accessibilityHidden(true)
+                //            Text(design.typography.onboardingCustomTitle.temporaryValue)
+                Text(viewModel.title)
+                    .typography(.h2)
+                    .foregroundColor(design.color.primary)
+                PillButton("Try me",
+                           style: .init(foregroundColor: design.color.primary,
+                                        backgroundColor: design.color.secondary,
+                                        showArrow: true),
+                           action: {
+                               withAnimation {
+                                   viewModel.onTap()
+                               }
+                           })
+            }
         }
     }
 }

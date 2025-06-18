@@ -51,3 +51,13 @@ public struct WebRouteDefinition: RouteDefinition, Equatable {
         self.external = external
     }
 }
+
+public extension Router.Identifier {
+    static func webRoute(_ url: URL, external: Bool = false) -> Router.Identifier {
+        .init(WebRouteDefinition(url, external: external))
+    }
+
+    static func webRoute(_ string: String, external: Bool = false) -> Router.Identifier {
+        .init(WebRouteDefinition(string, external: external))
+    }
+}

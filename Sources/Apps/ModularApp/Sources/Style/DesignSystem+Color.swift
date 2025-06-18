@@ -11,16 +11,34 @@ import Foundation
 import SwiftUI
 
 extension Design {
+    typealias AppColor = ModularAppAsset.Colors
+
     @MainActor func setupColor() {
         color
-            .register(for: .primary) { Color.green }
-            .register(for: .background) { Color.red }
+            .register(for: .primary) { AppColor.primary }
+            .register(for: .app) { "#56F30E" }
+            .register(for: .background) {
+                DesignSystem.RadialGradient(colors: [AppColor.background, Color.blue],
+                                            center: .center,
+                                            startRadius: 0,
+                                            endRadius: 300)
+            }
             .register(for: .secondary, type: ColorConvertible.self) {
-                DesignSystem.RadialGradient(colors: [.red, Color.yellow],
+                DesignSystem.RadialGradient(colors: [.red, Color.green],
                                             center: .center,
                                             startRadius: 0,
                                             endRadius: 100)
             }
+    }
+}
+
+extension Color.Key {
+    static var app: Self { "app" }
+}
+
+extension ModularAppColors: ColorConvertible {
+    public var hex: String {
+        swiftUIColor.hex
     }
 }
 

@@ -34,4 +34,4 @@ git init
 setupGit
 mise install
 tuist install
-tuist generate
+mise run project

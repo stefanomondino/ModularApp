@@ -4,7 +4,8 @@
 {% if files %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 import Foundation
-import SharedModel
+import DesignSystem
+
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
@@ -75,7 +76,9 @@ typealias {{name|swiftIdentifier:"pretty"}}{{suffix}} = {{productName|swiftIdent
         {%call typealiasIdentifier file.documents.first.data.name environment.productName "FontFamily" %}
         {%call typealiasIdentifier file.documents.first.data.name environment.productName "Asset" %}
         {%call typealiasIdentifier file.documents.first.data.name environment.productName "Images" %}
-        public struct EnvironmentImplementation: EnvironmentType {
+        {%call typealiasIdentifier file.documents.first.data.name environment.productName "Colors" %}
+        
+        public struct EnvironmentImplementation: Sendable {
             {% filter indent:2 %}
               {% for key,value in environment.constants %}
                 {% filter removeNewlines:"leading" %}

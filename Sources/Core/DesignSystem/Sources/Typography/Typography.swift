@@ -46,7 +46,7 @@ public struct Typography: Sendable {
                 numberOfLines: Int = 0,
                 baselineOffset: CGFloat = 0,
                 underlineStyle: UnderlineStyle? = nil,
-                lineHeight: LineHeight = .relative(0),
+                lineHeight: LineHeight = .relative(1),
                 textCase: Text.Case? = nil) {
         self.family = family
         self.baselineOffset = baselineOffset

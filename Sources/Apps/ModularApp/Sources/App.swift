@@ -8,16 +8,30 @@ import UIKit
 struct App: SwiftUI.App {
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
     var appState: AppState { appDelegate.container.state }
-//    @Environment(\.scenePhase) var scenePhase
+
     var body: some Scene {
         WindowGroup {
+            MainView()
+                .environment(\.appState, appState)
+                .environment(\.design, Design.shared)
+        }
+    }
+}
+
+extension App {
+    struct MainView: View {
+        @Environment(\.design) var design: DesignSystem.Design
+        @Environment(\.appState) var appState: AppState
+
+        var body: some View {
             VStack {
                 if appState.isConfigured {
                     PillButton("Click me", style: .init(foregroundColor: "#FFCC00",
                                                         backgroundColor: Color.clear,
                                                         showArrow: true)) {
-//                        await appState.router.send(OnboardingRouteDefinition())
-                        await appState.router.send(WebRouteDefinition("https://www.google.com"))
+                        await appState.router.send(OnboardingRouteDefinition())
+//                        await appState.router.send(WebRouteDefinition("https://www.google.com"))
+//                        await appState.router.send(.webRoute("https://www.google.com"))
                     }
                     // OnboardingView(viewModel: OnboardingView.ViewModel())
                 } else {
@@ -29,9 +43,12 @@ struct App: SwiftUI.App {
             }
             .modal()
             .navigationStack(router: appState.router)
-            .environment(\.design, Design.shared)
         }
     }
+}
+
+extension EnvironmentValues {
+    @Entry var appState: AppState = .empty
 }
 
 #Preview(traits: .design(.app)) {
