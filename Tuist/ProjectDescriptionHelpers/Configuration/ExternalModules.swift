@@ -2,7 +2,6 @@ import ProjectDescription
 import SkeletonPlugin
 
 extension Skeleton.ExternalModule {
-
     static func kingfisher() -> Skeleton.ExternalModule {
         .external(name: "Kingfisher")
     }
@@ -13,5 +12,9 @@ extension Skeleton.ExternalModule {
 
     static func asyncAlgorithms() -> Skeleton.ExternalModule {
         .external(name: "AsyncAlgorithms")
+    }
+
+    static func flyingFox() -> Skeleton.ExternalModule {
+        .external(name: "FlyingFox", isPrivate: true)
     }
 }

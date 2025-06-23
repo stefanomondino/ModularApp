@@ -42,7 +42,7 @@ public extension Skeleton.BlockModule {
               swiftVersion: .v6,
               dependencies: .init(external: []),
               testDependencies: .init(test: [.coreTesting()]),
-              synthesizers: [],
+              synthesizers: [.files(extensions: ["json"])],
               hasMacros: true)
     }
 }

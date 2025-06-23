@@ -24,4 +24,17 @@ public extension Skeleton.CoreModule {
               synthesizers: [],
               hasMacros: true)
     }
+
+    static func networking() -> Self {
+        .init(name: "Networking",
+              destinations: Constants.destinations,
+              deploymentTargets: .custom,
+              swiftVersion: .v6,
+              dependencies: .init(block: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+                                  core: []),
+              testDependencies: .init(test: [.coreTesting()],
+                                      external: [.flyingFox()]),
+              synthesizers: [],
+              hasMacros: false)
+    }
 }

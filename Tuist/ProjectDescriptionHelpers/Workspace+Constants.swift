@@ -16,15 +16,17 @@ public enum Constants {
 }
 
 @MainActor public let coreModules: [Skeleton.CoreModule] = [
-                                                            .designSystem()
-                                                            ]
+    .designSystem(),
+    .networking(),
+    .routes()
+]
 
 @MainActor public let blockModules: [Skeleton.BlockModule] = [
-                                                            .logger(),
-                                                            .dependencyContainer(),
-                                                            .streams(),
-                                                            .dataStructures()
-                                                            ]
+    .logger(),
+    .dependencyContainer(),
+    .streams(),
+    .dataStructures()
+]
 
 @MainActor public let bridgeModules: [Skeleton.BridgeModule] = []
 

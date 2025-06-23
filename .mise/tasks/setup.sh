@@ -33,5 +33,6 @@ ENDOFFILE
 git init
 setupGit
 mise install
+tuist clean plugins manifests
 tuist install
 mise run project

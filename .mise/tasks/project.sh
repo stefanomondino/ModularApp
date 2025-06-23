@@ -3,4 +3,4 @@
 #MISE alias="p"
 rm -rf Sources/Apps/*/Sources/Environments
 tuist scaffold environments
-tuist generate --open
+tuist generate --open --verbose
