@@ -16,14 +16,23 @@ class Server: Sendable {
         server = HTTPServer(port: port)
     }
 
-    func register(_ response: Response, for request: Request, delay: TimeInterval = 0) async throws {
+    func register(_ response: Response,
+                  for request: Request,
+                  delay: TimeInterval = 0,
+                  addTimestamp: Bool = false) async throws {
         await server.appendRoute(HTTPRoute(method: .init(rawValue: request.method.description),
-                                           path: request.path.description)) { _ in
+                                           path: request.path.description))
+    in
             if delay > 0 {
                 try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
             }
+            var headers: [HTTPHeader: String] = .init(response.headers.map { (HTTPHeader($0.key), $0.value) }, uniquingKeysWith: { _, last in last })
+            if addTimestamp {
+                headers[.init(rawValue: "x-custom-date")] = Date().timeIntervalSince1970.description
+            }
+
             return HTTPResponse(statusCode: .init(response.statusCode.rawValue, phrase: ""),
-                                headers: .init(response.headers.map { (HTTPHeader($0.key), $0.value) }, uniquingKeysWith: { _, last in last }),
+                                headers: headers,
                                 body: response.data)
         }
     }

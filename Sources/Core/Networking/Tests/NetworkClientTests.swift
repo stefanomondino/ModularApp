@@ -100,7 +100,7 @@ struct NetworkClientTests {
                 let name: String
             }
 
-            let request = Request(baseURL: "http://localhost:8083", path: "data", method: .get)
+            let request = Request(baseURL: "http://localhost:8083", path: "test", method: .get)
             let expectedData = TestData(id: 1, name: "Test")
             let expectedResponse = try Response(data: JSONEncoder().encode(expectedData))
 
@@ -108,6 +108,21 @@ struct NetworkClientTests {
 
             let actualResponse: Response.JSON<TestData> = try await client.response(request.json(TestData.self))
             #expect(try actualResponse.value() == expectedData, "Expected decoded response to match the expected data")
+        }
+    }
+
+    @Test("Simultaneous API calls are sharing underlying REST connection")
+    func concurrentCalls() async throws {
+        try await withServer { server in
+            let request = Request(baseURL: "http://localhost:8083", path: "concurrent", method: .get)
+            let expectedData = Data("concurrent".utf8)
+            let expectedResponse = Response(data: expectedData)
+            try await server.register(expectedResponse, for: request, delay: 2, addTimestamp: true)
+            async let response1 = client.response(request)
+            try await Task.sleep(for: .milliseconds(500))
+            async let response2 = client.response(request)
+            try await print(response1, response2)
+            #expect(try await response1 == response2)
         }
     }
 }

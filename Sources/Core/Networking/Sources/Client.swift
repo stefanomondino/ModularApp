@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import Streams
 
 public actor Client {
     let session: URLSession
     let mocker = Mocker()
+    private var cache: [Request: Signal<Result<Response, NetworkingError>>] = [:]
     public init(session: URLSession? = nil) {
         self.session = session ?? URLSession(configuration: .default)
     }
@@ -34,18 +36,40 @@ public actor Client {
         if let mockedResponse = await mockedResponse(for: request) {
             return mockedResponse
         }
+        if let cachedResponse = cache[request] {
+            for await result in cachedResponse.prefix(1) {
+                switch result {
+                case let .success(response):
+                    return response
+                case let .failure(error):
+                    throw error
+                }
+            }
+        }
+        let signal = Signal<Result<Response, NetworkingError>>()
+        var signalResult: Result<Response, NetworkingError>
+        cache[request] = signal
         do {
             let (result, httpResponse) = try await session.data(for: buildURLRequest(from: request))
-            guard let httpResponse = httpResponse as? HTTPURLResponse else {
-                throw NetworkingError.invalidResponse(httpResponse)
+            if let httpResponse = httpResponse as? HTTPURLResponse {
+                signalResult = .success(.init(data: result, response: httpResponse))
+            } else {
+                signalResult = .failure(NetworkingError.invalidResponse(httpResponse))
             }
-
-            return .init(data: result, response: httpResponse)
         } catch {
             switch error {
-            case let error as NetworkingError: throw error
-            default: throw .invalidResponse(request, underlyingError: error)
+            case let error as NetworkingError: signalResult = .failure(error)
+            default: signalResult = .failure(.invalidResponse(request, underlyingError: error))
             }
+        }
+
+        cache[request] = nil
+        await signal.send(signalResult)
+        switch signalResult {
+        case let .success(response):
+            return response
+        case let .failure(error):
+            throw error
         }
     }
 
