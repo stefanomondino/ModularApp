@@ -50,15 +50,15 @@ struct TypographyModifier: ViewModifier {
 
         if #available(iOS 26.0, *) {
             return content
-                .lineHeight(.multiple(factor: typography.lineHeight
-                        .relativeValue(fontSize: typography.size)))
+//                .lineHeight(.multiple(factor: typography.lineHeight
+//                        .relativeValue(fontSize: typography.size)))
                 .font(.init(typography.font(dynamic: dynamic) as CTFont))
                 .textCase(typography.textCase)
         } else {
             return content
                 .font(.init(typography.font(dynamic: dynamic) as CTFont))
                 .textCase(typography.textCase)
-                .lineSpacing(typography.lineHeight.value(fontSize: typography.size))
+//                .lineSpacing(typography.lineHeight.value(fontSize: typography.size))
             // Fallback on earlier versions
         }
     }

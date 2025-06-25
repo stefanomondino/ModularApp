@@ -11,10 +11,14 @@ import SwiftUI
 public extension View {
     @ViewBuilder
     func foregroundColor(_ color: ColorConvertible) -> some View {
-        if let gradient = color.swiftUIGradient {
-            overlay(gradient)
-        } else {
-            foregroundStyle(color.swiftUIColor)
+        switch color {
+        case let linear as LinearGradient:
+            overlay(alignment: .center) { linear.swiftUILinearGradient() }
+                .mask(self)
+        case let radial as RadialGradient:
+            overlay(alignment: .center) { radial.swiftUIRadialGradient() }
+                .mask(self)
+        default: foregroundStyle(color.swiftUIColor)
         }
     }
 
@@ -24,10 +28,14 @@ public extension View {
 
     @ViewBuilder
     func backgroundColor(_ color: ColorConvertible) -> some View {
-        if let gradient = color.swiftUIGradient {
-            background(gradient)
-        } else {
-            background {
+        switch color {
+        case let linear as LinearGradient:
+            background(alignment: .center) { linear.swiftUILinearGradient() }
+
+        case let radial as RadialGradient:
+            background(alignment: .center) { radial.swiftUIRadialGradient() }
+
+        default: background {
                 color.swiftUIColor
             }
         }
@@ -35,6 +43,18 @@ public extension View {
 
     func backgroundColor(_ key: Color.Key, provider: Color.Provider? = nil) -> some View {
         modifier(BackgroundColorModifier(key: key, provider: provider))
+    }
+}
+
+extension ColorConvertible {
+    @ViewBuilder func swiftUIView() -> some View {
+        switch self {
+        case let linear as LinearGradient:
+            linear.swiftUILinearGradient()
+        case let radial as RadialGradient:
+            radial.swiftUIRadialGradient()
+        default: swiftUIColor
+        }
     }
 }
 

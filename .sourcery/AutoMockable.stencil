@@ -381,7 +381,7 @@ import {{ import }}
 {%- endmacro %}
 
 {% macro extractRequiredProtocolConformance type -%}
-    {% if type.based.Sendable %}, @unchecked Sendable{% endif %}
+    {% if type.based.Sendable %}, @unchecked Sendable{% endif %}, @preconcurrency Mockable
 {%- endmacro %}
 
 {% for type in types.protocols where type.based.AutoMockable or type|annotated:"AutoMockable" %}{% if type.name != "AutoMockable" %}
@@ -421,3 +421,14 @@ import {{ import }}
 {% endfor %}
 }
 {% endif %}{% endfor %}
+
+public protocol Mockable: AnyObject {
+    init()
+}
+
+public extension Mockable {
+    init(_ closure: (Self) -> Void) {
+        self.init()
+        closure(self)
+    }
+}

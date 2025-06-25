@@ -25,4 +25,16 @@ public struct NetworkingError: Error, CustomStringConvertible, Equatable {
     public static func invalidResponse(_ response: URLResponse) -> NetworkingError {
         NetworkingError(message: "Invalid response - not an HTTP response: \(response)", code: -1)
     }
+
+    public static func decodingError(_ error: Error) -> NetworkingError {
+        NetworkingError(message: "Decoding error: \(error.localizedDescription)", code: -2)
+    }
+
+    public static func dataConversionError(_ error: Error) -> NetworkingError {
+        NetworkingError(message: "Data conversion error: \(error.localizedDescription)", code: -2)
+    }
+
+    public static func encodingFailed(_ error: Error) -> NetworkingError {
+        NetworkingError(message: "Encoding failure: \(error.localizedDescription)", code: -3)
+    }
 }

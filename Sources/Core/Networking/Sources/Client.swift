@@ -72,9 +72,4 @@ public actor Client {
             throw error
         }
     }
-
-    public func response<Value: Decodable & Sendable>(_ json: Request.JSON<Value>) async throws(NetworkingError) -> Response.JSON<Value> {
-        let response = try await self.response(json.request)
-        return Response.JSON<Value>(response: response, decoder: json.decoder)
-    }
 }

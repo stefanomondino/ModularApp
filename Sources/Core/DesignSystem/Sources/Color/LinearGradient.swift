@@ -8,30 +8,40 @@
 import Foundation
 import SwiftUI
 
-public extension ColorConvertible {
-    var swiftUIGradient: AnyView? { nil }
-}
-
-extension Array: ColorConvertible where Element: ColorConvertible {
-    public var swiftUIColor: Color {
-        first?.swiftUIColor ?? .clear
-    }
-
-    public var hex: String {
-        first?.hex ?? ""
-    }
-
-    public var swiftUIGradient: AnyView? {
-        guard !isEmpty else { return nil }
-        if count == 1 {
-            return first?.swiftUIGradient
-        }
-        return LinearGradient(stops: enumerated()
-            .map { .init(location: CGFloat($0) / CGFloat(count - 1), color: $1) },
-            startPoint: .top, endPoint: .bottom)
-            .swiftUIGradient
-    }
-}
+//
+// extension Array: ColorConvertible where Element: ColorConvertible {
+//    public var swiftUIColor: Color {
+//        first?.swiftUIColor ?? .clear
+//    }
+//
+//    public var hex: String {
+//        first?.hex ?? ""
+//    }
+//
+//    public func swiftUIRadialGradient() -> SwiftUI.RadialGradient {
+//
+//        guard !isEmpty else { return nil }
+//        var values = self
+//        if count == 1 {
+//            values = self + self
+//        }
+//        return RadialGradient(stops: values.enumerated()
+//            .map { .init(location: CGFloat($0) / CGFloat(count - 1), color: $1) },
+//            center: .center, startRadius: 0, endRadius: 100)
+//            .swiftUIRadialGradient()
+//    }
+//    public func swiftUILinearGradient() -> SwiftUI.LinearGradient {
+//        guard !isEmpty else { return nil }
+//        var values = self
+//        if count == 1 {
+//            values = self + self
+//        }
+//        return LinearGradient(stops: values.enumerated()
+//            .map { .init(location: CGFloat($0) / CGFloat(count - 1), color: $1) },
+//            startPoint: .top, endPoint: .bottom)
+//            .swiftUILinearGradient()
+//    }
+// }
 
 public struct LinearGradient: ColorConvertible {
     public struct Stop: Sendable {
@@ -66,11 +76,11 @@ public struct LinearGradient: ColorConvertible {
 }
 
 public extension LinearGradient {
-    var swiftUIGradient: AnyView? {
-        AnyView(SwiftUI.LinearGradient(stops: stops.map { .init(color: $0.color.swiftUIColor,
-                                                                location: $0.location) },
-                                       startPoint: startPoint,
-                                       endPoint: endPoint))
+    func swiftUILinearGradient() -> SwiftUI.LinearGradient {
+        .init(stops: stops.map { .init(color: $0.color.swiftUIColor,
+                                       location: $0.location) },
+              startPoint: startPoint,
+              endPoint: endPoint)
     }
 
     var swiftUIColor: Color {

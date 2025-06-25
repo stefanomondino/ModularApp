@@ -44,12 +44,12 @@ public struct RadialGradient: ColorConvertible {
 }
 
 public extension RadialGradient {
-    var swiftUIGradient: AnyView? {
-        AnyView(SwiftUI.RadialGradient(stops: stops.map { .init(color: $0.color.swiftUIColor,
-                                                                location: $0.location) },
-                                       center: center,
-                                       startRadius: startRadius,
-                                       endRadius: endRadius))
+    func swiftUIRadialGradient() -> SwiftUI.RadialGradient {
+        SwiftUI.RadialGradient(stops: stops.map { .init(color: $0.color.swiftUIColor,
+                                                        location: $0.location) },
+                               center: center,
+                               startRadius: startRadius,
+                               endRadius: endRadius)
     }
 
     var swiftUIColor: Color {

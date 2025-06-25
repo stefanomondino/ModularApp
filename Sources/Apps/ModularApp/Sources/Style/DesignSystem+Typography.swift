@@ -12,7 +12,8 @@ import Foundation
 extension Design {
     @MainActor func setupTypography() {
         typography.h1 = Typography(family: .archivo, weight: .black, size: 24)
-        typography.body = Typography(family: .archivo, weight: .ultralight, size: 24)
+        typography.h2 = Typography(family: .archivo, weight: .black, size: 20)
+        typography.body = Typography(family: .archivo, weight: .ultralight, size: 14)
     }
 }
 

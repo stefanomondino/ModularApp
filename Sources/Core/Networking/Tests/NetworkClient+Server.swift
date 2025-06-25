@@ -22,8 +22,7 @@ class Server: Sendable {
                   addTimestamp: Bool = false) async throws {
         await server.appendRoute(HTTPRoute(method: .init(rawValue: request.method.description),
                                            path: request.path.description))
-    in
-            if delay > 0 {
+              if delay > 0 {
                 try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
             }
             var headers: [HTTPHeader: String] = .init(response.headers.map { (HTTPHeader($0.key), $0.value) }, uniquingKeysWith: { _, last in last })

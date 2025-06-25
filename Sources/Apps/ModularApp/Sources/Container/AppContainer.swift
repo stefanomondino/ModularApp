@@ -6,6 +6,7 @@
 //  Copyright © 2025 Stefano Mondino. All rights reserved.
 //
 
+import AppSettings
 import DependencyContainer
 import DesignSystem
 import Foundation
@@ -24,6 +25,7 @@ actor AppContainer: DependencyContainer {
     @MainActor func setup() async {
         try? await Task.sleep(for: .seconds(2))
         Design.shared.setup()
+        await setupNetworking()
         await setupRoutes()
         await setupFeatures()
         state.isConfigured = true
@@ -31,6 +33,7 @@ actor AppContainer: DependencyContainer {
 
     func setupFeatures() async {
         await features.append(Onboarding.Feature(self))
+        await features.append(AppSettings.Feature(self))
     }
 }
 
@@ -47,3 +50,5 @@ extension AppContainer: Onboarding.FeatureContainer {
         routeContainer
     }
 }
+
+extension AppContainer: AppSettings.FeatureContainer {}

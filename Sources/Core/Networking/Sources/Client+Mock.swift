@@ -15,9 +15,9 @@ public extension Client {
         }
     }
 
-    func mock(for request: Request, response: @autoclosure @Sendable @escaping () -> Response?) async {
+    func mock(for request: Request, response: @autoclosure @Sendable @escaping () throws -> Response?) async {
         await mocker.register(for: request) {
-            response()
+            try? response()
         }
     }
 

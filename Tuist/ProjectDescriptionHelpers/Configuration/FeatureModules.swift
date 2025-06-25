@@ -8,8 +8,19 @@ public extension Skeleton.FeatureModule {
                                deploymentTargets: .custom,
                                dependencies: .init(core: [.routes(), .networking()],
                                                    bridge: [],
-                                                   external: [.kingfisher()]),
+                                                   external: []),
                                testDependencies: .init(test: [.coreTesting()]),
                                synthesizers: [])
+    }
+
+    static func appSettings() -> Skeleton.FeatureModule {
+        Skeleton.FeatureModule(name: "AppSettings",
+                               destinations: Constants.destinations,
+                               deploymentTargets: .custom,
+                               dependencies: .init(core: [.routes(), .networking()],
+                                                   bridge: [],
+                                                   external: [.kingfisher()]),
+                               testDependencies: .init(test: [.coreTesting()]),
+                               synthesizers: [.files(extensions: ["json"])])
     }
 }

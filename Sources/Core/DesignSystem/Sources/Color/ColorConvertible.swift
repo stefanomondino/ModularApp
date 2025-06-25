@@ -10,7 +10,8 @@ import SwiftUI
 
 public protocol ColorConvertible: Sendable {
     var swiftUIColor: SwiftUI.Color { get }
-    var swiftUIGradient: AnyView? { get }
+//    @ViewBuilder func swiftUILinearGradient() -> SwiftUI.LinearGradient?
+//    @ViewBuilder func swiftUIRadialGradient() -> SwiftUI.RadialGradient?
     var hex: String { get }
 }
 

@@ -64,7 +64,7 @@ public extension PillButton {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
-            .background { backgroundColor.swiftUIGradient }
+            .backgroundColor(backgroundColor)
             .foregroundColor(foregroundColor)
             .clipShape(Capsule())
         }

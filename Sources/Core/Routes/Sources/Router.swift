@@ -28,7 +28,7 @@ public actor Router {
         ///     - definitionType: the type of the `RouteDefinition` object getting registered
         ///     - closure: a closure that will associate a concrete definition of given type to a concrete `Route`
         public func register<Definition: RouteDefinition>(for definitionType: Definition.Type,
-                                                          closure: @Sendable @escaping @MainActor (Definition) -> Route) async {
+                                                          closure: @Sendable @escaping @MainActor (Definition) async -> Route) async {
             await container.register(for: ObjectIdentifier(definitionType),
                                      handler: { closure })
         }
@@ -60,14 +60,14 @@ public actor Router {
 
     @MainActor
     func resolve<Definition: RouteDefinition>(_ definition: Definition) async -> Route? {
-        guard let handler: @Sendable @MainActor (Definition) -> Route = await container.container.resolve(
+        guard let handler: @Sendable @MainActor (Definition) async -> Route = await container.container.resolve(
             ObjectIdentifier(Definition.self),
-            type: (@Sendable @MainActor (Definition) -> Route).self
+            type: (@Sendable @MainActor (Definition) async -> Route).self
         ) else {
             Logger.log("Route not found: \(definition)", level: .warning, tag: .routes)
             return nil
         }
-        return handler(definition)
+        return await handler(definition)
     }
 }
 

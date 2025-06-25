@@ -17,6 +17,10 @@ public final class Design: MainActorProvider {
         resolve(default: .init())
     }
 
+    @MainActor public var value: NumberValue.Provider {
+        resolve(default: .init())
+    }
+
     @MainActor public var color: Color.Provider {
         resolve(default: .init())
     }

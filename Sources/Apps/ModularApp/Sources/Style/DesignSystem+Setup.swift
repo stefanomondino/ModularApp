@@ -13,5 +13,6 @@ extension Design {
     @MainActor func setup() {
         setupTypography()
         setupColor()
+        setupValues()
     }
 }

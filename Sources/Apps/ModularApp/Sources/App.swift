@@ -31,7 +31,7 @@ extension App {
                                             backgroundColor: Color.clear,
                                             showArrow: true)) {
 //                        await appState.router.send(OnboardingRouteDefinition(message: "ciao dalla home"))
-                        await appState.router.send(WebRouteDefinition("https://www.google.com"))
+                        await appState.router.send(.appSettings())
 //                        await appState.router.send(.webRoute("https://www.google.com"))
                     }
                     // OnboardingView(viewModel: OnboardingView.ViewModel())
