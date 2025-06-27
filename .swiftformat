@@ -1,0 +1,4 @@
+--exclude Tuist/Dependencies,Sources/Components/Sources/Components.iOS/Pageboy
+--disable preferKeyPath,wrapMultilineStatementBraces
+--wrapparameters after-first
+--wrapcollections after-first

@@ -21,8 +21,8 @@ class Server: Sendable {
                   delay: TimeInterval = 0,
                   addTimestamp: Bool = false) async throws {
         await server.appendRoute(HTTPRoute(method: .init(rawValue: request.method.description),
-                                           path: request.path.description))
-              if delay > 0 {
+                                           path: request.path.description)) { _ in
+            if delay > 0 {
                 try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
             }
             var headers: [HTTPHeader: String] = .init(response.headers.map { (HTTPHeader($0.key), $0.value) }, uniquingKeysWith: { _, last in last })
@@ -39,8 +39,8 @@ class Server: Sendable {
     func register(request: Request,
                   response: @Sendable @escaping (Request) async throws -> Response) async rethrows {
         await server.appendRoute(HTTPRoute(method: .init(rawValue: request.method.description),
-                                           path: request.path.description))
-              let response = try await response(.init(httpRequest: $0, request: request))
+                                           path: request.path.description)) { httpRequest in
+            let response = try await response(.init(httpRequest: httpRequest, request: request))
             let headers: [HTTPHeader: String] = .init(response.headers.map { (HTTPHeader($0.key), $0.value) }, uniquingKeysWith: { _, last in last })
             return HTTPResponse(statusCode: .init(response.statusCode.rawValue, phrase: ""),
                                 headers: headers,
