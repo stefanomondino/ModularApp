@@ -16,7 +16,7 @@ public protocol ColorConvertible: Sendable {
 }
 
 extension SwiftUI.Color: ColorConvertible {
-    public var swiftUIColor: Color { self }
+    public var swiftUIColor: SwiftUI.Color { self }
     public var hex: String { UIColor(self).hex }
 }
 

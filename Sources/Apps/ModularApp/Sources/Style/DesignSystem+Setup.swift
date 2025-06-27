@@ -14,5 +14,6 @@ extension Design {
         setupTypography()
         setupColor()
         setupValues()
+        setupAssets()
     }
 }

@@ -26,9 +26,11 @@ extension App {
         var body: some View {
             VStack {
                 if appState.isConfigured {
+                    Image(design.asset.backIcon)
+
                     PillButton("Click me",
                                style: .init(foregroundColor: "#FFCC00",
-                                            backgroundColor: Color.clear,
+                                            backgroundColor: SwiftUI.Color.clear,
                                             showArrow: true)) {
 //                        await appState.router.send(OnboardingRouteDefinition(message: "ciao dalla home"))
                         await appState.router.send(.appSettings())

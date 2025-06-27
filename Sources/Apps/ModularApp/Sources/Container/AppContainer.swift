@@ -25,6 +25,9 @@ actor AppContainer: DependencyContainer {
     @MainActor func setup() async {
         try? await Task.sleep(for: .seconds(2))
         Design.shared.setup()
+        await register(for: Design.self) {
+            Design.shared
+        }
         await setupNetworking()
         await setupRoutes()
         await setupFeatures()

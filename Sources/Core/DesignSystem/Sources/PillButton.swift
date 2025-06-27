@@ -59,7 +59,7 @@ public extension PillButton {
                     configuration.label
                 }
                 if showArrow {
-                    Image(systemName: "chevron.right")
+                    SwiftUI.Image(systemName: "chevron.right")
                 }
             }
             .padding(.horizontal, 16)

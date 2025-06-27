@@ -6,6 +6,7 @@
 //
 
 import DependencyContainer
+import DesignSystem
 import Routes
 
 public protocol FeatureContainer: DependencyContainer where DependencyKey == ObjectIdentifier {
@@ -36,4 +37,8 @@ extension Router.Identifier {
     public static func appSettings() -> Self {
         .init(EntryPoint())
     }
+}
+
+public extension Asset.Key {
+    static var themeIcon: Self { "themeIcon" }
 }

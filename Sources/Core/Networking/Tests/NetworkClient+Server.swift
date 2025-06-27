@@ -35,6 +35,30 @@ class Server: Sendable {
                                 body: response.data)
         }
     }
+
+    func register(request: Request,
+                  response: @Sendable @escaping (Request) async throws -> Response) async rethrows {
+        await server.appendRoute(HTTPRoute(method: .init(rawValue: request.method.description),
+                                           path: request.path.description))
+              let response = try await response(.init(httpRequest: $0, request: request))
+            let headers: [HTTPHeader: String] = .init(response.headers.map { (HTTPHeader($0.key), $0.value) }, uniquingKeysWith: { _, last in last })
+            return HTTPResponse(statusCode: .init(response.statusCode.rawValue, phrase: ""),
+                                headers: headers,
+                                body: response.data)
+        }
+    }
+}
+
+extension Request {
+    init(httpRequest: HTTPRequest, request: Request) {
+        self.init(baseURL: request.baseURL,
+                  path: .init(httpRequest.path),
+                  method: request.method,
+                  httpHeaders: httpRequest.headers.reduce(into: [:]) { $0[.init($1.key.rawValue)] = $1.value },
+                  queryParameters: request.queryParameters,
+                  body: request.body?.asBodyParameters(),
+                  authorization: request.authorization)
+    }
 }
 
 @globalActor actor ServerActor: GlobalActor {

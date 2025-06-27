@@ -3,3 +3,6 @@ tuist = "latest"
 sourcery = "latest"
 swiftformat = "latest"
 swiftlint = "latest"
+
+[hooks]
+postinstall = "mise run setup"

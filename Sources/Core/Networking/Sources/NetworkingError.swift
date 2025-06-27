@@ -30,11 +30,27 @@ public struct NetworkingError: Error, CustomStringConvertible, Equatable {
         NetworkingError(message: "Decoding error: \(error.localizedDescription)", code: -2)
     }
 
+    public static func encodingError(_ error: Error) -> NetworkingError {
+        NetworkingError(message: "Encoding error: \(error.localizedDescription)", code: -3)
+    }
+
     public static func dataConversionError(_ error: Error) -> NetworkingError {
         NetworkingError(message: "Data conversion error: \(error.localizedDescription)", code: -2)
     }
 
     public static func encodingFailed(_ error: Error) -> NetworkingError {
         NetworkingError(message: "Encoding failure: \(error.localizedDescription)", code: -3)
+    }
+
+    public static func unknown() -> NetworkingError {
+        NetworkingError(message: "Unknown error", code: -999)
+    }
+
+    public static func connectionError(_ request: Request) -> NetworkingError {
+        NetworkingError(message: "Connection error for request \(request)", code: -4)
+    }
+
+    public static func httpError(_ response: Response) -> NetworkingError {
+        NetworkingError(message: "HTTP error \(response.statusCode) with response \(response)", code: -5)
     }
 }

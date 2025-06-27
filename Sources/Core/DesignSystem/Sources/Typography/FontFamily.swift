@@ -7,8 +7,6 @@
 import Foundation
 import class UIKit.UIFont
 
-public typealias Font = UIFont
-
 public struct FontFamily: Sendable {
     public struct Properties: Sendable {
         public let weight: FontWeight

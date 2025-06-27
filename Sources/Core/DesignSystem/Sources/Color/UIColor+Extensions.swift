@@ -17,7 +17,7 @@
     import UIKit
 
     extension String: ColorConvertible {
-        public var swiftUIColor: Color {
+        public var swiftUIColor: SwiftUI.Color {
             UIColor(hexString: self).swiftUIColor
         }
 
@@ -25,7 +25,7 @@
     }
 
     extension UIColor: ColorConvertible {
-        public var swiftUIColor: Color { .init(self) }
+        public var swiftUIColor: SwiftUI.Color { .init(self) }
 
         public var hex: String {
             var red: CGFloat = 0

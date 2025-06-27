@@ -21,7 +21,7 @@ public extension Client {
         }
     }
 
-    func mockedResponse(for request: Request) async -> Response? {
+    internal func mockedResponse(for request: Request) async -> Response? {
         await mocker.resolve(request, type: Response.self)
     }
 

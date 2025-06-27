@@ -83,7 +83,7 @@ public extension LinearGradient {
               endPoint: endPoint)
     }
 
-    var swiftUIColor: Color {
+    var swiftUIColor: SwiftUI.Color {
         stops.first?.color.swiftUIColor ?? .clear
     }
 

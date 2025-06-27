@@ -52,7 +52,7 @@ public extension RadialGradient {
                                endRadius: endRadius)
     }
 
-    var swiftUIColor: Color {
+    var swiftUIColor: SwiftUI.Color {
         stops.first?.color.swiftUIColor ?? .clear
     }
 

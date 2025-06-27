@@ -24,6 +24,10 @@ public final class Design: MainActorProvider {
     @MainActor public var color: Color.Provider {
         resolve(default: .init())
     }
+
+    @MainActor public var asset: Asset.Provider {
+        resolve(default: .init())
+    }
 }
 
 public extension EnvironmentValues {

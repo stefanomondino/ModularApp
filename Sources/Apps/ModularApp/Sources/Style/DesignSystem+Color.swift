@@ -18,13 +18,13 @@ extension Design {
             .register(for: .primary) { AppColor.primary }
             .register(for: .app) { "#56F30E" }
             .register(for: .background) {
-                DesignSystem.RadialGradient(colors: [AppColor.background, Color.blue],
+                DesignSystem.RadialGradient(colors: [AppColor.background, SwiftUI.Color.blue],
                                             center: .center,
                                             startRadius: 0,
                                             endRadius: 300)
             }
             .register(for: .secondary, type: ColorConvertible.self) {
-                DesignSystem.RadialGradient(colors: [.red, Color.green],
+                DesignSystem.RadialGradient(colors: [UIColor.red, UIColor.green],
                                             center: .center,
                                             startRadius: 0,
                                             endRadius: 100)
@@ -32,7 +32,7 @@ extension Design {
     }
 }
 
-extension Color.Key {
+extension DesignSystem.Color.Key {
     static var app: Self { "app" }
 }
 

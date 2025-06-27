@@ -12,8 +12,6 @@ import SwiftUI
 
 extension Design {
     @MainActor func setupValues() {
-        value.cornerRadius = 8
-
         let baseMultiplier: CGFloat = 8
         for multiplier in [0.25, 0.5, 1, 2, 3, 4] {
             value.register(for: .sidePadding(multiplier)) { NumberValue(doubleValue: baseMultiplier * multiplier) }

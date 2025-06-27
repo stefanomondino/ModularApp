@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import Routes
 
 extension Feature {
     func setupUseCases() async {
         await register(for: ThemesUseCase.self) { [self] in
-            await Themes.UseCase(theme: unsafeResolve())
+            await Themes.UseCase(theme: unsafeResolve(), design: unsafeResolve())
         }
     }
 }

@@ -19,25 +19,25 @@ import Networking
 // }
 
 extension Request {
-    struct Query: ExpressibleByStringInterpolation, CustomStringConvertible {
-        let value: String
-        var description: String {
-            value
-        }
+//    struct Query: ExpressibleByStringInterpolation, CustomStringConvertible {
+//        let value: String
+//        var description: String {
+//            value
+//        }
+//
+//        init(stringLiteral value: String) {
+//            self.value = value
+//        }
+//
+//        init(_ value: String) {
+//            self.value = value
+//        }
+//    }
 
-        init(stringLiteral value: String) {
-            self.value = value
-        }
-
-        init(_ value: String) {
-            self.value = value
-        }
-    }
-
-    static func queryThemes(_ query: Query) -> Request {
+    static func queryThemes(_ query: String) -> Request {
         Request(baseURL: "https://colormagic.app",
                 path: "/api/palette/search",
-                queryParameters: ["q": query.description])
+                queryParameters: ["q": query])
     }
 }
 
@@ -53,6 +53,6 @@ actor ThemeRepositoryImplementation: ThemeRepository {
     }
 
     func fetchThemes(query: String) async throws(NetworkingError) -> [Theme] {
-        try await networking.response(.queryThemes(.init(query))).json()
+        try await networking.response(.queryThemes(query)).json()
     }
 }

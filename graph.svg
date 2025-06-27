@@ -8,142 +8,167 @@
  viewBox="0.00 0.00 410.88 332.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 328)">
 <polygon fill="white" stroke="none" points="-4,4 -4,-328 406.88,-328 406.88,4 -4,4"/>
-<!-- DataStructures -->
+<!-- AppSettings -->
 <g id="node1" class="node">
+<title>AppSettings</title>
+<path fill="#ffb90f" stroke="black" d="M144.88,-248.73C144.88,-250.53 126.33,-252 103.5,-252 80.67,-252 62.12,-250.53 62.12,-248.73 62.12,-248.73 62.12,-219.27 62.12,-219.27 62.12,-217.47 80.67,-216 103.5,-216 126.33,-216 144.88,-217.47 144.88,-219.27 144.88,-219.27 144.88,-248.73 144.88,-248.73"/>
+<path fill="none" stroke="black" d="M144.88,-248.73C144.88,-246.92 126.33,-245.45 103.5,-245.45 80.67,-245.45 62.12,-246.92 62.12,-248.73"/>
+<text text-anchor="middle" x="103.5" y="-228.95" font-family="Times,serif" font-size="14.00">AppSettings</text>
+</g>
+<!-- Networking -->
+<g id="node7" class="node">
+<title>Networking</title>
+<path fill="#ffb90f" stroke="black" d="M138.75,-104.73C138.75,-106.53 120.71,-108 98.5,-108 76.29,-108 58.25,-106.53 58.25,-104.73 58.25,-104.73 58.25,-75.27 58.25,-75.27 58.25,-73.47 76.29,-72 98.5,-72 120.71,-72 138.75,-73.47 138.75,-75.27 138.75,-75.27 138.75,-104.73 138.75,-104.73"/>
+<path fill="none" stroke="black" d="M138.75,-104.73C138.75,-102.92 120.71,-101.45 98.5,-101.45 76.29,-101.45 58.25,-102.92 58.25,-104.73"/>
+<text text-anchor="middle" x="98.5" y="-84.95" font-family="Times,serif" font-size="14.00">Networking</text>
+</g>
+<!-- AppSettings&#45;&gt;Networking -->
+<g id="edge1" class="edge">
+<title>AppSettings&#45;&gt;Networking</title>
+<path fill="none" stroke="black" d="M102.89,-215.59C102.04,-191.61 100.51,-148.14 99.5,-119.42"/>
+<polygon fill="black" stroke="black" points="103.01,-119.49 99.16,-109.62 96.01,-119.74 103.01,-119.49"/>
+</g>
+<!-- Routes -->
+<g id="node9" class="node">
+<title>Routes</title>
+<path fill="#ffb90f" stroke="black" d="M180.5,-176.73C180.5,-178.53 168.4,-180 153.5,-180 138.6,-180 126.5,-178.53 126.5,-176.73 126.5,-176.73 126.5,-147.27 126.5,-147.27 126.5,-145.47 138.6,-144 153.5,-144 168.4,-144 180.5,-145.47 180.5,-147.27 180.5,-147.27 180.5,-176.73 180.5,-176.73"/>
+<path fill="none" stroke="black" d="M180.5,-176.73C180.5,-174.92 168.4,-173.45 153.5,-173.45 138.6,-173.45 126.5,-174.92 126.5,-176.73"/>
+<text text-anchor="middle" x="153.5" y="-156.95" font-family="Times,serif" font-size="14.00">Routes</text>
+</g>
+<!-- AppSettings&#45;&gt;Routes -->
+<g id="edge2" class="edge">
+<title>AppSettings&#45;&gt;Routes</title>
+<path fill="none" stroke="black" d="M115.86,-215.7C121.55,-207.73 128.43,-198.1 134.74,-189.26"/>
+<polygon fill="black" stroke="black" points="137.44,-191.51 140.4,-181.34 131.74,-187.44 137.44,-191.51"/>
+</g>
+<!-- DataStructures -->
+<g id="node2" class="node">
 <title>DataStructures</title>
 <path fill="#ffb90f" stroke="black" d="M247.62,-32.73C247.62,-34.53 226.05,-36 199.5,-36 172.95,-36 151.38,-34.53 151.38,-32.73 151.38,-32.73 151.38,-3.27 151.38,-3.27 151.38,-1.47 172.95,0 199.5,0 226.05,0 247.62,-1.47 247.62,-3.27 247.62,-3.27 247.62,-32.73 247.62,-32.73"/>
 <path fill="none" stroke="black" d="M247.62,-32.73C247.62,-30.92 226.05,-29.45 199.5,-29.45 172.95,-29.45 151.38,-30.92 151.38,-32.73"/>
 <text text-anchor="middle" x="199.5" y="-12.95" font-family="Times,serif" font-size="14.00">DataStructures</text>
 </g>
 <!-- DependencyContainer -->
-<g id="node2" class="node">
+<g id="node3" class="node">
 <title>DependencyContainer</title>
 <path fill="#ffb90f" stroke="black" d="M402.88,-32.73C402.88,-34.53 372.23,-36 334.5,-36 296.77,-36 266.12,-34.53 266.12,-32.73 266.12,-32.73 266.12,-3.27 266.12,-3.27 266.12,-1.47 296.77,0 334.5,0 372.23,0 402.88,-1.47 402.88,-3.27 402.88,-3.27 402.88,-32.73 402.88,-32.73"/>
 <path fill="none" stroke="black" d="M402.88,-32.73C402.88,-30.92 372.23,-29.45 334.5,-29.45 296.77,-29.45 266.12,-30.92 266.12,-32.73"/>
 <text text-anchor="middle" x="334.5" y="-12.95" font-family="Times,serif" font-size="14.00">DependencyContainer</text>
 </g>
 <!-- DesignSystem -->
-<g id="node3" class="node">
+<g id="node4" class="node">
 <title>DesignSystem</title>
-<path fill="#ffb90f" stroke="black" d="M145.88,-104.73C145.88,-106.53 124.64,-108 98.5,-108 72.36,-108 51.12,-106.53 51.12,-104.73 51.12,-104.73 51.12,-75.27 51.12,-75.27 51.12,-73.47 72.36,-72 98.5,-72 124.64,-72 145.88,-73.47 145.88,-75.27 145.88,-75.27 145.88,-104.73 145.88,-104.73"/>
-<path fill="none" stroke="black" d="M145.88,-104.73C145.88,-102.92 124.64,-101.45 98.5,-101.45 72.36,-101.45 51.12,-102.92 51.12,-104.73"/>
-<text text-anchor="middle" x="98.5" y="-84.95" font-family="Times,serif" font-size="14.00">DesignSystem</text>
+<path fill="#ffb90f" stroke="black" d="M251.88,-104.73C251.88,-106.53 230.64,-108 204.5,-108 178.36,-108 157.12,-106.53 157.12,-104.73 157.12,-104.73 157.12,-75.27 157.12,-75.27 157.12,-73.47 178.36,-72 204.5,-72 230.64,-72 251.88,-73.47 251.88,-75.27 251.88,-75.27 251.88,-104.73 251.88,-104.73"/>
+<path fill="none" stroke="black" d="M251.88,-104.73C251.88,-102.92 230.64,-101.45 204.5,-101.45 178.36,-101.45 157.12,-102.92 157.12,-104.73"/>
+<text text-anchor="middle" x="204.5" y="-84.95" font-family="Times,serif" font-size="14.00">DesignSystem</text>
 </g>
 <!-- DesignSystem&#45;&gt;DataStructures -->
-<g id="edge2" class="edge">
+<g id="edge4" class="edge">
 <title>DesignSystem&#45;&gt;DataStructures</title>
-<path fill="none" stroke="black" d="M123.73,-71.52C136.35,-62.76 151.82,-52.04 165.48,-42.58"/>
-<polygon fill="black" stroke="black" points="167.13,-45.7 173.35,-37.12 163.14,-39.94 167.13,-45.7"/>
+<path fill="none" stroke="black" d="M203.26,-71.7C202.74,-64.41 202.12,-55.73 201.54,-47.54"/>
+<polygon fill="black" stroke="black" points="205.03,-47.34 200.83,-37.61 198.05,-47.84 205.03,-47.34"/>
 </g>
 <!-- DesignSystem&#45;&gt;DependencyContainer -->
-<g id="edge1" class="edge">
+<g id="edge3" class="edge">
 <title>DesignSystem&#45;&gt;DependencyContainer</title>
-<path fill="none" stroke="black" d="M146.08,-74.8C149.27,-73.85 152.43,-72.91 155.5,-72 192.64,-60.96 234.14,-48.67 267.81,-38.71"/>
-<polygon fill="black" stroke="black" points="268.41,-42.18 277.01,-35.99 266.42,-35.47 268.41,-42.18"/>
+<path fill="none" stroke="black" d="M236.97,-71.52C253.77,-62.47 274.48,-51.32 292.48,-41.62"/>
+<polygon fill="black" stroke="black" points="293.97,-44.8 301.11,-36.98 290.65,-38.64 293.97,-44.8"/>
 </g>
 <!-- Logger -->
-<g id="node4" class="node">
+<g id="node5" class="node">
 <title>Logger</title>
 <path fill="#ffb90f" stroke="black" d="M55,-32.73C55,-34.53 42.67,-36 27.5,-36 12.33,-36 0,-34.53 0,-32.73 0,-32.73 0,-3.27 0,-3.27 0,-1.47 12.33,0 27.5,0 42.67,0 55,-1.47 55,-3.27 55,-3.27 55,-32.73 55,-32.73"/>
 <path fill="none" stroke="black" d="M55,-32.73C55,-30.92 42.67,-29.45 27.5,-29.45 12.33,-29.45 0,-30.92 0,-32.73"/>
 <text text-anchor="middle" x="27.5" y="-12.95" font-family="Times,serif" font-size="14.00">Logger</text>
 </g>
 <!-- DesignSystem&#45;&gt;Logger -->
-<g id="edge3" class="edge">
+<g id="edge6" class="edge">
 <title>DesignSystem&#45;&gt;Logger</title>
-<path fill="none" stroke="black" d="M80.95,-71.7C72.52,-63.39 62.27,-53.28 53,-44.14"/>
-<polygon fill="black" stroke="black" points="55.5,-41.7 45.93,-37.17 50.59,-46.68 55.5,-41.7"/>
+<path fill="none" stroke="black" d="M159.42,-72.83C134.2,-63.58 102.02,-51.45 65.65,-36.35"/>
+<polygon fill="black" stroke="black" points="67.26,-33.23 56.69,-32.6 64.56,-39.69 67.26,-33.23"/>
 </g>
 <!-- Streams -->
-<g id="node9" class="node">
+<g id="node10" class="node">
 <title>Streams</title>
 <path fill="#ffb90f" stroke="black" d="M133.62,-32.73C133.62,-34.53 120.12,-36 103.5,-36 86.88,-36 73.38,-34.53 73.38,-32.73 73.38,-32.73 73.38,-3.27 73.38,-3.27 73.38,-1.47 86.88,0 103.5,0 120.12,0 133.62,-1.47 133.62,-3.27 133.62,-3.27 133.62,-32.73 133.62,-32.73"/>
 <path fill="none" stroke="black" d="M133.62,-32.73C133.62,-30.92 120.12,-29.45 103.5,-29.45 86.88,-29.45 73.38,-30.92 73.38,-32.73"/>
 <text text-anchor="middle" x="103.5" y="-12.95" font-family="Times,serif" font-size="14.00">Streams</text>
 </g>
 <!-- DesignSystem&#45;&gt;Streams -->
-<g id="edge4" class="edge">
+<g id="edge5" class="edge">
 <title>DesignSystem&#45;&gt;Streams</title>
+<path fill="none" stroke="black" d="M179.27,-71.52C166.36,-62.57 150.48,-51.56 136.59,-41.94"/>
+<polygon fill="black" stroke="black" points="138.82,-39.22 128.61,-36.4 134.83,-44.97 138.82,-39.22"/>
+</g>
+<!-- ModularAppDev -->
+<g id="node6" class="node">
+<title>ModularAppDev</title>
+<polygon fill="deepskyblue" stroke="black" stroke-width="1.5" points="208,-324 103,-324 99,-320 99,-288 204,-288 208,-292 208,-324"/>
+<polyline fill="none" stroke="black" stroke-width="1.5" points="204,-320 99,-320"/>
+<polyline fill="none" stroke="black" stroke-width="1.5" points="204,-320 204,-288"/>
+<polyline fill="none" stroke="black" stroke-width="1.5" points="204,-320 208,-324"/>
+<text text-anchor="middle" x="153.5" y="-300.95" font-family="Times,serif" font-size="14.00">ModularAppDev</text>
+</g>
+<!-- ModularAppDev&#45;&gt;AppSettings -->
+<g id="edge8" class="edge">
+<title>ModularAppDev&#45;&gt;AppSettings</title>
+<path fill="none" stroke="black" d="M141.14,-287.7C135.45,-279.73 128.57,-270.1 122.26,-261.26"/>
+<polygon fill="black" stroke="black" points="125.26,-259.44 116.6,-253.34 119.56,-263.51 125.26,-259.44"/>
+</g>
+<!-- Onboarding -->
+<g id="node8" class="node">
+<title>Onboarding</title>
+<path fill="#ffb90f" stroke="black" d="M243.75,-248.73C243.75,-250.53 225.71,-252 203.5,-252 181.29,-252 163.25,-250.53 163.25,-248.73 163.25,-248.73 163.25,-219.27 163.25,-219.27 163.25,-217.47 181.29,-216 203.5,-216 225.71,-216 243.75,-217.47 243.75,-219.27 243.75,-219.27 243.75,-248.73 243.75,-248.73"/>
+<path fill="none" stroke="black" d="M243.75,-248.73C243.75,-246.92 225.71,-245.45 203.5,-245.45 181.29,-245.45 163.25,-246.92 163.25,-248.73"/>
+<text text-anchor="middle" x="203.5" y="-228.95" font-family="Times,serif" font-size="14.00">Onboarding</text>
+</g>
+<!-- ModularAppDev&#45;&gt;Onboarding -->
+<g id="edge7" class="edge">
+<title>ModularAppDev&#45;&gt;Onboarding</title>
+<path fill="none" stroke="black" d="M165.86,-287.7C171.55,-279.73 178.43,-270.1 184.74,-261.26"/>
+<polygon fill="black" stroke="black" points="187.44,-263.51 190.4,-253.34 181.74,-259.44 187.44,-263.51"/>
+</g>
+<!-- Networking&#45;&gt;DataStructures -->
+<g id="edge9" class="edge">
+<title>Networking&#45;&gt;DataStructures</title>
+<path fill="none" stroke="black" d="M123.21,-71.88C135.83,-63.13 151.39,-52.34 165.16,-42.8"/>
+<polygon fill="black" stroke="black" points="166.88,-45.87 173.1,-37.3 162.89,-40.12 166.88,-45.87"/>
+</g>
+<!-- Networking&#45;&gt;DependencyContainer -->
+<g id="edge11" class="edge">
+<title>Networking&#45;&gt;DependencyContainer</title>
+<path fill="none" stroke="black" d="M139.1,-75C142.28,-73.97 145.44,-72.96 148.5,-72 186.24,-60.21 228.62,-48.06 263.38,-38.36"/>
+<polygon fill="black" stroke="black" points="264.22,-41.76 272.92,-35.71 262.35,-35.02 264.22,-41.76"/>
+</g>
+<!-- Networking&#45;&gt;Logger -->
+<g id="edge12" class="edge">
+<title>Networking&#45;&gt;Logger</title>
+<path fill="none" stroke="black" d="M80.95,-71.7C72.52,-63.39 62.27,-53.28 53,-44.14"/>
+<polygon fill="black" stroke="black" points="55.5,-41.7 45.93,-37.17 50.59,-46.68 55.5,-41.7"/>
+</g>
+<!-- Networking&#45;&gt;Streams -->
+<g id="edge10" class="edge">
+<title>Networking&#45;&gt;Streams</title>
 <path fill="none" stroke="black" d="M99.74,-71.7C100.26,-64.41 100.88,-55.73 101.46,-47.54"/>
 <polygon fill="black" stroke="black" points="104.95,-47.84 102.17,-37.61 97.97,-47.34 104.95,-47.84"/>
 </g>
-<!-- ModularAppDev -->
-<g id="node5" class="node">
-<title>ModularAppDev</title>
-<polygon fill="deepskyblue" stroke="black" stroke-width="1.5" points="205,-324 100,-324 96,-320 96,-288 201,-288 205,-292 205,-324"/>
-<polyline fill="none" stroke="black" stroke-width="1.5" points="201,-320 96,-320"/>
-<polyline fill="none" stroke="black" stroke-width="1.5" points="201,-320 201,-288"/>
-<polyline fill="none" stroke="black" stroke-width="1.5" points="201,-320 205,-324"/>
-<text text-anchor="middle" x="150.5" y="-300.95" font-family="Times,serif" font-size="14.00">ModularAppDev</text>
-</g>
-<!-- Onboarding -->
-<g id="node7" class="node">
-<title>Onboarding</title>
-<path fill="#ffb90f" stroke="black" d="M190.75,-248.73C190.75,-250.53 172.71,-252 150.5,-252 128.29,-252 110.25,-250.53 110.25,-248.73 110.25,-248.73 110.25,-219.27 110.25,-219.27 110.25,-217.47 128.29,-216 150.5,-216 172.71,-216 190.75,-217.47 190.75,-219.27 190.75,-219.27 190.75,-248.73 190.75,-248.73"/>
-<path fill="none" stroke="black" d="M190.75,-248.73C190.75,-246.92 172.71,-245.45 150.5,-245.45 128.29,-245.45 110.25,-246.92 110.25,-248.73"/>
-<text text-anchor="middle" x="150.5" y="-228.95" font-family="Times,serif" font-size="14.00">Onboarding</text>
-</g>
-<!-- ModularAppDev&#45;&gt;Onboarding -->
-<g id="edge5" class="edge">
-<title>ModularAppDev&#45;&gt;Onboarding</title>
-<path fill="none" stroke="black" d="M150.5,-287.7C150.5,-280.41 150.5,-271.73 150.5,-263.54"/>
-<polygon fill="black" stroke="black" points="154,-263.62 150.5,-253.62 147,-263.62 154,-263.62"/>
-</g>
-<!-- Networking -->
-<g id="node6" class="node">
-<title>Networking</title>
-<path fill="#ffb90f" stroke="black" d="M244.75,-104.73C244.75,-106.53 226.71,-108 204.5,-108 182.29,-108 164.25,-106.53 164.25,-104.73 164.25,-104.73 164.25,-75.27 164.25,-75.27 164.25,-73.47 182.29,-72 204.5,-72 226.71,-72 244.75,-73.47 244.75,-75.27 244.75,-75.27 244.75,-104.73 244.75,-104.73"/>
-<path fill="none" stroke="black" d="M244.75,-104.73C244.75,-102.92 226.71,-101.45 204.5,-101.45 182.29,-101.45 164.25,-102.92 164.25,-104.73"/>
-<text text-anchor="middle" x="204.5" y="-84.95" font-family="Times,serif" font-size="14.00">Networking</text>
-</g>
-<!-- Networking&#45;&gt;DataStructures -->
-<g id="edge6" class="edge">
-<title>Networking&#45;&gt;DataStructures</title>
-<path fill="none" stroke="black" d="M203.26,-71.7C202.74,-64.41 202.12,-55.73 201.54,-47.54"/>
-<polygon fill="black" stroke="black" points="205.03,-47.34 200.83,-37.61 198.05,-47.84 205.03,-47.34"/>
-</g>
-<!-- Networking&#45;&gt;DependencyContainer -->
-<g id="edge9" class="edge">
-<title>Networking&#45;&gt;DependencyContainer</title>
-<path fill="none" stroke="black" d="M235.64,-72.23C252.62,-63.09 273.89,-51.64 292.34,-41.7"/>
-<polygon fill="black" stroke="black" points="293.78,-44.9 300.93,-37.08 290.46,-38.74 293.78,-44.9"/>
-</g>
-<!-- Networking&#45;&gt;Logger -->
-<g id="edge8" class="edge">
-<title>Networking&#45;&gt;Logger</title>
-<path fill="none" stroke="black" d="M163.77,-74.42C137.99,-65.01 103.77,-52.17 65.61,-36.33"/>
-<polygon fill="black" stroke="black" points="67.26,-33.23 56.69,-32.6 64.56,-39.69 67.26,-33.23"/>
-</g>
-<!-- Networking&#45;&gt;Streams -->
-<g id="edge7" class="edge">
-<title>Networking&#45;&gt;Streams</title>
-<path fill="none" stroke="black" d="M179.79,-71.88C166.79,-62.87 150.67,-51.69 136.6,-41.94"/>
-<polygon fill="black" stroke="black" points="138.71,-39.15 128.5,-36.33 134.73,-44.9 138.71,-39.15"/>
-</g>
 <!-- Onboarding&#45;&gt;Networking -->
-<g id="edge10" class="edge">
+<g id="edge13" class="edge">
 <title>Onboarding&#45;&gt;Networking</title>
-<path fill="none" stroke="black" d="M157.12,-215.59C166.32,-191.4 183.07,-147.36 193.98,-118.65"/>
-<polygon fill="black" stroke="black" points="197.17,-120.12 197.46,-109.53 190.63,-117.63 197.17,-120.12"/>
-</g>
-<!-- Routes -->
-<g id="node8" class="node">
-<title>Routes</title>
-<path fill="#ffb90f" stroke="black" d="M150.5,-176.73C150.5,-178.53 138.4,-180 123.5,-180 108.6,-180 96.5,-178.53 96.5,-176.73 96.5,-176.73 96.5,-147.27 96.5,-147.27 96.5,-145.47 108.6,-144 123.5,-144 138.4,-144 150.5,-145.47 150.5,-147.27 150.5,-147.27 150.5,-176.73 150.5,-176.73"/>
-<path fill="none" stroke="black" d="M150.5,-176.73C150.5,-174.92 138.4,-173.45 123.5,-173.45 108.6,-173.45 96.5,-174.92 96.5,-176.73"/>
-<text text-anchor="middle" x="123.5" y="-156.95" font-family="Times,serif" font-size="14.00">Routes</text>
+<path fill="none" stroke="black" d="M204.96,-215.68C205.69,-196.49 204.15,-165.43 189.5,-144 179.6,-129.51 164.33,-118.44 149.11,-110.26"/>
+<polygon fill="black" stroke="black" points="151.04,-107.31 140.53,-105.97 147.91,-113.57 151.04,-107.31"/>
 </g>
 <!-- Onboarding&#45;&gt;Routes -->
-<g id="edge11" class="edge">
+<g id="edge14" class="edge">
 <title>Onboarding&#45;&gt;Routes</title>
-<path fill="none" stroke="black" d="M143.83,-215.7C140.92,-208.15 137.43,-199.12 134.18,-190.68"/>
-<polygon fill="black" stroke="black" points="137.51,-189.59 130.64,-181.52 130.98,-192.11 137.51,-189.59"/>
+<path fill="none" stroke="black" d="M191.14,-215.7C185.45,-207.73 178.57,-198.1 172.26,-189.26"/>
+<polygon fill="black" stroke="black" points="175.26,-187.44 166.6,-181.34 169.56,-191.51 175.26,-187.44"/>
 </g>
 <!-- Routes&#45;&gt;DesignSystem -->
-<g id="edge12" class="edge">
+<g id="edge15" class="edge">
 <title>Routes&#45;&gt;DesignSystem</title>
-<path fill="none" stroke="black" d="M117.32,-143.7C114.63,-136.15 111.4,-127.12 108.39,-118.68"/>
-<polygon fill="black" stroke="black" points="111.78,-117.77 105.12,-109.53 105.19,-120.12 111.78,-117.77"/>
+<path fill="none" stroke="black" d="M166.11,-143.7C171.91,-135.73 178.93,-126.1 185.36,-117.26"/>
+<polygon fill="black" stroke="black" points="188.09,-119.47 191.15,-109.33 182.43,-115.35 188.09,-119.47"/>
 </g>
 </g>
 </svg>
