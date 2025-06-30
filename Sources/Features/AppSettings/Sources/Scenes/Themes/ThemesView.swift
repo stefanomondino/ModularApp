@@ -19,10 +19,10 @@ extension Themes {
 }
 
 extension Themes {
-    struct ViewContents: View {
-        @State var viewModel: ThemesSceneViewModel
+    struct ViewContents<ViewModel: ThemesSceneViewModel>: View {
+        @Bindable var viewModel: ViewModel
         @Environment(\.design) var design: Design
-        init(viewModel: ThemesSceneViewModel) {
+        init(viewModel: ViewModel) {
             self.viewModel = viewModel
         }
 
@@ -30,8 +30,7 @@ extension Themes {
             VStack(spacing: design.value.get(.sidePadding(2)).doubleValue) {
                 HStack {
                     TextField("Search themes",
-                              text: .init(get: { viewModel.queryString },
-                                          set: { viewModel.query($0) }))
+                              text: $viewModel.queryString)
                 }
                 .padding(.horizontal, .sidePadding(2))
                 ScrollView {

@@ -7,13 +7,14 @@
 
 import AsyncAlgorithms
 import DesignSystem
+import Observation
 import Streams
 import SwiftUI
 
 // sourcery: AutoMockable
-@MainActor protocol ThemesSceneViewModel {
+@MainActor protocol ThemesSceneViewModel: Observation.Observable, AnyObject {
     var items: [ThemeItemViewModel] { get }
-    var queryString: String { get }
+    var queryString: String { get set }
     func query(_ query: String)
     func select(_ item: ThemeItemViewModel)
 }
@@ -34,25 +35,19 @@ extension Themes {
 
         init(useCase: ThemesUseCase) {
             self.useCase = useCase
-            queryProperty.flatMapLatest { query in
-                AsyncStream {
-                    await useCase.availableThemes(query: query)
+            queryProperty
+                .removeDuplicates()
+                .debounce(for: .milliseconds(500))
+                .flatMapLatest { query in
+                    AsyncStream {
+                        await useCase.availableThemes(query: query)
+                    }
                 }
-            }
-            .sink { @MainActor [weak self] themes in
-                self?.items = themes
-            }
-            .store(in: bag)
+                .sink { @MainActor [weak self] themes in
+                    self?.items = themes
+                }
+                .store(in: bag)
 
-//            queryString.flatMap { query in
-//                useCase.availableThemes()
-//            }.sink { items in
-//                self.items = items.map { theme in
-//                    ThemeItemViewModelMock {
-//                        $0.id = theme.id
-//                        $0.title = theme.title
-//                    }
-//            }
             Task { @MainActor in
                 for await query in queryProperty {
                     let themes = await useCase.availableThemes(query: query)
