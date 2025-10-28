@@ -14,8 +14,7 @@ import SwiftUI
 // sourcery: AutoMockable
 @MainActor protocol ThemesSceneViewModel: Observation.Observable, AnyObject {
     var items: [ThemeItemViewModel] { get }
-    var queryString: String { get set }
-    func query(_ query: String)
+    var query: Property<String> { get }
     func select(_ item: ThemeItemViewModel)
 }
 
@@ -23,19 +22,13 @@ extension Themes {
     @Observable class ViewModelImplementation: ThemesSceneViewModel {
         var items: [ThemeItemViewModel] = []
         private let bag = TaskBag()
-        private let queryProperty = Property("")
-
-        var queryString: String = "" {
-            didSet {
-                Task { await queryProperty.send(queryString) }
-            }
-        }
+        let query = Property("")
 
         let useCase: ThemesUseCase
 
         init(useCase: ThemesUseCase) {
             self.useCase = useCase
-            queryProperty
+            query
                 .removeDuplicates()
                 .debounce(for: .milliseconds(500))
                 .flatMapLatest { query in
@@ -44,22 +37,20 @@ extension Themes {
                     }
                 }
                 .sink { @MainActor [weak self] themes in
-                    self?.items = themes
+                    withAnimation {
+                        self?.items = themes
+                    }
                 }
                 .store(in: bag)
 
-            Task { @MainActor in
-                for await query in queryProperty {
-                    let themes = await useCase.availableThemes(query: query)
-                    self.items = themes.map { theme in
-                        theme
-                    }
-                }
-            }
-        }
-
-        func query(_ query: String) {
-            queryString = query
+//            Task { @MainActor in
+//                for await query in queryProperty {
+//                    let themes = await useCase.availableThemes(query: query)
+//                    self.items = themes.map { theme in
+//                        theme
+//                    }
+//                }
+//            }
         }
 
         func select(_ item: ThemeItemViewModel) {

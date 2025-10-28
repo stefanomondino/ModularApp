@@ -22,9 +22,9 @@ extension Theme: ThemeItemViewModel {
 
 extension Themes {
     struct Card: View {
-        @State var viewModel: ThemeItemViewModel
+        @State var viewModel: any ThemeItemViewModel
         @Environment(\.design) var design: Design
-        init(viewModel: ThemeItemViewModel) {
+        init(viewModel: any ThemeItemViewModel) {
             self.viewModel = viewModel
         }
 

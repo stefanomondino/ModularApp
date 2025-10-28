@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Theme: Codable, Sendable {
+struct Theme: Codable, Sendable, Equatable {
     let id: String
     let text: String
     let colors: [String]

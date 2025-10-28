@@ -10,20 +10,22 @@ import DependencyContainer
 import Foundation
 import SwiftUI
 
-public struct Asset: Sendable {
-    public let image: Image
-    public init(_ image: Image = .init()) {
-        self.image = image
-    }
+public protocol AssetConvertible: Sendable {
+    var swiftUIImage: SwiftUI.Image { get }
+    var uiKitImage: UIImage { get }
 }
 
-public extension SwiftUI.Image {
-    init(_ asset: Asset) {
-        self.init(uiImage: asset.image)
-    }
+extension SwiftUI.Image: AssetConvertible {
+    public var uiKitImage: UIImage { .init() }
+    public var swiftUIImage: SwiftUI.Image { self }
 }
 
-public extension Asset {
+extension UIImage: AssetConvertible {
+    public var uiKitImage: UIImage { self }
+    public var swiftUIImage: SwiftUI.Image { .init(uiImage: self) }
+}
+
+public extension Image {
     struct Key: ExtensibleIdentifierType, ExpressibleByStringInterpolation {
         public let value: String
         public init(_ value: String) {
@@ -33,14 +35,14 @@ public extension Asset {
 
     @Observable
     final class Provider: DesignValueProvider {
-        public var provider: [Asset.Key: () -> Any] = [:]
-        public let defaultValue: Asset
-        public init(defaultValue: Asset = .init()) {
+        public var provider: [Image.Key: () -> Any] = [:]
+        public let defaultValue: AssetConvertible
+        public init(defaultValue: AssetConvertible = UIImage()) {
             self.defaultValue = defaultValue
         }
     }
 }
 
-public extension Asset.Key {
+public extension Image.Key {
     static var backIcon: Self { "backIcon" }
 }

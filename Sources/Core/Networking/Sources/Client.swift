@@ -8,14 +8,20 @@
 import Foundation
 import Streams
 
-public actor Client {
+@globalActor
+public actor NetworkingActor {
+    public static let shared = NetworkingActor()
+    public init() {}
+}
+
+@NetworkingActor
+public final class Client {
     let session: URLSession
     let mocker = Mocker()
     let authorization: AuthorizationMiddleware
     private var cache: [Request: Signal<Result<Response, NetworkingError>>] = [:]
     public init(session: URLSession? = nil,
-                authorization: AuthorizationMiddleware = EmptyAuthorizationMiddleware())
-    {
+                authorization: AuthorizationMiddleware = EmptyAuthorizationMiddleware()) {
         self.session = session ?? URLSession(configuration: .default)
         self.authorization = authorization
     }
@@ -49,21 +55,26 @@ public actor Client {
         }
     }
 
+    private func response(from cachedResponse: Signal<Result<Response, NetworkingError>>) async throws(NetworkingError) -> Response {
+        for await result in cachedResponse.prefix(1) {
+            switch result {
+            case let .success(response):
+                return response
+            case let .failure(error):
+                throw error
+            }
+        }
+        throw NetworkingError.unknown()
+    }
+
     public func response(_ request: Request) async throws(NetworkingError) -> Response {
         if let mockedResponse = await mockedResponse(for: request) {
             return mockedResponse
         }
         if let cachedResponse = cache[request] {
-            for await result in cachedResponse.prefix(1) {
-                switch result {
-                case let .success(response):
-                    return response
-                case let .failure(error):
-                    throw error
-                }
-            }
+            return try await response(from: cachedResponse)
         }
-        let signal = Signal<Result<Response, NetworkingError>>()
+        let signal = await Signal<Result<Response, NetworkingError>>()
         var signalResult: Result<Response, NetworkingError>
         cache[request] = signal
         do {

@@ -12,7 +12,7 @@ import Networking
 extension AppContainer {
     func setupNetworking() async {
         await register(scope: .singleton) { [self] in
-            Networking.Client()
+            await Networking.Client()
         }
     }
 }

@@ -30,7 +30,7 @@ extension Themes {
             VStack(spacing: design.value.get(.sidePadding(2)).doubleValue) {
                 HStack {
                     TextField("Search themes",
-                              text: $viewModel.queryString)
+                              text: viewModel.query.binding)
                 }
                 .padding(.horizontal, .sidePadding(2))
                 ScrollView {
@@ -54,7 +54,7 @@ extension Themes {
 
 #Preview(traits: .design()) {
     Themes.ViewContents(viewModel: ThemesSceneViewModelMock {
-        $0.queryString = ""
+        $0.query = Property("")
         $0.items = (0 ..< 10).map { index in
             ThemeItemViewModelMock {
                 $0.id = "theme-\(index)"

@@ -26,7 +26,7 @@ extension App {
         var body: some View {
             VStack {
                 if appState.isConfigured {
-                    Image(design.asset.backIcon)
+                    design.asset.backIcon.swiftUIImage
 
                     PillButton("Click me",
                                style: .init(foregroundColor: "#FFCC00",
@@ -53,8 +53,16 @@ extension App {
     }
 }
 
+@MainActor
+struct AppStateKey: @MainActor EnvironmentKey {
+    static let defaultValue: AppState = .empty
+}
+
 extension EnvironmentValues {
-    @Entry var appState: AppState = .empty
+    @MainActor var appState: AppState {
+        get { self[AppStateKey.self] }
+        set { self[AppStateKey.self] = newValue }
+    }
 }
 
 #Preview(traits: .design(.app)) {

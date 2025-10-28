@@ -19,7 +19,7 @@ struct NullableValueTests {
 
     @Test("JSON with null value should be parsed and have a default value")
     func nullValueGetsReplaced() throws {
-        let values = try Stubs.nullableValuesStub.decode([Mock].self)
+        let values = try Stubs.nullableValuesStubJson.decode([Mock].self)
         let lastValue = try #require(values.last)
         #expect(values.count == 2)
         #expect(lastValue.id == "2")

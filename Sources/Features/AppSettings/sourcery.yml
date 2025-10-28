@@ -7,4 +7,4 @@ configurations:
     - ../../../.sourcery/AutoMockable.stencil
     output: Sources/Generated/AutoMockable.swift
     args:
-      autoMockableImports: ["DesignSystem"]
+      autoMockableImports: ["DesignSystem", "Streams"]

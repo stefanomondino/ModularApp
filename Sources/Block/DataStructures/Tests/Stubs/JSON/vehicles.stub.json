@@ -1,0 +1,17 @@
+[
+  {
+    "type": "car",
+    "brand": "TheBrand™",
+    "name": "The Name®"
+  },
+  {
+    "type": "boat",
+    "engineCount": 2,
+    "name": "Floater 3000"
+  },
+  {
+    "type": "bike",
+    "isElectric": true,
+    "name": "Bye Cycle"
+  }
+]

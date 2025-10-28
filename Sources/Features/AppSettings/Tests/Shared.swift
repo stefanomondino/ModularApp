@@ -10,7 +10,7 @@ import Networking
 
 typealias Stubs = Files.Sources.Features.AppSettings.Tests.Stubs
 
-extension File: @unchecked Sendable, DataConvertible {
+extension File: DataConvertible {
     public func asData() throws(NetworkingError) -> Data {
         do {
             return try Data(contentsOf: url)

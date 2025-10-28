@@ -39,6 +39,6 @@ extension Router.Identifier {
     }
 }
 
-public extension Asset.Key {
+public extension Image.Key {
     static var themeIcon: Self { "themeIcon" }
 }

@@ -40,3 +40,11 @@ mise r
 ```
 
 and select manually the command you need.
+
+## Project setup
+Just run
+```sh
+mise install
+```
+
+to setup and install everything needed by the project

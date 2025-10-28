@@ -10,10 +10,10 @@ import Foundation
 @testable import Streams
 import Testing
 
-extension File: @unchecked Sendable, Stub {
+extension File: Stub {
     public func read() throws -> Data {
         try Data(contentsOf: url)
     }
 }
 
-public typealias Stubs = Files.Sources.Block.DataStructures.Tests.Stubs
+public typealias Stubs = Files.Sources.Block.DataStructures.Tests.Stubs.Json

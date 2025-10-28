@@ -6,6 +6,7 @@
 //
 import Streams
 
+@NetworkingActor
 public protocol AuthorizationMiddleware: Sendable {
     func createAuthorizationHeaders(from request: Request) async throws(NetworkingError) -> [Request.Header: String]
     func refresh(with client: Client, currentResponse: Response) async throws(NetworkingError) -> Bool
@@ -22,14 +23,13 @@ public struct EmptyAuthorizationMiddleware: AuthorizationMiddleware {
     }
 }
 
-public actor TokenAuthorizationMiddleware<Token: Sendable & Codable>: AuthorizationMiddleware {
+public final class TokenAuthorizationMiddleware<Token: Sendable & Codable>: AuthorizationMiddleware {
     let storage: Property<Token?>
     let headers: @Sendable (Request, Token?) -> [Request.Header: String]
     let refreshPolicy: @Sendable (Client, Response) async throws(NetworkingError) -> Bool
     public init(token: Property<Token?>,
                 headers: @Sendable @escaping (Request, Token?) -> [Request.Header: String] = { _, _ in [:] },
-                refresh: @Sendable @escaping (Client, Response) async throws(NetworkingError) -> Bool = { _, _ in false })
-    {
+                refresh: @Sendable @escaping (Client, Response) async throws(NetworkingError) -> Bool = { _, _ in false }) {
         storage = token
         self.headers = headers
         refreshPolicy = refresh

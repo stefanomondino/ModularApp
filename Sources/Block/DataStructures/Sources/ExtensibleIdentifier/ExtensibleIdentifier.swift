@@ -1,6 +1,6 @@
 //
 //  ExtensibleIdentifier.swift
-//  CodableKitten
+//  DataStructures
 //
 //  Created by Stefano Mondino on 19/05/25.
 //
@@ -8,10 +8,9 @@
 /// A generic, type-safe identifier that can be extended with a tag type.
 /// Useful for creating distinct identifier types from the same underlying value type while retaining type safety and extensibility, compared to enums.
 public struct ExtensibleIdentifier<Value: Hashable & Sendable & Codable, Tag>: ExtensibleIdentifierType {
-    
     /// The underlying value of the identifier.
     public var value: Value
-    
+
     /// Creates a new identifier with the given value.
     /// - Parameter value: The value to wrap.
     public init(_ value: Value) {
@@ -24,15 +23,15 @@ public struct ExtensibleIdentifier<Value: Hashable & Sendable & Codable, Tag>: E
         hasher.combine(value)
         hasher.combine(ObjectIdentifier(Tag.self))
     }
-    
+
     /// Compares two identifiers for equality.
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.value == rhs.value
     }
 }
 
-extension ExtensibleIdentifier {
-    public typealias Case = ExtensibleIdentifierCase<Self>
+public extension ExtensibleIdentifier {
+    typealias Case = ExtensibleIdentifierCase<Self>
 }
 
 extension ExtensibleIdentifier: ExpressibleByStringLiteral where Value == String {}

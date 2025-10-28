@@ -1,6 +1,7 @@
 import Foundation
 
-public actor Signal<Element: Sendable>: AsyncSequence {
+@MainActor
+public final class Signal<Element: Sendable>: AsyncSequence {
     public typealias AsyncIterator = ShareableAsyncStream<Element>.AsyncIterator
 
     public nonisolated func makeAsyncIterator() -> ShareableAsyncStream<Element>.AsyncIterator {
@@ -13,7 +14,7 @@ public actor Signal<Element: Sendable>: AsyncSequence {
         continuations[id] = continuation
     }
 
-    public func send(_ value: Element) async {
+    public func send(_ value: Element) {
         for continuation in continuations.values {
             continuation.yield(value)
         }

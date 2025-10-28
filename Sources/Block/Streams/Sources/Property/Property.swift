@@ -7,23 +7,28 @@
 
 import Foundation
 
-public actor Property<Element: Sendable>: AsyncSequence {
+@MainActor
+public final class Property<Element: Sendable>: AsyncSequence {
     public init(_ value: Element) {
-        _value = value
+        strategy = .memory(default: value)
     }
 
-    private var _value: Element
+    public init(_ strategy: Strategy) {
+        self.strategy = strategy
+    }
+
     public var value: Element {
-        get async { _value }
+        strategy.get()
     }
 
+    private var strategy: Strategy
     private var continuations: [UUID: AsyncStream<Element>.Continuation] = [:]
     private func update(continuation: AsyncStream<Element>.Continuation?, id: UUID) async {
         continuations[id] = continuation
     }
 
-    public func send(_ value: Element) async {
-        _value = value
+    public func send(_ value: Element) {
+        strategy.set(value)
         for continuation in continuations.values {
             continuation.yield(value)
         }
@@ -43,7 +48,7 @@ public actor Property<Element: Sendable>: AsyncSequence {
         ShareableAsyncStream { [weak self] continuation in
             let id = UUID()
             let task = Task { [weak self] in
-                guard let value = await self?._value else {
+                guard let value = await self?.value else {
                     continuation.finish()
                     return
                 }
@@ -62,7 +67,34 @@ public actor Property<Element: Sendable>: AsyncSequence {
 }
 
 public extension Property where Element: ExpressibleByNilLiteral {
-    init() {
+    convenience init() {
         self.init(nil)
+    }
+}
+
+public extension Property {
+    @MainActor
+    struct Strategy: Sendable {
+        fileprivate let get: @Sendable @MainActor () -> Element
+        fileprivate let set: @Sendable @MainActor (Element) -> Void
+        fileprivate init(get: @Sendable @MainActor @escaping () -> Element,
+                         set: @Sendable @MainActor @escaping (Element) -> Void) {
+            self.get = get
+            self.set = set
+        }
+
+        public static func memory(default value: Element) -> Strategy {
+            var storage: Element = value
+            return .init(get: {
+                storage
+            }) { newValue in
+                storage = newValue
+            }
+        }
+
+        public static func custom(get: @Sendable @MainActor @escaping () -> Element,
+                                  set: @Sendable @MainActor @escaping (Element) -> Void) -> Strategy {
+            .init(get: get, set: set)
+        }
     }
 }

@@ -14,10 +14,16 @@ import SwiftUI
 extension Design {
     @MainActor func setupAssets() {
         asset.register(for: .backIcon) {
-            Asset(ModularAppAsset.Assets.someImage.image)
+            ModularAppAsset.Assets.someImage
         }
         asset.register(for: .themeIcon) {
-            Asset(ModularAppAsset.Assets.someImage.image)
+            ModularAppAsset.Assets.someImage
         }
+    }
+}
+
+extension ModularAppImages: AssetConvertible {
+    public var uiKitImage: UIImage {
+        image
     }
 }

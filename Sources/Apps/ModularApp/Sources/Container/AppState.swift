@@ -10,7 +10,7 @@ import DataStructures
 import Observation
 import Routes
 
-@Observable final class AppState {
+@Observable @MainActor final class AppState {
     static var empty: AppState {
         .init(router: .init(container: .init(), name: "Empty AppState Router"))
     }

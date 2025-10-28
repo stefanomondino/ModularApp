@@ -5,7 +5,8 @@ import UIKit
 
 public typealias RouteContainer = Router.Container
 
-public actor Router {
+@MainActor
+public final class Router {
     /**
             An object containing all the `Route` underlying implementations associated to a `RouteDefinition` type.
 
@@ -40,22 +41,22 @@ public actor Router {
     public init(container: Container, name: String = "Auto-created Router") {
         self.container = container
         Task {
-            for await route in await definitionStream {
+            for await route in definitionStream {
                 print("Router \(name) emitted route \(route)")
             }
         }
     }
 
     var definitionStream: ShareableAsyncStream<RouteDefinition> {
-        get async { await routes.asAsyncStream() }
+        routes.asAsyncStream()
     }
 
-    public func send(_ route: RouteDefinition) async {
-        await routes.send(route)
+    public func send(_ route: RouteDefinition) {
+        routes.send(route)
     }
 
-    public func send(_ id: Identifier) async {
-        await send(id.definition)
+    public func send(_ id: Identifier) {
+        send(id.definition)
     }
 
     @MainActor

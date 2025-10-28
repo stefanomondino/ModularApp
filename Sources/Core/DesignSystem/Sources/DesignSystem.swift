@@ -25,7 +25,7 @@ public final class Design: MainActorProvider {
         resolve(default: .init())
     }
 
-    @MainActor public var asset: Asset.Provider {
+    @MainActor public var asset: Image.Provider {
         resolve(default: .init())
     }
 }

@@ -8,7 +8,8 @@
 import DependencyContainer
 
 public extension Client {
-    internal actor Mocker: DependencyContainer {
+    @NetworkingActor
+    internal final class Mocker: DependencyContainer {
         var container: Container<Request> = .init()
         func clear() async {
             container = .init()
