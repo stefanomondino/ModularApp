@@ -52,6 +52,13 @@ public struct Response: Sendable, Equatable {
         }
     }
 
+    public init(_ data: Data, statusCode: StatusCode, request: Request, headers: [String: String] = [:]) {
+        self.data = data
+        self.request = request
+        self.statusCode = statusCode
+        self.headers = headers
+    }
+
     public var contents: String? {
         String(bytes: data, encoding: .utf8)
     }

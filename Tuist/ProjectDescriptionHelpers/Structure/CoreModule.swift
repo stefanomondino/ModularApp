@@ -8,7 +8,7 @@ public extension Skeleton {
             public var core: [CoreModule]
             public var block: [BlockModule]
             public var external: [ExternalModule]
-            public var dependencies: [DependencyBuilder] { core + block + external }
+            public var dependencies: [DependencyBuilder] { core + block }
 
             public init(isPrivate: Bool = false,
                         block: [BlockModule] = [],

@@ -6,7 +6,7 @@ public extension Skeleton {
         public struct Dependencies: ModuleDependencies {
             public var isPrivate: Bool
             public var external: [ExternalModule]
-            public var dependencies: [DependencyBuilder] { external }
+            public var dependencies: [DependencyBuilder] { [] }
 
             public init(isPrivate: Bool = false,
                         external: [ExternalModule] = []) {

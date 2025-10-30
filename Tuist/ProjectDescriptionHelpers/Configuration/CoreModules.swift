@@ -13,6 +13,17 @@ public extension Skeleton.CoreModule {
               hasMacros: true)
     }
 
+    static func components() -> Self {
+        .init(name: "Components",
+              destinations: Constants.destinations,
+              deploymentTargets: .custom,
+              swiftVersion: .v6,
+              dependencies: .init(core: [.designSystem()]),
+              testDependencies: .init(test: [.coreTesting()]),
+              synthesizers: [],
+              hasMacros: false)
+    }
+
     static func routes() -> Self {
         .init(name: "Routes",
               destinations: Constants.destinations,

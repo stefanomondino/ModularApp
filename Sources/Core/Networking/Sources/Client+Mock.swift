@@ -6,6 +6,7 @@
 //
 
 import DependencyContainer
+import Foundation
 
 public extension Client {
     @NetworkingActor
@@ -19,6 +20,15 @@ public extension Client {
     func mock(for request: Request, response: @autoclosure @Sendable @escaping () throws -> Response?) async {
         await mocker.register(for: request) {
             try? response()
+        }
+    }
+
+    func mock(for request: Request,
+              data: DataConvertible,
+              statusCode: Response.StatusCode = .ok,
+              headers: [String: String] = [:]) async throws {
+        try await mocker.register(for: request) {
+            try Response(data.asData(), statusCode: statusCode, headers: headers, request: request)
         }
     }
 

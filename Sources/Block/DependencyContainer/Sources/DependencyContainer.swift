@@ -38,7 +38,7 @@ public struct ContainerTag: Hashable, ExpressibleByStringInterpolation, Sendable
 public actor Container<DependencyKey: Hashable>: DependencyContainer where DependencyKey: Sendable {
     struct Dependency: Sendable {
         let scope: Scope
-        let closure: @Sendable () async -> Sendable
+        let closure: @Sendable () async throws -> Sendable
     }
 
     /**
@@ -87,7 +87,7 @@ public actor Container<DependencyKey: Hashable>: DependencyContainer where Depen
     func register(for key: DependencyKey,
                   tag: ContainerTag = .empty,
                   scope: Container<DependencyKey>.Scope = .unique,
-                  handler: @Sendable @escaping () async -> some Any) async {
+                  handler: @Sendable @escaping () async throws -> some Any) async {
         let internalKey = Container.InternalKey(key: key, tag: tag)
         singletons[internalKey] = nil
         dependencies[internalKey] = Container<DependencyKey>.Dependency(scope: scope,
@@ -99,17 +99,19 @@ public actor Container<DependencyKey: Hashable>: DependencyContainer where Depen
         guard let dependency = dependencies[internalKey] else { return nil }
         switch dependency.scope {
         case .unique:
-            return await dependency.closure() as? Value
+            return try? await dependency.closure() as? Value
         case .weakSingleton:
             guard let value = weakSingletons[internalKey]?.value else {
-                let newValue = await dependency.closure() as AnyObject
-                weakSingletons[internalKey] = .init(value: newValue)
-                return newValue as? Value
+                if let newValue = try? await dependency.closure() {
+                    weakSingletons[internalKey] = .init(value: newValue as AnyObject)
+                    return newValue as? Value
+                }
+                return nil
             }
             return value as? Value
         case .singleton, .eagerSingleton:
             guard let value = singletons[internalKey] else {
-                let newValue = await dependency.closure()
+                let newValue = try? await dependency.closure()
                 singletons[internalKey] = newValue
                 return newValue as? Value
             }
@@ -142,7 +144,7 @@ public extension DependencyContainer {
     func register<Value: Sendable>(for key: DependencyKey,
                                    tag: ContainerTag = .empty,
                                    scope: Container<DependencyKey>.Scope = .unique,
-                                   handler: @Sendable @escaping () async -> Value) async {
+                                   handler: @Sendable @escaping () async throws -> Value) async {
         await container.register(for: key, tag: tag, scope: scope, handler: handler)
         switch scope {
         case .eagerSingleton: _ = await resolve(key, type: Value.self, tag: tag) as Value?

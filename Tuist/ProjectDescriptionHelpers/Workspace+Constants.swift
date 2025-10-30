@@ -15,22 +15,19 @@ public enum Constants {
     public static let defaultAppstoreConnectTeamName = "Stefano Mondino"
 }
 
-@MainActor public let coreModules: [Skeleton.CoreModule] = [
-    .designSystem(),
-    .networking(),
-    .routes()
-]
+@MainActor public let coreModules: [Skeleton.CoreModule] = [.designSystem(),
+                                                            .networking(),
+                                                            .routes(),
+                                                            .components()]
 
-@MainActor public let blockModules: [Skeleton.BlockModule] = [
-    .logger(),
-    .dependencyContainer(),
-    .streams(),
-    .dataStructures()
-]
+@MainActor public let blockModules: [Skeleton.BlockModule] = [.logger(),
+                                                              .dependencyContainer(),
+                                                              .streams(),
+                                                              .dataStructures()]
 
 @MainActor public let bridgeModules: [Skeleton.BridgeModule] = []
 
-@MainActor public let featureModules: [Skeleton.FeatureModule] = [.onboarding()]
+@MainActor public let featureModules: [Skeleton.FeatureModule] = [.onboarding(), .appSettings()]
 
 @MainActor public let testModules: [Skeleton.TestModule] = [.coreTesting()]
 

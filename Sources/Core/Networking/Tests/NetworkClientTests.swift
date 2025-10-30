@@ -20,12 +20,12 @@ struct NetworkClientTests {
     let client: Client
     let refreshRequest: Request
     let token: Property<AccessToken?>
-    init() throws {
+    init() async throws {
         let refreshRequest = try Request(baseURL: "http://localhost:8083", path: "token", method: .post, body: .json(AccessToken.test))
         self.refreshRequest = refreshRequest
-        let token = Property<AccessToken?>(.test)
+        let token = await Property<AccessToken?>(.test)
         self.token = token
-        client = .init(authorization: TokenAuthorizationMiddleware<AccessToken>(
+        client = await .init(authorization: TokenAuthorizationMiddleware<AccessToken>(
             token: token,
             headers: { request, currentToken in
                 if let currentToken, request.authorization == .bearer {

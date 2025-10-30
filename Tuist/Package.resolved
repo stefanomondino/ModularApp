@@ -1,13 +1,13 @@
 {
-  "originHash" : "2e43fcb4ca71c88215fc632409a0c1af5117dc93923beaf567b5b370a9b57b21",
+  "originHash" : "188b1234415e9518bb3ee0cb588b4be551f623dba0aae9bbe58197f9a03543a6",
   "pins" : [
     {
       "identity" : "flyingfox",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swhitty/FlyingFox.git",
       "state" : {
-        "revision" : "147d130b65cab784351069a13fe4e614c331599a",
-        "version" : "0.24.0"
+        "revision" : "76b2d2d0eb54f0b53e8b661cc8007c487d94f8da",
+        "version" : "0.25.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
-        "revision" : "7deda23bbdca612076c5c315003d8638a08ed0f1",
-        "version" : "8.3.2"
+        "revision" : "4d75de347da985a70c63af4d799ed482021f6733",
+        "version" : "8.6.1"
       }
     },
     {
