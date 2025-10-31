@@ -11,12 +11,14 @@ import DesignSystem
 import SwiftUI
 
 public extension Design {
-    @MainActor var pillButton: PillButton.Provider {
+    @MainActor var pill: Pill.Provider {
         resolve(default: .init())
     }
 }
 
-public extension PillButton {
+public enum Pill {}
+
+public extension Pill {
     struct Key: ExtensibleIdentifierType, ExpressibleByStringInterpolation {
         public let value: String
         public init(_ value: String) {
@@ -38,39 +40,39 @@ public extension PillButton {
     }
 }
 
-public struct PillButton: View {
-    @Environment(\.design) var design
-    let action: @Sendable () async -> Void
-    let title: String
-    let style: (Design) -> Style
-    public init(_ title: String,
-                style: Style,
-                action: @Sendable @escaping @MainActor () async -> Void = {}) {
-        self.action = action
-        self.title = title
-        self.style = { _ in style }
-    }
+public extension Pill {
+    struct Button<Label: View>: View {
+        @Environment(\.design) var design
+        let action: @Sendable () async -> Void
+        let title: () -> Label
+        let style: (Design) -> Style
+        public init(_ title: String,
+                    style: Style,
+                    action: @Sendable @escaping @MainActor () async -> Void = {}) where Label == Text {
+            self.action = action
+            self.title = { Text(title) }
+            self.style = { _ in style }
+        }
 
-    public init(_ title: String,
-                style key: Key,
-                action: @Sendable @escaping @MainActor () async -> Void = {}) {
-        self.action = action
-        self.title = title
-        style = { $0.pillButton.get(key) }
-    }
+        public init(_ title: String,
+                    style key: Key,
+                    action: @Sendable @escaping @MainActor () async -> Void = {}) where Label == Text {
+            self.action = action
+            self.title = { Text(title) }
+            style = { $0.pill.get(key) }
+        }
 
-    public var body: some View {
-        Button(action: { Task {
-                   await action()
-               } },
-               label: {
-                   Text("Button")
-               })
-               .buttonStyle(style(design))
+        public var body: some View {
+            SwiftUI.Button(action: { Task {
+                               await action()
+                           } },
+                           label: { title() })
+                .buttonStyle(style(design))
+        }
     }
 }
 
-public extension PillButton {
+public extension Pill {
     struct Style: ButtonStyle {
         @Environment(\.isEnabled) var isEnabled: Bool
 
@@ -106,10 +108,10 @@ public extension PillButton {
 #Preview(traits: .design(.baseTypography)) {
     @Previewable @Environment(\.design) var design
     VStack {
-        PillButton("Title",
-                   style: .init(foregroundColor: design.color.primary,
-                                backgroundColor: design.color.secondary,
-                                showArrow: true))
+        Pill.Button("Title",
+                    style: .init(foregroundColor: design.color.primary,
+                                 backgroundColor: design.color.secondary,
+                                 showArrow: true))
 //        PillButton().disabled(true)
     }
 }

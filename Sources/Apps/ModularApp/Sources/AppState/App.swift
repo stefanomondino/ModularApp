@@ -32,10 +32,8 @@ extension App {
                     TabView {
                         ZStack {
                             Color.red.ignoresSafeArea()
-                            PillButton("Click me - I pretend to be the home screen :)",
-                                       style: .init(foregroundColor: "#FFCC00",
-                                                    backgroundColor: SwiftUI.Color.clear,
-                                                    showArrow: true)) {
+                            Pill.Button("Click me - I pretend to be the home screen :)",
+                                        style: .standard) {
                                 //                        await appState.router.send(OnboardingRouteDefinition(message: "ciao dalla home"))
                                 appState.router.send(.appSettings())
                                 //                        await appState.router.send(.webRoute("https://www.google.com"))

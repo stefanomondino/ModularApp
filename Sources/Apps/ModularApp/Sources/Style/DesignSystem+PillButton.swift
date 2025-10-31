@@ -13,28 +13,35 @@ import SwiftUI
 
 extension Design {
     @MainActor func setupPillButton() {
-        pillButton.register(for: .standard) { [self] in
-            PillButton.Style(foregroundColor: color.primary,
-                             backgroundColor: color.background,
-                             showArrow: false)
+        pill.register(for: .standard) { [self] in
+            Pill.Style(foregroundColor: color.primary,
+                       backgroundColor: color.background,
+                       showArrow: false)
         }
-        pillButton.register(for: .secondary) { [self] in
-            PillButton.Style(foregroundColor: color.background,
-                             backgroundColor: color.primary,
-                             showArrow: true)
+        pill.register(for: .secondary) { [self] in
+            Pill.Style(foregroundColor: color.background,
+                       backgroundColor: color.primary,
+                       showArrow: true)
+        }
+        pill.register(for: .outline) { [self] in
+            Pill.Style(foregroundColor: color.primary,
+                       backgroundColor: SwiftUI.Color.clear,
+                       showArrow: false)
         }
     }
 }
 
-extension PillButton.Key {
+extension Pill.Key {
     static var secondary: Self { "secondary" }
+    static var outline: Self { "outline" }
 }
 
 #Preview(traits: .design(.app)) {
     @Previewable @Environment(\.design) var design
     VStack(spacing: 16) {
-        ForEach([PillButton.Key.standard, .secondary], id: \.self) {
-            PillButton("Test", style: $0)
+        ForEach([Pill.Key.standard, .secondary, .outline], id: \.self) {
+            Pill.Button("Test", style: $0)
+            Pill.Button("Hanno osato cervare l'ucciso del re", style: $0)
         }
     }
 }

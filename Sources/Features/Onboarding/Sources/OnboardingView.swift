@@ -26,15 +26,13 @@ public struct OnboardingView: View {
                 Text(viewModel.title)
                     .typography(.h2)
                     .foregroundColor(design.color.primary)
-                PillButton("Try me",
-                           style: .init(foregroundColor: design.color.primary,
-                                        backgroundColor: design.color.secondary,
-                                        showArrow: true),
-                           action: {
-                               withAnimation {
-                                   viewModel.onTap()
-                               }
-                           })
+                Pill.Button("Try me",
+                            style: .standard,
+                            action: {
+                                withAnimation {
+                                    viewModel.onTap()
+                                }
+                            })
             }
         }
     }
