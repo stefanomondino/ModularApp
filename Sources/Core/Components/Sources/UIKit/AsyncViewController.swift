@@ -7,12 +7,12 @@ import UIKit
     }
 
     /// A wrapper around UIViewController with async initialization
-    public final class AsyncViewController<WrappedViewController: UIViewController>: UIViewController, WithAsyncViewController {
-        let callback: () async -> WrappedViewController?
-        weak var viewController: WrappedViewController?
+    public final class AsyncViewController<Wrapped: UIViewController>: UIViewController, WithAsyncViewController {
+        let callback: () async -> Wrapped?
+        weak var viewController: Wrapped?
         public var asyncViewController: UIViewController? { viewController }
         var disableAutolayout: Bool = false
-        public init(disableAutolayout: Bool = false, _ callback: @escaping () async -> WrappedViewController?) {
+        public init(disableAutolayout: Bool = false, _ callback: @escaping () async -> Wrapped?) {
             self.callback = callback
             self.disableAutolayout = disableAutolayout
             super.init(nibName: nil, bundle: nil)

@@ -8,21 +8,6 @@
 import Foundation
 import SwiftUI
 
-public struct SwiftUIModalRoute: SwiftUIRoute, RouteDefinition {
-    public let identifier: String
-
-    public func isSameRoute(as _: any RouteDefinition) -> Bool {
-        false
-    }
-
-    public let view: @MainActor @Sendable () -> AnyView
-    public init(identifier: String = UUID().uuidString,
-                _ view: @MainActor @Sendable @escaping () -> any View) {
-        self.view = { AnyView(view()) }
-        self.identifier = identifier
-    }
-}
-
 public extension View {
     func modal() -> some View {
         modifier(Router.ModalModifier())
@@ -39,7 +24,7 @@ extension Router {
                 .uiKitModal()
                 .task {
                     guard let router else { return }
-                    for await route in await router.definitionStream {
+                    for await route in router.definitionStream {
                         if let path = await Router.NavigationPath<SwiftUIModalRoute>(router: router, routeDefinition: route) {
                             self.path = path
                         }
@@ -65,10 +50,8 @@ extension Router {
             content
                 .task {
                     guard let router else { return }
-                    for await route in await router.definitionStream {
-                        if route is BackRouteDefinition {
-                            dismiss()
-                        }
+                    for await route in router.definitionStream where route is BackRouteDefinition {
+                        dismiss()
                     }
                 }
         }

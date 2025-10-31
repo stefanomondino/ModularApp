@@ -20,8 +20,7 @@ public extension Typography {
     @Observable
     @dynamicMemberLookup
     @MainActor final class Provider: MainActorProvider {
-        public var provider: [Typography.Key: () -> Any] = [:]
-        public typealias Key = Typography.Key
+        public let storage: Storage<Typography.Key> = .init()
         let defaultValue: Typography
 
         public init(defaultValue: Typography = Typography(family: .system,

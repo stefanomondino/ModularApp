@@ -23,10 +23,10 @@ struct UIViewControllerNavigationModifier<CustomRoute: SwiftUIRoute & RouteDefin
     func body(content: Content) -> some View {
         content.task {
             if let router {
-                for await definition in await router.definitionStream {
+                for await definition in router.definitionStream {
                     if let definition = await router.resolve(definition) as? UIKitRoute,
                        let viewController = await definition.createViewController() {
-                        await router.send(CustomRoute(identifier: UUID().uuidString) {
+                        router.send(CustomRoute(identifier: UUID().uuidString) {
                             ViewControllerWrapper(viewController: viewController)
                         })
                     }

@@ -20,7 +20,7 @@ public extension Color {
 
     @Observable
     final class Provider: DesignValueProvider {
-        public var provider: [Color.Key: () -> Any] = [:]
+        public var storage: Storage<Color.Key> = .init()
         public let defaultValue: ColorConvertible
         public init(defaultValue: ColorConvertible = "#000000") {
             self.defaultValue = defaultValue

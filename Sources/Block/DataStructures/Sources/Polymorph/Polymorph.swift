@@ -41,9 +41,10 @@ public struct Polymorph<Extractor: TypeExtractor, Value: Sendable>: Decodable, S
     public init(from decoder: any Decoder) throws {
         if Extractor.ObjectType.self == Value.self {
             guard let value: Extractor.ObjectType = try Extractor.extract(from: decoder) else {
-                throw DecodingError.valueNotFound(Value.self,
-                                                  .init(codingPath: [],
-                                                        debugDescription: "Expected a value of type \(Value.self) but found nil. Did you register the concrete type on the decoder?"))
+                throw DecodingError
+                    .valueNotFound(Value.self,
+                                   .init(codingPath: [],
+                                         debugDescription: "Expected a value of type \(Value.self) but found nil. Did you register the concrete type on the decoder?"))
             }
             self.value = value as? Value
         } else if Value.self == Extractor.ObjectType?.self {
@@ -56,14 +57,16 @@ public struct Polymorph<Extractor: TypeExtractor, Value: Sendable>: Decodable, S
             let value: [Extractor.ObjectType]? = try Extractor.extract(from: decoder)
             self.value = value as? Value
         } else {
-            throw DecodingError.dataCorrupted(.init(codingPath: [],
-                                                    debugDescription: "Attempted to decode a Polymorph with a Value type that does not match the expected ObjectType from the Extractor."))
+            throw DecodingError
+                .dataCorrupted(.init(codingPath: [],
+                                     debugDescription: "Attempted to decode a Polymorph with a Value type that does not match the expected ObjectType from the Extractor."))
         }
     }
 }
 
 /// Adds Encodable conformance to `Polymorph` when the wrapped value is encodable.
-/// Note: Currently as of Swift 6.2 there's no way to conditionally conform a property wrapper to `Encodable` based on the wrapped value type, because Polymorph will use a generic protocol as Value (example: any Animal) which is not declarable as encodable.
+/// Note: Currently as of Swift 6.2 there's no way to conditionally conform a property wrapper to `Encodable` based on the wrapped value type,
+/// because Polymorph will use a generic protocol as Value (example: any Animal) which is not declarable as encodable.
 extension Polymorph: Encodable {
     public func encode(to encoder: any Encoder) throws {
         if let value = wrappedValue as? Extractor.ObjectType {

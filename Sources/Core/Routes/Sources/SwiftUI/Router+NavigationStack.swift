@@ -8,21 +8,6 @@
 import Foundation
 import SwiftUI
 
-public struct SwiftUINavigationRoute: SwiftUIRoute, RouteDefinition, Sendable {
-    public let identifier: String
-
-    public func isSameRoute(as _: any RouteDefinition) -> Bool {
-        false
-    }
-
-    public let view: @MainActor @Sendable () -> AnyView
-    public init(identifier: String = UUID().uuidString,
-                _ view: @MainActor @Sendable @escaping () -> any View) {
-        self.identifier = identifier
-        self.view = { AnyView(view()) }
-    }
-}
-
 private struct NavigationRouterWrapper: ViewModifier {
     @Environment(\.router) var router
     func body(content: Content) -> some View {
@@ -59,7 +44,7 @@ extension Router {
                     .environment(\.router, router)
             }
             .task {
-                for await route in await self.router.definitionStream {
+                for await route in self.router.definitionStream {
                     if let path = await NavigationPath<SwiftUINavigationRoute>(router: router, routeDefinition: route) {
                         self.path.append(path)
                     }
@@ -68,7 +53,7 @@ extension Router {
                         case .single:
                             guard !self.path.isEmpty else { return }
                             self.path.removeLast()
-                        case let .identifier(id):
+                        case .identifier:
                             while self.path.isEmpty == false {
                                 self.path = .init()
                             }
@@ -82,20 +67,5 @@ extension Router {
                 }
             }
         }
-    }
-}
-
-public struct BackRouteDefinition: RouteDefinition, Equatable {
-    public enum BackType: Equatable, Sendable {
-        case single
-        case root
-        case count(Int)
-        case identifier(String)
-    }
-
-    public let identifier: String = "back"
-    let backType: BackType
-    public init(backType: BackType = .single) {
-        self.backType = backType
     }
 }

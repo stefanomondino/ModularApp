@@ -74,7 +74,7 @@ public extension Property where Element: ExpressibleByNilLiteral {
 
 public extension Property {
     @MainActor
-    struct Strategy: Sendable {
+    struct Strategy {
         fileprivate let get: @Sendable @MainActor () -> Element
         fileprivate let set: @Sendable @MainActor (Element) -> Void
         fileprivate init(get: @Sendable @MainActor @escaping () -> Element,
@@ -85,11 +85,8 @@ public extension Property {
 
         public static func memory(default value: Element) -> Strategy {
             var storage: Element = value
-            return .init(get: {
-                storage
-            }) { newValue in
-                storage = newValue
-            }
+            return .init(get: { storage },
+                         set: { storage = $0 })
         }
 
         public static func custom(get: @Sendable @MainActor @escaping () -> Element,

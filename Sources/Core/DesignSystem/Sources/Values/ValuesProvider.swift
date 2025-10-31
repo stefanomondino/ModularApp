@@ -80,7 +80,7 @@ public extension NumberValue {
 
     @Observable
     final class Provider: DesignValueProvider {
-        public var provider: [NumberValue.Key: () -> Any] = [:]
+        public var storage: Storage<NumberValue.Key> = .init()
         public let defaultValue: NumberValue
         public init(defaultValue: NumberValue = .zero) {
             self.defaultValue = defaultValue

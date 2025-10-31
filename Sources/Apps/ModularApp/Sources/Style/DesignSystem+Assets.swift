@@ -14,10 +14,10 @@ import SwiftUI
 extension Design {
     @MainActor func setupAssets() {
         asset.register(for: .backIcon) {
-            ModularAppAsset.Assets.someImage
+            UIImage()
         }
         asset.register(for: .themeIcon) {
-            ModularAppAsset.Assets.someImage
+            UIImage()
         }
     }
 }

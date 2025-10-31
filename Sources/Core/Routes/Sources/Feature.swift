@@ -7,6 +7,7 @@
 
 import DependencyContainer
 
+@MainActor
 public protocol Feature: DependencyContainer where DependencyKey == ObjectIdentifier {
     associatedtype Container: DependencyContainer
     var services: [Service] { get async }

@@ -32,7 +32,7 @@ struct DummyView: View {
     var body: some View {
         Text("Navigation Route - click me to go back")
             .onTapGesture {
-                Task { await router?.send(BackRouteDefinition()) }
+                router?.send(BackRouteDefinition())
             }
     }
 }

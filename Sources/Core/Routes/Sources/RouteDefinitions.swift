@@ -52,6 +52,3 @@ public protocol Route: Sendable {}
 public struct EmptyRoute: Route {
     public init() {}
 }
-
-/// A Scene generically represents a "screen" of the app. On UIKit apps, it can be a `UIViewController`
-// public protocol Scene {}

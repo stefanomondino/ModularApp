@@ -9,7 +9,7 @@ public extension AsyncSequence {
     func flatMapLatest<ResultSequence: AsyncSequence>(
         _ transformation: @Sendable @escaping (Element) async -> ResultSequence
     ) -> AsyncThrowingStream<ResultSequence.Element, any Error>
-        where Element: Sendable, Self: Sendable, ResultSequence.Element: Sendable {
+        where Element: Sendable, Self: Sendable, ResultSequence.Element: Sendable, ResultSequence: Sendable {
         AsyncThrowingStream<ResultSequence.Element, Swift.Error> { continuation in
             let task = Task {
                 do {

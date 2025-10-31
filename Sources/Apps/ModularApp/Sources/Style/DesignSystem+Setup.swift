@@ -15,5 +15,6 @@ extension Design {
         setupColor()
         setupValues()
         setupAssets()
+        setupPillButton()
     }
 }

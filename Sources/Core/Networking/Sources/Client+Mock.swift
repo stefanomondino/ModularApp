@@ -26,8 +26,8 @@ public extension Client {
     func mock(for request: Request,
               data: DataConvertible,
               statusCode: Response.StatusCode = .ok,
-              headers: [String: String] = [:]) async throws {
-        try await mocker.register(for: request) {
+              headers: [String: String] = [:]) async {
+        await mocker.register(for: request) {
             try Response(data.asData(), statusCode: statusCode, headers: headers, request: request)
         }
     }

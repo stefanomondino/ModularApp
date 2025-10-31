@@ -13,11 +13,14 @@ import Foundation
 import Onboarding
 import Routes
 
-actor AppContainer: DependencyContainer {
+@MainActor
+final class AppContainer: DependencyContainer {
     let container = ObjectContainer()
-    var isConfigured: Bool = false
     let routeContainer = Router.Container()
-    var services: [String: any Service] { [:] }
+    var services: [String: any Service] {
+        get async { await unsafeResolve() }
+    }
+
     var features: [any Routes.Feature] = []
     @MainActor lazy var state: AppState = .init(router: .init(container: routeContainer,
                                                               name: "AppContainer"))
@@ -28,10 +31,18 @@ actor AppContainer: DependencyContainer {
         await register(for: Design.self) {
             Design.shared
         }
+        await register(for: AppConfiguration.self, scope: .singleton) {
+            EnvironmentImplementation()
+        }
+        await register(for: [String: any Service].self) { @MainActor [self] in
+            await features
+                .asyncFlatMap { await $0.services }
+                .asDictionaryOfValues(indexedBy: \.serviceIdentifier.stringValue)
+        }
         await setupNetworking()
         await setupRoutes()
         await setupFeatures()
-        state.isConfigured = true
+        await state.start()
     }
 
     func setupFeatures() async {

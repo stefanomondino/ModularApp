@@ -11,7 +11,7 @@ import Networking
 
 extension AppContainer {
     func setupNetworking() async {
-        await register(scope: .singleton) { [self] in
+        await register(scope: .singleton) {
             await Networking.Client()
         }
     }

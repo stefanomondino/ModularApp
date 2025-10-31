@@ -35,7 +35,7 @@ public extension Image {
 
     @Observable
     final class Provider: DesignValueProvider {
-        public var provider: [Image.Key: () -> Any] = [:]
+        public var storage: Storage<Image.Key> = .init()
         public let defaultValue: AssetConvertible
         public init(defaultValue: AssetConvertible = UIImage()) {
             self.defaultValue = defaultValue

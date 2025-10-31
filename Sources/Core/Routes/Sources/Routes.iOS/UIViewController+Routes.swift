@@ -53,7 +53,7 @@ public extension UIViewController {
     func subscribe(to router: Router,
                    with callback: @escaping (UIKitRoute?) async -> UIKitRoute? = { $0 }) -> Task<Void, Never> {
         Task { @MainActor [weak self] in
-            for await definition in await router.definitionStream {
+            for await definition in router.definitionStream {
                 if let route = await callback(router.resolve(definition) as? UIKitRoute) {
                     await route.execute(from: self)
                 }
@@ -67,7 +67,7 @@ public extension UIWindow {
         Logger.log("Subscribing to router", level: .verbose, tag: .lifecycle)
         return Task(priority: .high) { @MainActor [weak self] in
             Logger.log("Subscribed to router", level: .verbose, tag: .lifecycle)
-            for await definition in await router.definitionStream {
+            for await definition in router.definitionStream {
                 if let route = await router.resolve(definition) as? UIKitRoute {
                     await route.execute(from: self?.rootViewController)
                 }

@@ -7,17 +7,27 @@
 
 public protocol MainActorProvider: AnyObject, Sendable {
     associatedtype Key: Hashable, Sendable
-    @MainActor var provider: [Key: () -> Any] { get set }
+    @MainActor var storage: Storage<Key> { get }
 }
 
-public typealias MainActorTypeProvider = [ObjectIdentifier: () -> Any]
+@MainActor
+public final class Storage<Key: Hashable & Sendable> {
+    private var storage: [Key: () -> Any] = [:]
+    public init(_: Key.Type = Key.self) {}
+    fileprivate subscript(key: Key) -> (() -> Any)? {
+        get { storage[key] }
+        set { storage[key] = newValue }
+    }
+}
+
+public typealias MainActorTypeStorage = Storage<ObjectIdentifier>
 
 public extension MainActorProvider {
     @discardableResult
     @MainActor func register<Value: Sendable>(for key: Key,
                                               type _: Value.Type = Value.self,
                                               callback: @Sendable @escaping @MainActor () -> Value) -> Self {
-        provider[key] = { callback() }
+        storage[key] = { callback() }
         return self
     }
 
@@ -25,7 +35,7 @@ public extension MainActorProvider {
                                              type _: Value.Type = Value.self,
                                              default defaultValue: Value) -> Value {
         print("\(Value.self) for \(key)")
-        guard let value = (provider[key]?() as? Value) else {
+        guard let value = (storage[key]?() as? Value) else {
             register(for: key) { defaultValue }
             return defaultValue
         }
@@ -33,7 +43,7 @@ public extension MainActorProvider {
     }
 
     @MainActor func resolve<Value: Sendable>(_ key: Key) -> Value? {
-        provider[key]?() as? Value
+        storage[key]?() as? Value
     }
 }
 
@@ -71,11 +81,9 @@ public extension MainActorProvider where Key == ObjectIdentifier {
         set { fatalError() }
     }
 
-    public static subscript<Container: MainActorProvider>(
-        _enclosingInstance instance: Container,
-        wrapped _: ReferenceWritableKeyPath<Container, Value>,
-        storage storageKeyPath: ReferenceWritableKeyPath<Container, Self>
-    ) -> Value where Container.Key == ObjectIdentifier {
+    public static subscript<Container: MainActorProvider>(_enclosingInstance instance: Container,
+                                                          wrapped _: ReferenceWritableKeyPath<Container, Value>,
+                                                          storage storageKeyPath: ReferenceWritableKeyPath<Container, Self>) -> Value where Container.Key == ObjectIdentifier {
         get {
             if let value = instance.resolve(Value.self) {
                 return value

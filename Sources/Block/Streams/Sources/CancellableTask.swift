@@ -26,19 +26,15 @@ public actor TaskBag {
     }
 
     public func cancel() {
-        for task in tasks {
-            if !task.isCancelled {
-                task.cancel()
-            }
+        for task in tasks where !task.isCancelled {
+            task.cancel()
         }
     }
 
     deinit {
         // Cannot call cancel() directly until
-        for task in tasks {
-            if !task.isCancelled {
-                task.cancel()
-            }
+        for task in tasks where !task.isCancelled {
+            task.cancel()
         }
     }
 }

@@ -3,7 +3,7 @@ import SwiftUI
 
 @Observable
 public final class Design: MainActorProvider {
-    @MainActor public var provider: MainActorTypeProvider = [:]
+    @MainActor public var storage: MainActorTypeStorage = .init()
 
     public static let shared = Design()
 
