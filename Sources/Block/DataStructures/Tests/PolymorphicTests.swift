@@ -15,7 +15,7 @@ struct PolymorphicTests {
     }
 
     @Test("Mocks are properly working")
-    func test_mocks_are_properly_working() throws {
+    func mocks_are_properly_working() throws {
         struct Test: Decodable {
             let type: String
         }
@@ -25,7 +25,7 @@ struct PolymorphicTests {
     }
 
     @Test("Polymorphic root object gets decoded")
-    func test_polymorphic_root_object_gets_decoded() throws {
+    func polymorphic_root_object_gets_decoded() throws {
         let vehicle = try Mock.vehicle
             .object(of: Polymorph<VehicleType, any Vehicle>.self, decoder: decoder)
             .wrappedValue
@@ -34,7 +34,7 @@ struct PolymorphicTests {
     }
 
     @Test("Polymorphic2 root object gets decoded")
-    func test_polymorphic2_root_object_gets_decoded() throws {
+    func polymorphic2_root_object_gets_decoded() throws {
         let animal = try Mock.animal
             .object(of: Polymorph<AnimalType, any Animal>.self, decoder: decoder)
             .wrappedValue
@@ -43,7 +43,7 @@ struct PolymorphicTests {
     }
 
     @Test("Root array of polymorphic objects gets decoded")
-    func test_root_array_of_polymorphic_objects_gets_decoded() throws {
+    func root_array_of_polymorphic_objects_gets_decoded() throws {
         let array = try Mock.vehicles
             .object(of: Polymorph<VehicleType, [any Vehicle]>.self, decoder: decoder)
             .wrappedValue
@@ -52,7 +52,7 @@ struct PolymorphicTests {
     }
 
     @Test("Polymorphic object as property gets decoded")
-    func test_polymorphic_object_as_property_gets_decoded() throws {
+    func polymorphic_object_as_property_gets_decoded() throws {
         do {
             let response = try Mock.vehicleResponseWithProperties
                 .object(of: SingleResponse.self, decoder: decoder)
@@ -63,7 +63,7 @@ struct PolymorphicTests {
     }
 
     @Test("Polymorphic objects with nested types gets decoded")
-    func test_polymorphic_objects_with_nested_types_gets_decoded() throws {
+    func polymorphic_objects_with_nested_types_gets_decoded() throws {
         let array = try Mock.watchablesWithNestedTypes
             .object(of: Polymorph<WatchableType, [any Watchable]>.self, decoder: decoder)
             .wrappedValue
@@ -71,7 +71,7 @@ struct PolymorphicTests {
     }
 
     @Test("Polymorphic objects with nested types gets encoded")
-    func test_polymorphic_objects_with_nested_types_gets_encoded() throws {
+    func polymorphic_objects_with_nested_types_gets_encoded() throws {
         let polymorph = try Mock.watchablesWithNestedTypes
             .object(of: Polymorph<WatchableType, [any Watchable]>.self, decoder: decoder)
         let data = try JSONEncoder().encode(polymorph)
@@ -81,7 +81,7 @@ struct PolymorphicTests {
     }
 
     @Test("Single polymorphic animal gets encoded and decoded")
-    func test_single_polymorphic_animal_gets_encoded_and_decoded() throws {
+    func single_polymorphic_animal_gets_encoded_and_decoded() throws {
         let polymorph = try Mock.animal
             .object(of: Polymorph<AnimalType, any Animal>.self, decoder: decoder)
         let data = try JSONEncoder().encode(polymorph)

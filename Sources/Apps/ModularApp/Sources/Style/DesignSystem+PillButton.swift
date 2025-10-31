@@ -31,17 +31,12 @@ extension Design {
     }
 }
 
-extension Pill.Key {
-    static var secondary: Self { "secondary" }
-    static var outline: Self { "outline" }
-}
-
 #Preview(traits: .design(.app)) {
     @Previewable @Environment(\.design) var design
     VStack(spacing: 16) {
         ForEach([Pill.Key.standard, .secondary, .outline], id: \.self) {
             Pill.Button("Test", style: $0)
-            Pill.Button("Hanno osato cervare l'ucciso del re", style: $0)
+            Pill.Button("Very long text just to double check things", style: $0)
         }
     }
 }

@@ -51,7 +51,7 @@ struct DateValueTests {
     }
 
     @Test("ISO8601DateFormatter gets converted in Date")
-    func testISO8601DateFormatter() throws {
+    func iSO8601DateFormatter() throws {
         let mock = iso8601Mock
         let date = try #require(DateValue<ISO8601SafeFormat, Date>(mock.string)).date
         let expected = mock.date
@@ -59,7 +59,7 @@ struct DateValueTests {
     }
 
     @Test("ISO8601DateFormatter with milliseconds gets converted in Date")
-    func testISO8601WithMillisecondsDateFormatter() throws {
+    func iSO8601WithMillisecondsDateFormatter() throws {
         let mock = iso8601WithMillisecondsMock
         let date = try #require(DateValue<ISO8601SafeFormat, Date>(mock.string)).date
         let expected = mock.date
@@ -67,7 +67,7 @@ struct DateValueTests {
     }
 
     @Test("Date Formatter works as Codable")
-    func testDateFormatterCodable() throws {
+    func dateFormatterCodable() throws {
         struct Mock: Codable {
             @DateValue<ISO8601Format, Date> var date: Date
         }
@@ -82,7 +82,7 @@ struct DateValueTests {
     }
 
     @Test("Codable DateFormat on a nil value")
-    func testNullableCodableValue() throws {
+    func nullableCodableValue() throws {
         struct Mock: Codable {
 //            @DateValue<String, ISO8601Format> var date: Date
             var date: DateValue<ISO8601Format, Date?>

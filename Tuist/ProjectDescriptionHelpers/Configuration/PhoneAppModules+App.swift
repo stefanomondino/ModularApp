@@ -64,10 +64,8 @@ public extension Skeleton {
                                                                  "UIApplicationSupportsIndirectInputEvents": true,
                                                                  "ITSAppUsesNonExemptEncryption": false,
                                                                  "LSApplicationQueriesSchemes": [],
-                                                                 "CFBundleURLTypes": [
-                                                                     ["CFBundleURLName": "modularappdev",
-                                                                      "CFBundleURLSchemes": .array([.string("modularappdev")])]
-                                                                 ]],
+                                                                 "CFBundleURLTypes": [["CFBundleURLName": "modularappdev",
+                                                                                       "CFBundleURLSchemes": .array([.string("modularappdev")])]]],
                                                          isTestable: true)],
                                     organizationName: "Stefano Mondino",
                                     dependencies: Dependencies(bridge: [],

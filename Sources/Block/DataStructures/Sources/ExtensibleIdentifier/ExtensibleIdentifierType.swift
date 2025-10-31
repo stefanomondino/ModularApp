@@ -1,5 +1,5 @@
 //
-//  ExtensibleIdentifier.swift
+//  ExtensibleIdentifierType.swift
 //  CodableKit
 //
 //  Created by Stefano Mondino on 11/09/24.
@@ -20,6 +20,7 @@ public extension ExtensibleIdentifierType {
         let value = try decoder.singleValueContainer().decode(Value.self)
         self.init(value)
     }
+
     /// Encodes the identifier to an encoder.
     /// - Parameter encoder: The encoder to write data to.
     func encode(to encoder: any Encoder) throws {
@@ -27,21 +28,22 @@ public extension ExtensibleIdentifierType {
         try container.encode(value)
     }
 }
-extension ExtensibleIdentifierType where Value: CustomStringConvertible {
+
+public extension ExtensibleIdentifierType where Value: CustomStringConvertible {
     /// A textual representation of the identifier.
-    public var description: String { value.description }
+    var description: String { value.description }
 }
 
-extension ExtensibleIdentifierType where Value: CustomDebugStringConvertible {
+public extension ExtensibleIdentifierType where Value: CustomDebugStringConvertible {
     /// A debug textual representation of the identifier.
-    public var debugDescription: String { value.debugDescription }
+    var debugDescription: String { value.debugDescription }
 }
 
-extension ExtensibleIdentifierType {
+public extension ExtensibleIdentifierType {
     /// The raw value of the identifier.
-    public var rawValue: Value { value }
+    var rawValue: Value { value }
     /// Creates an identifier from a raw value.
-    public init?(rawValue: Value) {
+    init?(rawValue: Value) {
         self.init(rawValue)
     }
 }
@@ -55,33 +57,34 @@ public typealias BoolIdentifier<Tag> = ExtensibleIdentifier<Bool, Tag>
 /// A typealias for a float-based extensible identifier.
 public typealias FloatIdentifier<Tag> = ExtensibleIdentifier<Float, Tag>
 
-extension ExtensibleIdentifierType where Value == String {
+public extension ExtensibleIdentifierType where Value == String {
     /// Creates an identifier from a string literal.
-    public init(stringLiteral value: String) {
+    init(stringLiteral value: String) {
         self.init(value)
     }
 }
 
-extension ExtensibleIdentifierType where Value == IntegerLiteralType {
+public extension ExtensibleIdentifierType where Value == IntegerLiteralType {
     /// Creates an identifier from an integer literal.
-    public init(integerLiteral value: IntegerLiteralType) {
+    init(integerLiteral value: IntegerLiteralType) {
         self.init(value)
     }
 }
 
-extension ExtensibleIdentifierType where Value == Bool {
+public extension ExtensibleIdentifierType where Value == Bool {
     /// Creates an identifier from a boolean literal.
-    public init(booleanLiteral value: Bool) {
+    init(booleanLiteral value: Bool) {
         self.init(value)
     }
 }
 
-extension ExtensibleIdentifierType where Value == Float {
+public extension ExtensibleIdentifierType where Value == Float {
     /// Creates an identifier from a float literal.
-    public init(floatLiteral value: Float) {
+    init(floatLiteral value: Float) {
         self.init(value)
     }
 }
+
 /// Provides a syntax close to enum case to ExtensibleIdentifierType objects
 ///
 ///  - Warning:
@@ -109,6 +112,7 @@ extension ExtensibleIdentifierType where Value == Float {
     public init(_ key: Identifier.Value) {
         self.key = key
     }
+
     /// The wrapped identifier value.
     public var wrappedValue: Identifier {
         return .init(key)

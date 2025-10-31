@@ -1,6 +1,4 @@
 import ProjectDescription
 import SkeletonPlugin
 
-public extension Skeleton.BridgeModule {
-    
-}
+public extension Skeleton.BridgeModule {}

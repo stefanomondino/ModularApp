@@ -16,7 +16,6 @@ private let encoder: JSONEncoder = {
 }()
 
 @MainActor private let items = appModules.map { app in
-
     let data = try! encoder.encode(app)
     let string = String(data: data,
                         encoding: .utf8)!

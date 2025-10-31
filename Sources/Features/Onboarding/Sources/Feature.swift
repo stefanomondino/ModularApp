@@ -16,9 +16,7 @@ public final class Feature<Container: FeatureContainer>: Routes.Feature {
     let dependencies: Container
     public let container: ObjectContainer
     public var services: [any Service] {
-        get async { await [
-            unsafeResolve(TestService.self)
-        ]
+        get async { await [unsafeResolve(TestService.self)]
         }
     }
 

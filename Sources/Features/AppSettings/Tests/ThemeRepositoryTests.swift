@@ -17,7 +17,7 @@ import Testing
     }
 
     @Test("Test View actually works")
-    @MainActor func testEmptyView() {
+    @MainActor func emptyView() {
         let view = Themes.ViewContents(viewModel: Themes.ViewModelImplementation(useCase: ThemesUseCaseMock {
             $0.availableThemesQueryStringThemeReturnValue = [.init(id: "1", text: "Test Theme", colors: ["334455"])]
         }))

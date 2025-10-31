@@ -13,11 +13,9 @@ public struct ProviderMacro {
 }
 
 extension ProviderMacro: AccessorMacro {
-    public static func expansion(
-        of node: AttributeSyntax,
-        providingAccessorsOf declaration: some DeclSyntaxProtocol,
-        in _: some MacroExpansionContext
-    ) throws -> [AccessorDeclSyntax] {
+    public static func expansion(of node: AttributeSyntax,
+                                 providingAccessorsOf declaration: some DeclSyntaxProtocol,
+                                 in _: some MacroExpansionContext) throws -> [AccessorDeclSyntax] {
 //        let extensionType = context.lexicalContext.first?
 //            .as(ExtensionDeclSyntax.self)?.extendedType
 //            .as(IdentifierTypeSyntax.self)

@@ -24,8 +24,6 @@ public extension Pill {
         public init(_ value: String) {
             self.value = value
         }
-
-        public static var standard: Self { .init("standard") }
     }
 
     @Observable
@@ -38,6 +36,12 @@ public extension Pill {
             self.defaultValue = defaultValue
         }
     }
+}
+
+public extension Pill.Key {
+    static var standard: Self { .init("standard") }
+    static var secondary: Self { "secondary" }
+    static var outline: Self { "outline" }
 }
 
 public extension Pill {
