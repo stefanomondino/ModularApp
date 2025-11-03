@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Property {
+public extension Property.Strategy {
     struct UserDefaultsParameters: Sendable {
         public let key: String
         public let userDefaults: @Sendable () -> UserDefaults
@@ -22,7 +22,7 @@ public extension Property {
                              defaultValue: Element,
                              userDefaults: @Sendable @autoclosure @escaping () -> UserDefaults = .standard,
                              get: @Sendable @escaping (Data) -> Element,
-                             set: @Sendable @escaping (Element) -> Data) -> Strategy {
+                             set: @Sendable @escaping (Element) -> Data) -> Property.Strategy {
         self.userDefaults(parameters: .init(key, userDefaults: userDefaults),
                           defaultValue: defaultValue,
                           get: get,
@@ -31,7 +31,7 @@ public extension Property {
 
     static func userDefaults(_ key: String,
                              defaultValue: Element,
-                             userDefaults: @Sendable @autoclosure @escaping () -> UserDefaults = .standard) -> Strategy where Element: Codable {
+                             userDefaults: @Sendable @autoclosure @escaping () -> UserDefaults = .standard) -> Property.Strategy where Element: Codable {
         self.userDefaults(parameters: .init(key, userDefaults: userDefaults),
                           defaultValue: defaultValue,
                           get: { (try? JSONDecoder().decode(Element.self, from: $0)) },
@@ -41,7 +41,7 @@ public extension Property {
     private static func userDefaults(parameters: UserDefaultsParameters,
                                      defaultValue: Element,
                                      get: @Sendable @MainActor @escaping (Data) -> Element?,
-                                     set: @Sendable @MainActor @escaping (Element) -> Data?) -> Strategy {
+                                     set: @Sendable @MainActor @escaping (Element) -> Data?) -> Property.Strategy {
         .custom(get: {
             guard let data = parameters.userDefaults()[data: parameters.key] else {
                 return defaultValue

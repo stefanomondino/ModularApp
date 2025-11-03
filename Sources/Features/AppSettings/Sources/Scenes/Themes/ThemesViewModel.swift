@@ -32,9 +32,7 @@ extension Themes {
                 .removeDuplicates()
                 .debounce(for: .milliseconds(500))
                 .flatMapLatest { query in
-                    AsyncStream {
-                        await useCase.availableThemes(query: query)
-                    }
+                    await ShareableAsyncStream.just(useCase.availableThemes(query: query))
                 }
                 .sink { @MainActor [weak self] themes in
                     withAnimation {

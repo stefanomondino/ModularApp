@@ -3,8 +3,6 @@ import SkeletonPlugin
 
 public extension Skeleton {
     struct BridgeModule: SkeletonModule {
-        public var swiftVersion: SwiftVersion
-
         public struct Dependencies: ModuleDependencies {
             public var isPrivate: Bool
             public var core: [CoreModule]
@@ -22,6 +20,7 @@ public extension Skeleton {
             }
         }
 
+        public var swiftVersion: SwiftVersion
         public var path: ProjectDescription.Path { "Sources/Bridges/\(name)" }
         public var name: String
         public var destinations: Destinations

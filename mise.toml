@@ -3,6 +3,8 @@ tuist = "latest"
 sourcery = "latest"
 swiftformat = "latest"
 swiftlint = "latest"
+ruby = "latest"
+jq = "latest"
 
 [hooks]
 postinstall = "mise run setup"

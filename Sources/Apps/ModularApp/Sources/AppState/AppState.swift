@@ -33,4 +33,10 @@ import Routes
     func start() async {
         state = .home
     }
+
+    func goToAppSettings() {
+        if true {
+            router.send(.appSettings())
+        }
+    }
 }

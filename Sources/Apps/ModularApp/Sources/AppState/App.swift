@@ -35,8 +35,8 @@ extension App {
                             Pill.Button("Click me - I pretend to be the home screen :)",
                                         style: .standard) {
                                 //                        await appState.router.send(OnboardingRouteDefinition(message: "ciao dalla home"))
-                                appState.router.send(.appSettings())
-                                //                        await appState.router.send(.webRoute("https://www.google.com"))
+                                appState.goToAppSettings()
+//                                appState.router.send(.webRoute("https://www.google.com"))
                             }
                         }.tabItem {
                             Text("Home")

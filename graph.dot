@@ -68,35 +68,35 @@ digraph {
   _SwiftLibraryPluginProviderCShims [fillcolor=coral1 shape=cylinder style=filled]
   _SwiftSyntaxCShims [fillcolor=coral1 shape=cylinder style=filled]
   _SwiftSyntaxGenericTestSupport [fillcolor=coral1 shape=cylinder style=filled]
+  AppSettings -> Kingfisher
   AppSettings -> Routes
   AppSettings -> Components
-  AppSettings -> Kingfisher
   AppSettings -> Networking
-  AppSettingsTests -> Components
-  AppSettingsTests -> XCTest
-  AppSettingsTests -> Networking
-  AppSettingsTests -> CoreTesting
-  AppSettingsTests -> AppSettings
-  AppSettingsTests -> Testing
-  AppSettingsTests -> Routes
   AppSettingsTests -> Kingfisher
+  AppSettingsTests -> CoreTesting
+  AppSettingsTests -> XCTest
+  AppSettingsTests -> Testing
+  AppSettingsTests -> AppSettings
+  AppSettingsTests -> Components
+  AppSettingsTests -> Networking
+  AppSettingsTests -> Routes
   AsyncAlgorithms -> OrderedCollections
   AsyncAlgorithms -> DequeModule
   BasicContainers -> InternalCollectionsUtilities
   BasicContainers -> ContainersPreview
   BitCollections -> InternalCollectionsUtilities
-  Collections -> _RopeModule
   Collections -> HeapModule
-  Collections -> HashTreeCollections
+  Collections -> _RopeModule
   Collections -> BitCollections
   Collections -> OrderedCollections
   Collections -> DequeModule
+  Collections -> HashTreeCollections
   Components -> DesignSystem
-  ComponentsTests -> XCTest
-  ComponentsTests -> DesignSystem
   ComponentsTests -> Components
-  ComponentsTests -> CoreTesting
+  ComponentsTests -> XCTest
   ComponentsTests -> Testing
+  ComponentsTests -> DesignSystem
+  ComponentsTests -> CoreTesting
   ContainersPreview -> InternalCollectionsUtilities
   CoreTesting -> XCTest
   DataStructures -> DataStructuresMacro
@@ -104,138 +104,138 @@ digraph {
   DataStructuresMacros -> SwiftCompilerPlugin
   DataStructuresMacros -> SwiftSyntaxMacros
   DataStructuresTests -> CoreTesting
-  DataStructuresTests -> DataStructures
   DataStructuresTests -> XCTest
+  DataStructuresTests -> DataStructures
   DataStructuresTests -> Testing
-  DependencyContainerTests -> CoreTesting
-  DependencyContainerTests -> XCTest
-  DependencyContainerTests -> Testing
   DependencyContainerTests -> DependencyContainer
+  DependencyContainerTests -> XCTest
+  DependencyContainerTests -> CoreTesting
+  DependencyContainerTests -> Testing
   DequeModule -> InternalCollectionsUtilities
   DesignSystem -> DependencyContainer
-  DesignSystem -> DataStructures
-  DesignSystem -> DesignSystemMacro
-  DesignSystem -> Streams
   DesignSystem -> Logger
+  DesignSystem -> DesignSystemMacro
+  DesignSystem -> DataStructures
+  DesignSystem -> Streams
   DesignSystemMacro -> DesignSystemMacros
-  DesignSystemMacros -> SwiftCompilerPlugin
   DesignSystemMacros -> SwiftSyntaxMacros
+  DesignSystemMacros -> SwiftCompilerPlugin
   DesignSystemTests -> CoreTesting
+  DesignSystemTests -> XCTest
   DesignSystemTests -> DesignSystem
+  DesignSystemTests -> Testing
+  DesignSystemTests -> DataStructures
   DesignSystemTests -> DependencyContainer
   DesignSystemTests -> Logger
   DesignSystemTests -> Streams
-  DesignSystemTests -> DataStructures
-  DesignSystemTests -> XCTest
-  DesignSystemTests -> Testing
   FlyingFox -> FlyingSocks
   HashTreeCollections -> InternalCollectionsUtilities
   HeapModule -> InternalCollectionsUtilities
-  LoggerTests -> XCTest
-  LoggerTests -> CoreTesting
-  LoggerTests -> Testing
   LoggerTests -> Logger
-  ModularAppDev -> AppSettings
+  LoggerTests -> Testing
+  LoggerTests -> CoreTesting
+  LoggerTests -> XCTest
   ModularAppDev -> Onboarding
-  ModularAppDevelTests -> AppSettings
-  ModularAppDevelTests -> ModularAppDev
+  ModularAppDev -> AppSettings
   ModularAppDevelTests -> Onboarding
-  Networking -> Streams
-  Networking -> Logger
+  ModularAppDevelTests -> ModularAppDev
+  ModularAppDevelTests -> AppSettings
   Networking -> DataStructures
+  Networking -> Logger
   Networking -> DependencyContainer
-  NetworkingTests -> FlyingFox
+  Networking -> Streams
   NetworkingTests -> Logger
-  NetworkingTests -> Testing
-  NetworkingTests -> Networking
-  NetworkingTests -> DependencyContainer
-  NetworkingTests -> DataStructures
-  NetworkingTests -> XCTest
   NetworkingTests -> Streams
+  NetworkingTests -> DependencyContainer
   NetworkingTests -> CoreTesting
-  Onboarding -> Components
+  NetworkingTests -> Networking
+  NetworkingTests -> DataStructures
+  NetworkingTests -> Testing
+  NetworkingTests -> XCTest
+  NetworkingTests -> FlyingFox
   Onboarding -> Networking
+  Onboarding -> Components
   Onboarding -> Routes
-  OnboardingTests -> Networking
-  OnboardingTests -> Routes
   OnboardingTests -> XCTest
+  OnboardingTests -> Routes
   OnboardingTests -> Components
-  OnboardingTests -> Onboarding
   OnboardingTests -> CoreTesting
+  OnboardingTests -> Onboarding
+  OnboardingTests -> Networking
   OnboardingTests -> Testing
   OrderedCollections -> InternalCollectionsUtilities
-  Routes -> RoutesMacro
   Routes -> DesignSystem
+  Routes -> RoutesMacro
   RoutesMacro -> RoutesMacros
-  RoutesMacros -> SwiftSyntaxMacros
   RoutesMacros -> SwiftCompilerPlugin
+  RoutesMacros -> SwiftSyntaxMacros
   RoutesTests -> DesignSystem
-  RoutesTests -> Testing
-  RoutesTests -> Routes
   RoutesTests -> CoreTesting
   RoutesTests -> XCTest
+  RoutesTests -> Testing
+  RoutesTests -> Routes
   Streams -> AsyncAlgorithms
-  StreamsTests -> CoreTesting
-  StreamsTests -> AsyncAlgorithms
   StreamsTests -> Streams
   StreamsTests -> XCTest
+  StreamsTests -> AsyncAlgorithms
+  StreamsTests -> CoreTesting
   StreamsTests -> Testing
   SwiftBasicFormat -> SwiftSyntax
   SwiftCompilerPlugin -> SwiftCompilerPluginMessageHandling
   SwiftCompilerPlugin -> SwiftSyntaxMacros
-  SwiftCompilerPluginMessageHandling -> SwiftSyntaxMacroExpansion
-  SwiftCompilerPluginMessageHandling -> SwiftSyntaxMacros
   SwiftCompilerPluginMessageHandling -> SwiftSyntax
+  SwiftCompilerPluginMessageHandling -> SwiftSyntaxMacros
   SwiftCompilerPluginMessageHandling -> SwiftOperators
   SwiftCompilerPluginMessageHandling -> SwiftDiagnostics
-  SwiftCompilerPluginMessageHandling -> _SwiftSyntaxCShims
+  SwiftCompilerPluginMessageHandling -> SwiftSyntaxMacroExpansion
   SwiftCompilerPluginMessageHandling -> SwiftParser
+  SwiftCompilerPluginMessageHandling -> _SwiftSyntaxCShims
   SwiftDiagnostics -> SwiftSyntax
-  SwiftIDEUtils -> SwiftParser
   SwiftIDEUtils -> SwiftDiagnostics
+  SwiftIDEUtils -> SwiftParser
   SwiftIDEUtils -> SwiftSyntax
   SwiftLibraryPluginProvider -> SwiftCompilerPluginMessageHandling
-  SwiftLibraryPluginProvider -> _SwiftLibraryPluginProviderCShims
   SwiftLibraryPluginProvider -> SwiftSyntaxMacros
+  SwiftLibraryPluginProvider -> _SwiftLibraryPluginProviderCShims
   SwiftOperators -> SwiftSyntax
   SwiftOperators -> SwiftDiagnostics
   SwiftOperators -> SwiftParser
   SwiftParser -> SwiftSyntax
-  SwiftParserDiagnostics -> SwiftBasicFormat
   SwiftParserDiagnostics -> SwiftSyntax
   SwiftParserDiagnostics -> SwiftParser
+  SwiftParserDiagnostics -> SwiftBasicFormat
   SwiftParserDiagnostics -> SwiftDiagnostics
-  SwiftRefactor -> SwiftBasicFormat
   SwiftRefactor -> SwiftSyntaxBuilder
   SwiftRefactor -> SwiftSyntax
   SwiftRefactor -> SwiftParser
-  SwiftSyntax -> SwiftSyntax509
-  SwiftSyntax -> SwiftSyntax510
+  SwiftRefactor -> SwiftBasicFormat
   SwiftSyntax -> _SwiftSyntaxCShims
+  SwiftSyntax -> SwiftSyntax509
   SwiftSyntax -> SwiftSyntax600
-  SwiftSyntaxBuilder -> SwiftParser
-  SwiftSyntaxBuilder -> SwiftParserDiagnostics
+  SwiftSyntax -> SwiftSyntax510
+  SwiftSyntaxBuilder -> SwiftDiagnostics
   SwiftSyntaxBuilder -> SwiftBasicFormat
   SwiftSyntaxBuilder -> SwiftSyntax
-  SwiftSyntaxBuilder -> SwiftDiagnostics
-  SwiftSyntaxMacroExpansion -> SwiftSyntaxBuilder
+  SwiftSyntaxBuilder -> SwiftParserDiagnostics
+  SwiftSyntaxBuilder -> SwiftParser
+  SwiftSyntaxMacroExpansion -> SwiftSyntax
   SwiftSyntaxMacroExpansion -> SwiftSyntaxMacros
   SwiftSyntaxMacroExpansion -> SwiftDiagnostics
-  SwiftSyntaxMacroExpansion -> SwiftSyntax
   SwiftSyntaxMacroExpansion -> SwiftOperators
-  SwiftSyntaxMacros -> SwiftSyntax
-  SwiftSyntaxMacros -> SwiftDiagnostics
+  SwiftSyntaxMacroExpansion -> SwiftSyntaxBuilder
   SwiftSyntaxMacros -> SwiftParser
+  SwiftSyntaxMacros -> SwiftDiagnostics
   SwiftSyntaxMacros -> SwiftSyntaxBuilder
+  SwiftSyntaxMacros -> SwiftSyntax
+  SwiftSyntaxMacrosGenericTestSupport -> SwiftDiagnostics
   SwiftSyntaxMacrosGenericTestSupport -> SwiftParser
-  SwiftSyntaxMacrosGenericTestSupport -> SwiftSyntaxMacros
   SwiftSyntaxMacrosGenericTestSupport -> SwiftSyntaxMacroExpansion
+  SwiftSyntaxMacrosGenericTestSupport -> SwiftSyntaxMacros
   SwiftSyntaxMacrosGenericTestSupport -> _SwiftSyntaxGenericTestSupport
   SwiftSyntaxMacrosGenericTestSupport -> SwiftIDEUtils
-  SwiftSyntaxMacrosGenericTestSupport -> SwiftDiagnostics
-  SwiftSyntaxMacrosTestSupport -> SwiftSyntaxMacros
   SwiftSyntaxMacrosTestSupport -> SwiftSyntaxMacroExpansion
   SwiftSyntaxMacrosTestSupport -> SwiftSyntax
   SwiftSyntaxMacrosTestSupport -> SwiftSyntaxMacrosGenericTestSupport
+  SwiftSyntaxMacrosTestSupport -> SwiftSyntaxMacros
   _RopeModule -> InternalCollectionsUtilities
 }
