@@ -5,6 +5,7 @@
 //  Created by Stefano Mondino on 03/11/25.
 //
 
+import DataStructures
 import Foundation
 
 public extension Permission {

@@ -17,7 +17,7 @@ public extension Skeleton.FeatureModule {
         Skeleton.FeatureModule(name: "AppSettings",
                                destinations: Constants.destinations,
                                deploymentTargets: .custom,
-                               dependencies: .init(core: [.routes(), .networking(), .components()],
+                               dependencies: .init(core: [.routes(), .networking(), .components(), .locations()],
                                                    bridge: [],
                                                    external: [.kingfisher()]),
                                testDependencies: .init(test: [.coreTesting()]),

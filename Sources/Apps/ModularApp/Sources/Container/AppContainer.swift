@@ -22,8 +22,8 @@ final class AppContainer: DependencyContainer {
     }
 
     var features: [any Routes.Feature] = []
-    @MainActor lazy var state: AppState = .init(router: .init(container: routeContainer,
-                                                              name: "AppContainer"))
+    @MainActor lazy var state: AppLifecycle = .init(router: .init(container: routeContainer,
+                                                                  name: "AppContainer"))
 
     @MainActor func setup() async {
         try? await Task.sleep(for: .seconds(2))

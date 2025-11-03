@@ -14,11 +14,11 @@ import SwiftUI
 struct App: SwiftUI.App {
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
     @Environment(\.scenePhase) private var scenePhase
-    var appState: AppState { appDelegate.container.state }
+    var appState: AppLifecycle { appDelegate.container.state }
 
     var body: some Scene {
         WindowGroup {
-            StateView()
+            LifecycleView()
                 .environment(\.appState, appState)
                 .environment(\.design, Design.shared)
                 .onChange(of: scenePhase) { _, phase in
@@ -36,11 +36,11 @@ struct App: SwiftUI.App {
 
 @MainActor
 struct AppStateKey: @MainActor EnvironmentKey {
-    static let defaultValue: AppState = .empty
+    static let defaultValue: AppLifecycle = .empty
 }
 
 extension EnvironmentValues {
-    @MainActor var appState: AppState {
+    @MainActor var appState: AppLifecycle {
         get { self[AppStateKey.self] }
         set { self[AppStateKey.self] = newValue }
     }

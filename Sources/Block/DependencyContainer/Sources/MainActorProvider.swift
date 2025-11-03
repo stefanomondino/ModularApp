@@ -4,13 +4,15 @@
 //
 //  Created by Stefano Mondino on 10/06/25.
 //
+import Foundation
+import Observation
 
 public protocol MainActorProvider: AnyObject, Sendable {
     associatedtype Key: Hashable, Sendable
     @MainActor var storage: Storage<Key> { get }
 }
 
-@MainActor
+@Observable @MainActor
 public final class Storage<Key: Hashable & Sendable> {
     private var storage: [Key: () -> Any] = [:]
     public init(_: Key.Type = Key.self) {}
