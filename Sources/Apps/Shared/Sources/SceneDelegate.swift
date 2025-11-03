@@ -13,12 +13,4 @@ import SwiftUI
 import UIKit
 
 @MainActor
-final class SceneDelegate: UIResponder, UISceneDelegate {
-    func scene(_: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
-//        Design.shared.setup()
-    }
-
-    func scene(_: UIScene, restoreInteractionStateWith _: NSUserActivity) {}
-
-    func sceneDidBecomeActive(_: UIScene) {}
-}
+final class SceneDelegate: UIResponder, UISceneDelegate {}

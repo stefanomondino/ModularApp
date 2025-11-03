@@ -5,20 +5,6 @@ import Routes
 import SwiftUI
 import UIKit
 
-@main
-struct App: SwiftUI.App {
-    @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
-    var appState: AppState { appDelegate.container.state }
-
-    var body: some Scene {
-        WindowGroup {
-            StateView()
-                .environment(\.appState, appState)
-                .environment(\.design, Design.shared)
-        }
-    }
-}
-
 extension App {
     struct StateView: View {
         @Environment(\.design) var design: DesignSystem.Design
@@ -54,31 +40,25 @@ extension App {
                             .cornerRadius(8)
                     }
                 }
+            }.overlay {
+                if appState.isLocked {
+                    ZStack {
+                        Color.red.ignoresSafeArea()
+                        VStack {
+                            Text("Locked")
+                            Button(action: {
+                                appState.unlock()
+                            }, label: {
+                                Text("Unlock")
+                            })
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-@MainActor
-struct AppStateKey: @MainActor EnvironmentKey {
-    static let defaultValue: AppState = .empty
-}
-
-extension EnvironmentValues {
-    @MainActor var appState: AppState {
-        get { self[AppStateKey.self] }
-        set { self[AppStateKey.self] = newValue }
-    }
-}
-
 #Preview(traits: .design(.app)) {
     OnboardingView(viewModel: OnboardingView.ViewModel())
-}
-
-public extension DesignPreviewModifier.Customization {
-    static var app: Self {
-        .init {
-            $0.setup()
-        }
-    }
 }

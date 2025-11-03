@@ -23,7 +23,7 @@ open class AppDelegate<Container: AppContainer>: UIResponder, UIApplicationDeleg
         }
     }
 
-    @MainActor func startAfterContainerSetup() async {
+    @MainActor public func startAfterContainerSetup() async {
         let launchOptions = launchOptions
         await container.setup()
         await register(services: container.services.map { $0.value })

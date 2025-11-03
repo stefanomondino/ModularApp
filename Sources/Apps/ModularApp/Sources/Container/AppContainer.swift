@@ -35,8 +35,9 @@ final class AppContainer: DependencyContainer {
             EnvironmentImplementation()
         }
         await register(for: [String: any Service].self) { @MainActor [self] in
-            await features
-                .asyncFlatMap { await $0.services }
+            await ([self.state] +
+                features
+                .asyncFlatMap { await $0.services })
                 .asDictionaryOfValues(indexedBy: \.serviceIdentifier.stringValue)
         }
         await setupNetworking()
