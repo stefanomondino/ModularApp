@@ -1,0 +1,34 @@
+name: core
+parameters: 
+- name: name
+  isRequired: true
+  description: "Name of the Core module."
+- name: tuist.config.core
+  isRequired: true
+- name: fileHeader
+  isRequired: true
+paths: 
+- from: Module
+  to: Sources/Core/{{name|firstUppercase}}
+description: A core module.
+plugins:
+  shell:
+    after:  
+    - "cd Sources/Core/{{name|firstUppercase}}/ && mise exec -- sourcery --config sourcery.yml"
+replacements: 
+  - text: |
+          static func {{name|firstLowercase}}Bridge() -> Skeleton.BridgeModule {
+              Skeleton.CoreModule(name: "{{name|firstUppercase}}Bridge", 
+                                    platforms: Constants.platforms,
+                                    dependencies: .init(block: [], external: []),
+                                    synthesizers: [])
+          }
+    destination: "{{tuist.config.core}}"
+    placeholder: "// murray: declaration"
+
+  - text: |
+          Skeleton.CoreModule.{{name|firstLowercase}}(),
+    destination: "{{tuist.workspace.config}}"
+    placeholder: "// murray: core integration"
+    
+    

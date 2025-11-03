@@ -1,10 +1,10 @@
 name: Project
 description: A group of procedures to handle a Skeleton project
 procedures:
-- name: client
-  description: An empty network client core framework
+- name: core
+  description: An empty core framework
   items:
-  - client/client.yml
+  - core/config.yml
 - name: feature
   description: An empty featureModule framework
   items:

@@ -48,4 +48,6 @@ public extension Skeleton.CoreModule {
               synthesizers: [],
               hasMacros: false)
     }
+
+    // murray: declaration
 }
