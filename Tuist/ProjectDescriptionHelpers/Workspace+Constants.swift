@@ -18,6 +18,7 @@ public enum Constants {
 @MainActor public let coreModules: [Skeleton.CoreModule] = [.designSystem(),
                                                             .networking(),
                                                             .routes(),
+                                                            .locations(),
                                                             // murray: core integration
                                                             .components()]
 

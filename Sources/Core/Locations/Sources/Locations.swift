@@ -1,0 +1,5 @@
+//
+// Locations.swift
+//
+
+import Foundation

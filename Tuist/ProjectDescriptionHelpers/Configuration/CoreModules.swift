@@ -49,5 +49,17 @@ public extension Skeleton.CoreModule {
               hasMacros: false)
     }
 
+    static func locations() -> Skeleton.CoreModule {
+        .init(name: "Locations",
+              destinations: Constants.destinations,
+              deploymentTargets: .custom,
+              swiftVersion: .v6,
+              dependencies: .init(block: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+                                  core: []),
+              testDependencies: .init(test: [.coreTesting()],
+                                      external: []),
+              synthesizers: [],
+              hasMacros: false)
+    }
     // murray: declaration
 }
