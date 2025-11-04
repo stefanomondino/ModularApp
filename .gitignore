@@ -1,6 +1,4 @@
 vendor
-Pods
-Carthage
 DerivedData
 
 *.xcodeproj
@@ -12,10 +10,7 @@ default.profraw
 .build
 fastlane/README.md
 fastlane/report.xml
-
 fastlane/test_output
-#Info.plist
-#Entitlements.entitlements
 Sources/App/Sources/SupportingFiles/Info.plist
 .vscode
 **/Derived
@@ -25,3 +20,6 @@ Environment.environment
 Generated
 *-plugin.zip
 build
+*.xcresult
+results.junit
+coverage.xml

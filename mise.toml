@@ -5,6 +5,7 @@ swiftformat = "latest"
 swiftlint = "latest"
 ruby = "latest"
 jq = "latest"
+xcresultparser = 'latest'
 
 [hooks]
 postinstall = "mise run setup"
