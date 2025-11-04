@@ -2,9 +2,13 @@ name: Project
 description: A group of procedures to handle a Skeleton project
 procedures:
 - name: core
-  description: An empty core framework
+  description: An empty core module
   items:
   - core/config.yml
+- name: deviceCapability
+  description: An empty device capability module
+  items:
+  - deviceCapability/config.yml
 - name: feature
   description: An empty featureModule framework
   items:

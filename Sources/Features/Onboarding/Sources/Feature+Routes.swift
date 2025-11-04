@@ -11,9 +11,10 @@ import Routes
 extension Feature {
     func setupRoutes() async {
         let routeContainer = await dependencies.routeContainer()
-        await routeContainer.register(for: OnboardingRouteDefinition.self) { definition in
-            SwiftUINavigationRoute(identifier: "Inizio") {
-                OnboardingView(viewModel: OnboardingView.ViewModel(message: definition.message))
+        await routeContainer.register(for: OnboardingRouteDefinition.self) { _ in
+            let viewModel = PermissionViewModelImplementation()
+            return SwiftUINavigationRoute {
+                PermissionView(viewModel: viewModel)
             }
         }
     }

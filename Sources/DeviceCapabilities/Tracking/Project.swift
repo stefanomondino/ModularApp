@@ -2,4 +2,4 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 import SkeletonPlugin
 
-let project = Skeleton.BridgeModule.{{name|firstLowercase}}Bridge().project()
+let project = Skeleton.DeviceCapabilityModule.tracking().project()

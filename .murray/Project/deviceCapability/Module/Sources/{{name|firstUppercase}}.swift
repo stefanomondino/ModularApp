@@ -1,3 +1,3 @@
-{{fileHeader}}
+{{ fileHeader }}
 
 import Foundation

@@ -25,5 +25,29 @@ public extension Skeleton.DeviceCapabilityModule {
               synthesizers: [],
               hasMacros: false)
     }
-    // murray: declaration
+    static func tracking() -> Self {
+    .init(name: "Tracking",
+    destinations: Constants.destinations,
+    deploymentTargets: .custom,
+    swiftVersion: .v6,
+    dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+                        external: []),
+    testDependencies: .init(test: [.coreTesting()],
+                            external: []),
+    synthesizers: [],
+    hasMacros: false)
+}
+static func notifications() -> Self {
+    .init(name: "Notifications",
+    destinations: Constants.destinations,
+    deploymentTargets: .custom,
+    swiftVersion: .v6,
+    dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+                        external: []),
+    testDependencies: .init(test: [.coreTesting()],
+                            external: []),
+    synthesizers: [],
+    hasMacros: false)
+}
+// murray: declaration
 }

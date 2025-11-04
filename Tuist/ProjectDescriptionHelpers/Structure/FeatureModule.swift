@@ -9,7 +9,7 @@ public extension Skeleton {
             public var core: [CoreModule]
             public var deviceCapabilities: [DeviceCapabilityModule] = []
             public var external: [ExternalModule]
-            public var dependencies: [DependencyBuilder] { core + utilities }
+            public var dependencies: [DependencyBuilder] { core + deviceCapabilities + utilities }
             public init(utilities: [UtilityModule] = [],
                         core: [CoreModule] = [],
                         deviceCapabilities: [DeviceCapabilityModule] = [],

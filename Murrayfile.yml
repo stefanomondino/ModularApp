@@ -15,8 +15,8 @@ environment:
     config:
       path: '{{tuist.path}}/Configuration'
       core: '{{tuist.config.path}}/CoreModules.swift'
-      block: '{{tuist.config.path}}/BlockModules.swift'
-      bridge: '{{tuist.config.path}}/BridgeModules.swift' 
+      utility: '{{tuist.config.path}}/UtilityModules.swift'
+      deviceCapability: '{{tuist.config.path}}/DeviceCapabilityModules.swift'
       feature: '{{tuist.config.path}}/FeatureModules.swift'
     workspace:
       config: '{{tuist.path}}/Workspace+Constants.swift'

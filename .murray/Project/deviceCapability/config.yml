@@ -1,20 +1,20 @@
-name: core
+name: deviceCapability
 parameters: 
 - name: name
   isRequired: true
-  description: "Name of the Core module."
-- name: tuist.config.core
+  description: "Name of the Device Capability module."
+- name: tuist.config.deviceCapability
   isRequired: true
 - name: fileHeader
   isRequired: true
 paths: 
 - from: Module
-  to: Sources/Core/{{name|firstUppercase}}
+  to: Sources/DeviceCapabilities/{{name|firstUppercase}}
 description: A core module.
 plugins:
   shell:
     after:  
-    - "cd Sources/Core/{{name|firstUppercase}}/ && mise exec -- sourcery --config sourcery.yml"
+    - "cd Sources/DeviceCapabilities/{{name|firstUppercase}}/ && mise exec -- sourcery --config sourcery.yml"
 replacements: 
   - text: |
           static func {{name|firstLowercase}}() -> Self {
@@ -23,18 +23,18 @@ replacements:
               deploymentTargets: .custom,
               swiftVersion: .v6,
               dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
-                                  core: []),
+                                  external: []),
               testDependencies: .init(test: [.coreTesting()],
                                       external: []),
               synthesizers: [],
               hasMacros: false)
           }
-    destination: "{{tuist.config.core}}"
+    destination: "{{tuist.config.deviceCapability}}"
     placeholder: "// murray: declaration"
 
   - text: |
           .{{name|firstLowercase}}(),
     destination: "{{tuist.workspace.config}}"
-    placeholder: "// murray: core integration"
+    placeholder: "// murray: device capability integration"
     
     

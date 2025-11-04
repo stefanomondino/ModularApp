@@ -8,6 +8,7 @@
 
 import Foundation
 import Routes
+import Onboarding
 
 @Observable @MainActor final class StartViewModel {
     let router: Router
@@ -17,7 +18,7 @@ import Routes
 
     func goToAppSettings() {
         if true {
-            router.send(.appSettings())
+            router.send(.onboarding())
         }
     }
 }
