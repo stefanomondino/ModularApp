@@ -68,7 +68,9 @@ public extension Skeleton {
                                                                                        "CFBundleURLSchemes": .array([.string("modularappdev")])]]],
                                                          isTestable: true)],
                                     organizationName: "Stefano Mondino",
-                                    dependencies: Dependencies(feature: [.onboarding(), .appSettings()],
+                                    dependencies: Dependencies(feature: [.onboarding(),
+                                                                         // murray: feature integration
+                                                                         .appSettings()],
                                                                external: []),
                                     supplementarySources: [],
                                     supplementaryResources: [],

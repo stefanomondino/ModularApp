@@ -1,9 +1,10 @@
+{{ fileHeader }}
+
 import DependencyContainer
 import Foundation
-import Networking
 
 extension Feature {
-    func registerRepositories() async {
+    func setupRepositories() async {
         // murray: registration
     }
 }

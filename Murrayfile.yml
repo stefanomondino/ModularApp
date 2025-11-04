@@ -8,8 +8,9 @@ environment:
     container:
       path: '{{app.path}}/Sources/Containers/App.Container.swift'
       moduleFolder: '{{app.path}}/Sources/Containers/Modules'
-  moduleSourcesFolder: Sources/Features/{{module|firstUppercase}}/Sources
-  moduleTestsFolder: Sources/Features/{{module|firstUppercase}}/Tests
+  features:
+    sources: Sources/Features/{{feature|firstUppercase}}/Sources
+    tests: Sources/Features/{{feature|firstUppercase}}/Tests
   tuist:
     path: Tuist/ProjectDescriptionHelpers
     config:
@@ -18,6 +19,7 @@ environment:
       utility: '{{tuist.config.path}}/UtilityModules.swift'
       deviceCapability: '{{tuist.config.path}}/DeviceCapabilityModules.swift'
       feature: '{{tuist.config.path}}/FeatureModules.swift'
+      app: '{{tuist.config.path}}/PhoneAppModules+{{appName|firstUppercase}}.swift'
     workspace:
       config: '{{tuist.path}}/Workspace+Constants.swift'
     project:

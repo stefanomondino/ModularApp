@@ -2,18 +2,18 @@ name: useCase
 parameters: 
 - name: name
   isRequired: true
-- name: module
+- name: feature
   isRequired: true
 paths: 
 - from: UseCase.swift.stencil
-  to: "{{moduleSourcesFolder}}/Scenes/Elements/{{name|firstUppercase}}/{{name|firstUppercase}}UseCase.swift"
+  to: "{{features.sources}}/UseCases/{{name|firstUppercase}}UseCase.swift"
 - from: UseCaseTests.swift.stencil
-  to: "{{moduleTestsFolder}}/{{name|firstUppercase}}/{{name|firstUppercase}}UseCase.swift"
+  to: "{{features.tests}}/UseCases/{{name|firstUppercase}}UseCaseTests.swift"
 description: A usecase with tests
 replacements: 
 - text: |
           register(for: {{name|firstUppercase}}UseCase.self, scope: .singleton) {
             {{name|firstUppercase}}UseCaseImplementation()
           }
-  destination: "{{moduleSourcesFolder}}/Feature+UseCases.swift"
+  destination: "{{features.sources}}/Feature+UseCases.swift"
   placeholder: "// murray: registration"

@@ -1,6 +1,0 @@
-import ProjectDescription
-import ProjectDescriptionHelpers
-
-let project = Project.featureFramework(name: "{{name|firstUppercase}}",
-                                       dependencies: { _ in[] },
-                                       testDependencies: { _ in []} )

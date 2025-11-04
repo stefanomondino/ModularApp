@@ -14,6 +14,8 @@ import Logger
 import Onboarding
 import Routes
 
+// murray: import
+
 @MainActor
 final class AppContainer: DependencyContainer {
     let container = ObjectContainer()
@@ -24,8 +26,7 @@ final class AppContainer: DependencyContainer {
 
     var features: [any Routes.Feature] = []
     @MainActor lazy var state: AppLifecycle = .init(router: .init(container: routeContainer,
-                                                                  name: "AppContainer"),
-                                                    container: container)
+                                                                  name: "AppContainer"))
 
     @MainActor func setup() async {
         await Logger.shared.add(logger: ConsoleLogger(logLevel: .verbose))
@@ -58,6 +59,7 @@ final class AppContainer: DependencyContainer {
     func setupFeatures() async {
         await features.append(Onboarding.Feature(self))
         await features.append(AppSettings.Feature(self))
+        // murray: registration
     }
 }
 

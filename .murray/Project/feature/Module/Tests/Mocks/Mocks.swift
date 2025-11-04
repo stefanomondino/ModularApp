@@ -1,7 +1,5 @@
-//
-// Mocks.swift
-//
+{{fileHeader}}
 
-import FeatureTesting
 import Foundation
+
 @testable import {{name|firstUppercase}}

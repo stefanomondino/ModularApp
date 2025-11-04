@@ -1,12 +1,10 @@
-//
-// Feature+UseCases.swift
-//
+{{ fileHeader }}
 
 import DependencyContainer
 import Foundation
 
 extension Feature {
-    func registerUseCases() async {
+    func setupUseCases() async {
         // murray: registration
     }
 }

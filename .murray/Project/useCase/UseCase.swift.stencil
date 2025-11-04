@@ -1,16 +1,13 @@
 {{fileHeader}}
 
-import ToolKit
 import Foundation
-import Combine
-import Components
 
 // sourcery: AutoMockable
-public protocol {{name|firstUppercase}}UseCase {
+public protocol {{name|firstUppercase}}UseCase: Sendable {
 
 }
 
-class {{name|firstUppercase}}UseCaseImplementation: {{name|firstUppercase}}UseCase {
+final class {{name|firstUppercase}}UseCaseImplementation: {{name|firstUppercase}}UseCase {
 
     init() {}
 

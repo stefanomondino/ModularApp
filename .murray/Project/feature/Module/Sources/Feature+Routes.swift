@@ -1,14 +1,11 @@
-//
-// Feature+Routes.swift
-//
+{{ fileHeader }}
 
+import DependencyContainer
 import Foundation
 import Routes
-import ToolKit
 
 extension Feature {
-    func registerRoutes(routeContainer _: Router.Container,
-                        viewModels _: SceneViewModelFactory) async {
+    func setupRoutes() async {
         // murray: registration
     }
 }
