@@ -26,7 +26,7 @@ extension Date: ExpressibleByDate {
 }
 
 /// Conformance for Optional<Date> to ExpressibleByDate, allowing direct initialization and value extraction.
-extension Optional: ExpressibleByDate where Wrapped == Date {
+extension Date?: ExpressibleByDate {
     /// Initializes an Optional<Date> with the provided Date value.
     public init(_ date: Date) {
         self = date

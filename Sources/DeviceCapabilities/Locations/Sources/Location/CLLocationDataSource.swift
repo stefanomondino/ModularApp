@@ -41,7 +41,7 @@ public final class CLLocationDataSource: LocationDataSource {
         }
 
         public func makeAsyncIterator() -> some AsyncIteratorProtocol {
-            let dataSource = self.dataSource
+            let dataSource = dataSource
             Task { @MainActor in
                 await dataSource?.askForPermissions(mode: .whenInUse)
                 dataSource?.manager.startUpdatingLocation()

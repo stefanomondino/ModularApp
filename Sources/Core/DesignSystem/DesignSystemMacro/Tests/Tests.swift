@@ -18,14 +18,14 @@ public struct DesignSystemMacrosTests {
 
         let file = BasicMacroExpansionContext.KnownSourceFile(
             moduleName: "MyModule",
-            fullFilePath: "test.swift"
+            fullFilePath: "test.swift",
         )
 
         let context = BasicMacroExpansionContext(sourceFiles: [source: file])
 
         let transformedSF = source.expand(
             macros: ["Provider": ProviderMacro.self],
-            in: context
+            in: context,
         )
 
         let expectedDescription =

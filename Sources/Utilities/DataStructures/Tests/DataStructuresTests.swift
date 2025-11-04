@@ -16,4 +16,4 @@ extension File: Stub {
     }
 }
 
-public typealias Stubs = Files.Sources.Block.DataStructures.Tests.Stubs.Json
+public typealias Stubs = Files.Sources.Utilities.DataStructures.Tests.Stubs.Json

@@ -72,9 +72,9 @@ public extension TypeExtractor {
 
     func extract(from container: SingleValueDecodingContainer, availableTypes: [any Polymorphic.Type]) throws -> ObjectType? {
         if let type = itemType(from: availableTypes) {
-            return try container.decode(type) as? ObjectType
+            try container.decode(type) as? ObjectType
         } else {
-            return nil
+            nil
         }
     }
 

@@ -23,8 +23,8 @@ struct DateValueTests {
                 hour: 12,
                 minute: 34,
                 second: 56,
-                nanosecond: 0
-            ).date.unsafelyUnwrapped
+                nanosecond: 0,
+            ).date.unsafelyUnwrapped,
         )
     }
 
@@ -40,8 +40,8 @@ struct DateValueTests {
                 hour: 12,
                 minute: 34,
                 second: 56,
-                nanosecond: 1 * 1_000_000
-            ).date.unsafelyUnwrapped
+                nanosecond: 1 * 1_000_000,
+            ).date.unsafelyUnwrapped,
         )
     }
 

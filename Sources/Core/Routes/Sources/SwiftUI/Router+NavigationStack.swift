@@ -44,24 +44,24 @@ extension Router {
                     .environment(\.router, router)
             }
             .task {
-                for await route in self.router.definitionStream {
+                for await route in router.definitionStream {
                     if let path = await NavigationPath<SwiftUINavigationRoute>(router: router, routeDefinition: route) {
                         self.path.append(path)
                     }
                     if let back = route as? BackRouteDefinition {
                         switch back.backType {
                         case .single:
-                            guard !self.path.isEmpty else { return }
-                            self.path.removeLast()
+                            guard !path.isEmpty else { return }
+                            path.removeLast()
                         case .identifier:
-                            while self.path.isEmpty == false {
-                                self.path = .init()
+                            while path.isEmpty == false {
+                                path = .init()
                             }
                         case .root:
-                            self.path = .init()
+                            path = .init()
                         case let .count(count):
-                            guard self.path.count >= count else { return }
-                            self.path.removeLast(count)
+                            guard path.count >= count else { return }
+                            path.removeLast(count)
                         }
                     }
                 }

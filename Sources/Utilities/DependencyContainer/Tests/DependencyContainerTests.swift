@@ -200,7 +200,7 @@ final class DependencyContainerTests {
 }
 
 protocol MyContainer {
-    func register<Value>(_ block: @escaping () -> Value)
+    func register(_ block: @escaping () -> some Any)
     func resolve<Value>(_ type: Value.Type) throws -> Value
 }
 

@@ -15,9 +15,7 @@
 import Foundation
 
 public extension Sequence {
-    func asyncMap<T>(
-        _ transform: @Sendable (Element) async throws -> T
-    ) async rethrows -> [T] {
+    func asyncMap<T>(_ transform: @Sendable (Element) async throws -> T) async rethrows -> [T] {
         var values = [T]()
 
         for element in self {
@@ -29,9 +27,7 @@ public extension Sequence {
 }
 
 public extension Sequence {
-    func asyncCompactMap<T>(
-        _ transform: @Sendable (Element) async throws -> T?
-    ) async rethrows -> [T] {
+    func asyncCompactMap<T>(_ transform: @Sendable (Element) async throws -> T?) async rethrows -> [T] {
         var values = [T]()
 
         for element in self {
@@ -45,9 +41,7 @@ public extension Sequence {
 }
 
 public extension Sequence {
-    func asyncFlatMap<T>(
-        _ transform: @Sendable (Element) async throws -> [T]
-    ) async rethrows -> [T] where T: Sendable {
+    func asyncFlatMap<T>(_ transform: @Sendable (Element) async throws -> [T]) async rethrows -> [T] where T: Sendable {
         var values = [T]()
 
         for element in self {
@@ -59,9 +53,7 @@ public extension Sequence {
 }
 
 public extension Sequence {
-    func asyncForEach(
-        _ operation: @Sendable (Element) async throws -> Void
-    ) async rethrows {
+    func asyncForEach(_ operation: @Sendable (Element) async throws -> Void) async rethrows {
         for element in self {
             try await operation(element)
         }

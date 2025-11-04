@@ -23,7 +23,7 @@ public struct Polymorph<Extractor: TypeExtractor, Value: Sendable>: Decodable, S
     private var value: Value?
     public var wrappedValue: Value {
         get {
-            return value.unsafelyUnwrapped
+            value.unsafelyUnwrapped
         }
         set {
             value = newValue

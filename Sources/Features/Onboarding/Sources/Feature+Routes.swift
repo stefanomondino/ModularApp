@@ -14,7 +14,7 @@ extension Feature {
         await routeContainer.register(for: OnboardingRouteDefinition.self) { [self] _ in
             let viewModel = await PermissionViewModelImplementation(
                 router: unsafeResolve(),
-                permissionsUseCase: unsafeResolve()
+                permissionsUseCase: unsafeResolve(),
             )
             return SwiftUIRestartRoute {
                 PermissionView(viewModel: viewModel)

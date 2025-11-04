@@ -60,7 +60,7 @@ public extension KeyedDecodingContainer {
 }
 
 public extension KeyedEncodingContainer {
-    mutating func encode<Value>(_ value: NullableValue<Value>, forKey key: K) throws where Value: Sendable & Encodable {
+    mutating func encode(_ value: NullableValue<some Sendable & Encodable>, forKey key: K) throws {
         if let innerValue = value.innerValue {
             try encodeIfPresent(innerValue, forKey: key)
         }

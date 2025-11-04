@@ -61,7 +61,7 @@ public final class Router {
     func resolve<Definition: RouteDefinition>(_ definition: Definition) async -> Route? {
         guard let handler: @Sendable @MainActor (Definition) async -> Route = await container.container.resolve(
             ObjectIdentifier(Definition.self),
-            type: (@Sendable @MainActor (Definition) async -> Route).self
+            type: (@Sendable @MainActor (Definition) async -> Route).self,
         ) else {
             Logger.log("Route not found: \(definition)", level: .warning, tag: .routes)
             return nil

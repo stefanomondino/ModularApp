@@ -18,5 +18,5 @@ let package = Package(
     dependencies: [.package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.0.0"),
                    .package(url: "https://github.com/apple/swift-async-algorithms", from: "1.0.0"),
                    .package(url: "https://github.com/onevcat/Kingfisher", from: "8.0.0"),
-                   .package(url: "https://github.com/swhitty/FlyingFox.git", .upToNextMajor(from: "0.20.0"))] + macros
+                   .package(url: "https://github.com/swhitty/FlyingFox.git", .upToNextMajor(from: "0.20.0"))] + macros,
 )

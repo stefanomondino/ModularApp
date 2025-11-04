@@ -56,13 +56,12 @@ extension ProviderMacro: AccessorMacro {
         guard let identifier = varDecl.bindings.first?.pattern else {
             throw MacroExpansionErrorMessage("Unable to resolve variable identifier")
         }
-        let id: String
-        if case let .argumentList(args) = node.arguments,
-           let expression = args.first?.expression,
-           expression.description.isEmpty == false {
-            id = expression.trimmedDescription
+        let id: String = if case let .argumentList(args) = node.arguments,
+                            let expression = args.first?.expression,
+                            expression.description.isEmpty == false {
+            expression.trimmedDescription
         } else {
-            id = "\"\(identifier.trimmedDescription)\""
+            "\"\(identifier.trimmedDescription)\""
         }
 
         let mainActorAttribute = AttributeSyntax("MainActor") {

@@ -31,7 +31,7 @@ extension Router {
                     }
                 }
                 .fullScreenCover(item: $path) { path in
-                    if let router = router {
+                    if let router {
                         let internalRouter = Router(container: router.container, name: "Modal presentation")
                         path.route.view()
                             .ignoresSafeArea()

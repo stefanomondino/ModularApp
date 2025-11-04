@@ -5,8 +5,8 @@
 //  Created by Stefano Mondino on 04/11/25.
 //
 
-import Routes
 import Foundation
+import Routes
 
 public struct OnboardingRouteDefinition: RouteDefinition, Equatable {
     public let identifier: String = UUID().uuidString

@@ -17,7 +17,7 @@ public struct NumberValue: Sendable, Hashable, ExpressibleByFloatLiteral, Expres
         case double(Double)
     }
 
-    init?<T: Numeric>(exactly value: T) {
+    init?(exactly value: some Numeric) {
         switch value {
         case let intValue as Int: self.value = .int(intValue)
         case let floatValue as Float: self.value = .float(floatValue)
@@ -47,25 +47,25 @@ public struct NumberValue: Sendable, Hashable, ExpressibleByFloatLiteral, Expres
 
     public var floatValue: Float {
         switch value {
-        case let .int(intValue): return Float(intValue)
-        case let .float(floatValue): return floatValue
-        case let .double(doubleValue): return Float(doubleValue)
+        case let .int(intValue): Float(intValue)
+        case let .float(floatValue): floatValue
+        case let .double(doubleValue): Float(doubleValue)
         }
     }
 
     public var doubleValue: Double {
         switch value {
-        case let .int(intValue): return Double(intValue)
-        case let .float(floatValue): return Double(floatValue)
-        case let .double(doubleValue): return doubleValue
+        case let .int(intValue): Double(intValue)
+        case let .float(floatValue): Double(floatValue)
+        case let .double(doubleValue): doubleValue
         }
     }
 
     public var intValue: Int {
         switch value {
-        case let .int(intValue): return intValue
-        case let .float(floatValue): return Int(floatValue)
-        case let .double(doubleValue): return Int(doubleValue)
+        case let .int(intValue): intValue
+        case let .float(floatValue): Int(floatValue)
+        case let .double(doubleValue): Int(doubleValue)
         }
     }
 }

@@ -26,14 +26,14 @@ public struct DataStructuresMacroTests {
 
         let file = BasicMacroExpansionContext.KnownSourceFile(
             moduleName: "MyModule",
-            fullFilePath: "test.swift"
+            fullFilePath: "test.swift",
         )
 
         let context = BasicMacroExpansionContext(sourceFiles: [source: file])
 
         let transformedSF = source.expand(
             macros: ["Case": CaseMacro.self],
-            in: context
+            in: context,
         )
 
         let expectedDescription =

@@ -19,7 +19,7 @@ struct PositionObservingView<Content: View>: View {
             .background(GeometryReader { geometry in
                 Color.clear.preference(
                     key: PreferenceKey.self,
-                    value: geometry.frame(in: coordinateSpace)
+                    value: geometry.frame(in: coordinateSpace),
                 )
             })
             .onPreferenceChange(PreferenceKey.self) { frame in
@@ -75,18 +75,18 @@ public struct ObservableScrollView<Content: View>: View {
                     set: { newOffset in
                         offset = CGPoint(
                             x: -newOffset.x,
-                            y: -newOffset.y
+                            y: -newOffset.y,
                         )
-                    }
+                    },
                 ),
                 contentSize: Binding(
                     get: { contentSize },
                     set: { newSize in
                         contentSize = .init(width: newSize.width,
                                             height: newSize.height)
-                    }
+                    },
                 ),
-                content: content
+                content: content,
             )
         }
         .coordinateSpace(name: coordinateSpaceName)

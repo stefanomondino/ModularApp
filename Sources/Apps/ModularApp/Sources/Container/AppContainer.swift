@@ -38,7 +38,7 @@ final class AppContainer: DependencyContainer {
             EnvironmentImplementation()
         }
         await register(for: [String: any Service].self) { @MainActor [self] in
-            await ([self.state] +
+            await ([state] +
                 features
                 .asyncFlatMap { await $0.services })
                 .asDictionaryOfValues(indexedBy: \.serviceIdentifier.stringValue)

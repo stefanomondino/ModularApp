@@ -17,7 +17,7 @@ struct RestartRouteModifier: ViewModifier {
                 guard let router else { return }
                 for await definition in router.definitionStream {
                     if let route = await router.resolve(definition) as? SwiftUIRestartRoute {
-                        self.restartRoute = route
+                        restartRoute = route
                     }
                 }
             }

@@ -2,3 +2,4 @@
 --disable preferKeyPath,wrapMultilineStatementBraces
 --wrapparameters after-first
 --wrapcollections after-first
+--swift-version 6.2

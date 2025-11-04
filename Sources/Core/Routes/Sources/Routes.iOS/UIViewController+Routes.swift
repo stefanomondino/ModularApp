@@ -26,8 +26,8 @@ public enum UIKitPresentationMode: Sendable, Equatable {
 
     var swiftUIType: SwiftUIRoute.Type {
         switch self {
-        case .push: return SwiftUINavigationRoute.self
-        case .present: return SwiftUIModalRoute.self
+        case .push: SwiftUINavigationRoute.self
+        case .present: SwiftUIModalRoute.self
         }
     }
 }

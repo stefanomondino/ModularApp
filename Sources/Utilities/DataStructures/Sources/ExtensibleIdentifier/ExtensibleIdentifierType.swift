@@ -115,6 +115,6 @@ public extension ExtensibleIdentifierType where Value == Float {
 
     /// The wrapped identifier value.
     public var wrappedValue: Identifier {
-        return .init(key)
+        .init(key)
     }
 }

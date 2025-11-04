@@ -42,7 +42,7 @@ struct NetworkClientTests {
                     return true
                 }
                 return false
-            }
+            },
         ))
     }
 

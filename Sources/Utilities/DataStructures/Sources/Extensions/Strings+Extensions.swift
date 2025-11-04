@@ -4,7 +4,7 @@ public extension String {
     /// Returns String unicode value of country flag for iso code
 
     var capitalizedFirst: String {
-        guard let first = first else { return self }
+        guard let first else { return self }
         return first.uppercased() + dropFirst()
     }
 

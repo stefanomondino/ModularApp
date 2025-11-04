@@ -12,11 +12,11 @@ let package = Package(
     products: [// Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "\(name)Macro",
-            targets: ["\(name)Macro"]
+            targets: ["\(name)Macro"],
         ),
         .executable(
             name: "\(name)Client",
-            targets: ["\(name)Client"]
+            targets: ["\(name)Client"],
         )],
     dependencies: [// Depend on the Swift 5.9 release of SwiftSyntax
         .package(url: "https://github.com/apple/swift-syntax.git", from: "600.0.0")],
@@ -27,7 +27,7 @@ let package = Package(
             name: "\(name)Macros",
             dependencies: [.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                            .product(name: "SwiftCompilerPlugin", package: "swift-syntax")],
-            path: "Sources/Macros"
+            path: "Sources/Macros",
 
         ),
 
@@ -45,6 +45,6 @@ let package = Package(
         .testTarget(
             name: "\(name)MacrosTests",
             dependencies: [.init(stringLiteral: "\(name)Macros"),
-                           .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax")]
-        )]
+                           .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax")],
+        )],
 )

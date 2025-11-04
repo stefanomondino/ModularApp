@@ -65,9 +65,7 @@
         ///
         /// - Returns: A sendable async sequence that can be safely shared across multiple concurrent tasks.
         ///
-        func share(
-            bufferingPolicy: AsyncShareSequence<Self>.AsyncBufferSequencePolicy = .bounded(1)
-        ) -> AsyncShareSequence<Self> {
+        func share(bufferingPolicy: AsyncShareSequence<Self>.AsyncBufferSequencePolicy = .bounded(1)) -> AsyncShareSequence<Self> {
             // The iterator is transferred to the isolation of the iterating task
             // this has to be done "unsafely" since we cannot annotate the transfer
             // however since iterating an AsyncSequence types twice has been defined
@@ -86,7 +84,7 @@
                 {
                     iterator
                 },
-                bufferingPolicy: bufferingPolicy
+                bufferingPolicy: bufferingPolicy,
             )
         }
     }
@@ -137,7 +135,7 @@
 
             /// A policy for buffering elements without limit.
             public static var unbounded: Self {
-                return Self(policy: .unbounded)
+                Self(policy: .unbounded)
             }
 
             /// A policy for buffering elements until the limit is reached.
@@ -340,7 +338,7 @@
                 // If no limit is specified it interprets that as an unbounded limit.
                 mutating func emit<T>(_ value: T,
                                       limit: Int?) -> (T, UnsafeContinuation<Bool, Never>?, UnsafeContinuation<Void, Never>?, Bool) {
-                    return _emit(value, limit: limit ?? .max)
+                    _emit(value, limit: limit ?? .max)
                 }
 
                 // Adds an element to the buffer according to the configured storage policy.
@@ -504,9 +502,9 @@
                 return state.withLock { state in
                     switch state.iteratingTask {
                     case .cancelled:
-                        return false
+                        false
                     default:
-                        return true
+                        true
                     }
                 }
             }
@@ -569,10 +567,8 @@
                 }
             }
 
-            private func nextIteration(
-                _ id: Int
-            ) async -> Result<Base.Element?, Failure> {
-                return await withTaskCancellationHandler {
+            private func nextIteration(_ id: Int) async -> Result<Base.Element?, Failure> {
+                await withTaskCancellationHandler {
                     await withUnsafeContinuation { continuation in
                         let (res, limitContinuation, demandContinuation, cancelled) = state.withLock {
                             state -> (Result<Base.Element?, Failure>?, UnsafeContinuation<Bool, Never>?, UnsafeContinuation<Void, Never>?, Bool) in
@@ -791,7 +787,7 @@ struct ManagedCriticalState<State> {
     }
 
     func withLock<R>(_ critical: (inout State) throws -> R) rethrows -> R {
-        return try withCriticalRegion(critical)
+        try withCriticalRegion(critical)
     }
 }
 

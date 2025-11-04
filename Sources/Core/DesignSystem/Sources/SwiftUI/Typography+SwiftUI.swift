@@ -32,9 +32,9 @@ struct TypographyModifier: ViewModifier {
         func extract(with provider: Typography.Provider) -> Typography {
             switch self {
             case let .value(value):
-                return value
+                value
             case let .key(key):
-                return provider.get(key)
+                provider.get(key)
             }
         }
     }
@@ -78,13 +78,13 @@ public extension DesignPreviewModifier.Customization {
             $0.typography.h1 = Typography(
                 family: .system,
                 weight: .black,
-                size: 48
+                size: 48,
             )
             $0.typography.h2 = Typography(
                 family: .system,
                 weight: .bold,
                 size: 20,
-                lineHeight: .relative(0.75)
+                lineHeight: .relative(0.75),
             )
         }
     }

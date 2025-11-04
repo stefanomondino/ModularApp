@@ -7,6 +7,4 @@ import Testing
 @testable import Tracking
 
 @Suite
-struct TrackingTests {
-
-}
+struct TrackingTests {}

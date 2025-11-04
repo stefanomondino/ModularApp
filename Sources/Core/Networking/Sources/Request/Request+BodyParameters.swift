@@ -16,7 +16,7 @@ public extension Request {
             self.headers = headers
         }
 
-        public static func json<JSON: Encodable>(_ object: JSON, encoder: JSONEncoder = .init()) throws(NetworkingError) -> Self {
+        public static func json(_ object: some Encodable, encoder: JSONEncoder = .init()) throws(NetworkingError) -> Self {
             do {
                 let data: Data = try encoder.encode(object)
                 return .init(data: data, headers: [.contentType: "application/json"])

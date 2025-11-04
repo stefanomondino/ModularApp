@@ -3,10 +3,8 @@
 //
 
 import Foundation
-import Testing
 @testable import Notifications
+import Testing
 
 @Suite
-struct NotificationsTests {
-
-}
+struct NotificationsTests {}
