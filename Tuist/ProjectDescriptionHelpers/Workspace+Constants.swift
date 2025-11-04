@@ -18,16 +18,17 @@ public enum Constants {
 @MainActor public let coreModules: [Skeleton.CoreModule] = [.designSystem(),
                                                             .networking(),
                                                             .routes(),
-                                                            .locations(),
                                                             // murray: core integration
                                                             .components()]
 
-@MainActor public let blockModules: [Skeleton.BlockModule] = [.logger(),
-                                                              .dependencyContainer(),
-                                                              .streams(),
-                                                              .dataStructures()]
+@MainActor public let deviceCapabilityModules: [Skeleton.DeviceCapabilityModule] = [.locations()
+                                                                                    // murray: device capability integration]
+]
 
-@MainActor public let bridgeModules: [Skeleton.BridgeModule] = []
+@MainActor public let utilityModules: [Skeleton.UtilityModule] = [.logger(),
+                                                                  .dependencyContainer(),
+                                                                  .streams(),
+                                                                  .dataStructures()]
 
 @MainActor public let featureModules: [Skeleton.FeatureModule] = [.onboarding(), .appSettings()]
 

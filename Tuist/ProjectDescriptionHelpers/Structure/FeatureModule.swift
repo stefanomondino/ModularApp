@@ -4,18 +4,19 @@ import SkeletonPlugin
 public extension Skeleton {
     struct FeatureModule: SkeletonModule {
         public struct Dependencies: ModuleDependencies {
-            public var isPrivate: Bool
+            public var isPrivate: Bool { true }
+            public var utilities: [UtilityModule] = []
             public var core: [CoreModule]
-            public var bridge: [BridgeModule]
+            public var deviceCapabilities: [DeviceCapabilityModule] = []
             public var external: [ExternalModule]
-            public var dependencies: [DependencyBuilder] { core + bridge }
-            public init(isPrivate: Bool = false,
+            public var dependencies: [DependencyBuilder] { core + utilities }
+            public init(utilities: [UtilityModule] = [],
                         core: [CoreModule] = [],
-                        bridge: [BridgeModule] = [],
+                        deviceCapabilities: [DeviceCapabilityModule] = [],
                         external: [ExternalModule] = []) {
-                self.isPrivate = isPrivate
+                self.utilities = utilities
                 self.core = core
-                self.bridge = bridge
+                self.deviceCapabilities = deviceCapabilities
                 self.external = external
             }
         }

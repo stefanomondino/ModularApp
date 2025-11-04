@@ -2,4 +2,4 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 import SkeletonPlugin
 
-let project = Skeleton.BlockModule.streams().project()
+let project = Skeleton.DeviceCapabilityModule.locations().project()

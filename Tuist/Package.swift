@@ -9,7 +9,7 @@ import PackageDescription
         productTypes: ["Kingfisher": .framework])
 #endif
 
-let macros: [PackageDescription.Package.Dependency] = [.package(path: "../Sources/Block/DataStructures/DataStructuresMacro"),
+let macros: [PackageDescription.Package.Dependency] = [.package(path: "../Sources/Utilities/DataStructures/DataStructuresMacro"),
                                                        .package(path: "../Sources/Core/DesignSystem/DesignSystemMacro"),
                                                        .package(path: "../Sources/Core/Routes/RoutesMacro")]
 

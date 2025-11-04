@@ -2,4 +2,4 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 import SkeletonPlugin
 
-let project = Skeleton.BlockModule.dependencyContainer().project()
+let project = Skeleton.UtilityModule.logger().project()

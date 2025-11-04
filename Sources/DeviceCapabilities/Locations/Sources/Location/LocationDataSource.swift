@@ -10,6 +10,7 @@ import DataStructures
 import Foundation
 import Streams
 
+// sourcery: AutoMockable
 @MainActor public protocol LocationDataSource: Sendable {
     func shouldAskForPermissions() async -> Bool
     func askForPermissions(mode: LocationPermissionRequestMode) async -> LocationPermissionStatus

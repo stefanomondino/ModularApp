@@ -7,7 +7,7 @@
 import ProjectDescription
 import SkeletonPlugin
 
-public extension Skeleton.BlockModule {
+public extension Skeleton.UtilityModule {
     static func logger() -> Self {
         .init(name: "Logger", destinations: Constants.destinations,
               deploymentTargets: .custom,

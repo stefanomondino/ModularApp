@@ -2,7 +2,7 @@ import ProjectDescription
 import SkeletonPlugin
 
 public extension Skeleton {
-    struct BlockModule: SkeletonModule {
+    struct UtilityModule: SkeletonModule {
         public struct Dependencies: ModuleDependencies {
             public var isPrivate: Bool
             public var external: [ExternalModule]
@@ -15,7 +15,7 @@ public extension Skeleton {
             }
         }
 
-        public var path: ProjectDescription.Path { "Sources/Block/\(folderName)" }
+        public var path: ProjectDescription.Path { "Sources/Utilities/\(folderName)" }
         public var swiftVersion: SwiftVersion
         public var name: String
         public var folderName: String
@@ -66,7 +66,7 @@ public extension Skeleton {
         public func makeDependency() -> TargetDependency? {
             if createProject {
                 .project(target: name,
-                         path: "../../Block/\(folderName)",
+                         path: "../../Utilities/\(folderName)",
                          condition: .when(deploymentTargets.filters))
             } else {
                 .target(name: name, condition: .when(deploymentTargets.filters))

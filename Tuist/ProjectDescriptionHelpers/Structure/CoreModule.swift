@@ -6,17 +6,17 @@ public extension Skeleton {
         public struct Dependencies: ModuleDependencies {
             public var isPrivate: Bool
             public var core: [CoreModule]
-            public var block: [BlockModule]
+            public var utilities: [UtilityModule]
             public var external: [ExternalModule]
-            public var dependencies: [DependencyBuilder] { core + block }
+            public var dependencies: [DependencyBuilder] { core + utilities }
 
             public init(isPrivate: Bool = false,
-                        block: [BlockModule] = [],
+                        utilities: [UtilityModule] = [],
                         core: [CoreModule] = [],
                         external: [ExternalModule] = []) {
                 self.isPrivate = isPrivate
                 self.core = core
-                self.block = block
+                self.utilities = utilities
                 self.external = external
             }
         }

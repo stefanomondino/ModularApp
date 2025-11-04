@@ -22,7 +22,7 @@ replacements:
               destinations: Constants.destinations,
               deploymentTargets: .custom,
               swiftVersion: .v6,
-              dependencies: .init(block: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+              dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
                                   core: []),
               testDependencies: .init(test: [.coreTesting()],
                                       external: []),

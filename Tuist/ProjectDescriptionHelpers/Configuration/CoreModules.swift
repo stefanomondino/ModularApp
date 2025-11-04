@@ -7,7 +7,7 @@ public extension Skeleton.CoreModule {
               destinations: Constants.destinations,
               deploymentTargets: .custom,
               swiftVersion: .v6,
-              dependencies: .init(block: [.logger(), .dependencyContainer(), .streams(), .dataStructures()]),
+              dependencies: .init(utilities: [.logger(), .dependencyContainer(), .streams(), .dataStructures()]),
               testDependencies: .init(test: [.coreTesting()]),
               synthesizers: [],
               hasMacros: true)
@@ -29,7 +29,7 @@ public extension Skeleton.CoreModule {
               destinations: Constants.destinations,
               deploymentTargets: .custom,
               swiftVersion: .v6,
-              dependencies: .init(block: [],
+              dependencies: .init(utilities: [],
                                   core: [.designSystem()]),
               testDependencies: .init(test: [.coreTesting()]),
               synthesizers: [],
@@ -41,23 +41,10 @@ public extension Skeleton.CoreModule {
               destinations: Constants.destinations,
               deploymentTargets: .custom,
               swiftVersion: .v6,
-              dependencies: .init(block: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+              dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
                                   core: []),
               testDependencies: .init(test: [.coreTesting()],
                                       external: [.flyingFox()]),
-              synthesizers: [],
-              hasMacros: false)
-    }
-
-    static func locations() -> Skeleton.CoreModule {
-        .init(name: "Locations",
-              destinations: Constants.destinations,
-              deploymentTargets: .custom,
-              swiftVersion: .v6,
-              dependencies: .init(block: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
-                                  core: []),
-              testDependencies: .init(test: [.coreTesting()],
-                                      external: []),
               synthesizers: [],
               hasMacros: false)
     }

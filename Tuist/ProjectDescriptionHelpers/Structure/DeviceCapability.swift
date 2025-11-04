@@ -2,27 +2,26 @@ import ProjectDescription
 import SkeletonPlugin
 
 public extension Skeleton {
-    struct BridgeModule: SkeletonModule {
+    struct DeviceCapabilityModule: SkeletonModule {
         public struct Dependencies: ModuleDependencies {
             public var isPrivate: Bool
-            public var core: [CoreModule]
-            public var bridge: [BridgeModule]
+            public var utilities: [UtilityModule]
             public var external: [ExternalModule]
-            public var dependencies: [DependencyBuilder] { core + bridge }
+            public var dependencies: [DependencyBuilder] { utilities }
+
             public init(isPrivate: Bool = false,
-                        core: [CoreModule] = [],
-                        bridge: [BridgeModule] = [],
+                        utilities: [UtilityModule] = [],
                         external: [ExternalModule] = []) {
                 self.isPrivate = isPrivate
-                self.core = core
-                self.bridge = bridge
+                self.utilities = utilities
                 self.external = external
             }
         }
 
+        public var path: ProjectDescription.Path { "Sources/DeviceCapabilities/\(folderName)" }
         public var swiftVersion: SwiftVersion
-        public var path: ProjectDescription.Path { "Sources/Bridges/\(name)" }
         public var name: String
+        public var folderName: String
         public var destinations: Destinations
         public var deploymentTargets: DeploymentTargets
         public var dependencies: ModuleDependencies
@@ -32,10 +31,11 @@ public extension Skeleton {
         public var product: Product
         public var useSourcery: Bool
         public var isTestable: Bool
-        public var supportsParallelTesting: Bool
         public var hasDemoApp: Bool
+        public var supportsParallelTesting: Bool
         public var hasMacros: Bool
         public init(name: String,
+                    folderName: String? = nil,
                     destinations: Destinations,
                     deploymentTargets: DeploymentTargets,
                     product: ProjectDefinition.Product = .automaticFramework,
@@ -50,10 +50,11 @@ public extension Skeleton {
                     hasDemoApp: Bool = false,
                     hasMacros: Bool = false) {
             self.name = name
-            self.swiftVersion = swiftVersion
             self.product = product.product
-            self.deploymentTargets = deploymentTargets
+            self.swiftVersion = swiftVersion
+            self.folderName = folderName ?? name
             self.destinations = destinations
+            self.deploymentTargets = deploymentTargets
             self.dependencies = dependencies
             self.testDependencies = testDependencies
             self.settings = settings
@@ -67,8 +68,8 @@ public extension Skeleton {
 
         public func makeDependency() -> TargetDependency? {
             if createProject {
-                .project(target: "\(name)",
-                         path: "../../Bridges/\(name)",
+                .project(target: name,
+                         path: "../../DeviceCapabilities/\(folderName)",
                          condition: .when(deploymentTargets.filters))
             } else {
                 .target(name: name, condition: .when(deploymentTargets.filters))

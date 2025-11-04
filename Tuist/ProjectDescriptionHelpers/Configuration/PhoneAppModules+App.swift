@@ -10,13 +10,13 @@ public extension Skeleton {
         public struct Dependencies: ModuleDependencies {
             public var isPrivate: Bool { true }
             public var core: [CoreModule]
-            public var bridge: [BridgeModule]
             public var feature: [FeatureModule]
             public var external: [ExternalModule]
-            public var dependencies: [DependencyBuilder] { core + bridge + feature }
-            public init(core: [CoreModule] = [], bridge: [BridgeModule] = [], feature: [FeatureModule] = [], external: [ExternalModule] = []) {
+            public var dependencies: [DependencyBuilder] { core + feature }
+            public init(core: [CoreModule] = [],
+                        feature: [FeatureModule] = [],
+                        external: [ExternalModule] = []) {
                 self.core = core
-                self.bridge = bridge
                 self.feature = feature
                 self.external = external
             }
@@ -68,8 +68,7 @@ public extension Skeleton {
                                                                                        "CFBundleURLSchemes": .array([.string("modularappdev")])]]],
                                                          isTestable: true)],
                                     organizationName: "Stefano Mondino",
-                                    dependencies: Dependencies(bridge: [],
-                                                               feature: [.onboarding(), .appSettings()],
+                                    dependencies: Dependencies(feature: [.onboarding(), .appSettings()],
                                                                external: []),
                                     supplementarySources: [],
                                     supplementaryResources: [],

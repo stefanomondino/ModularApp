@@ -7,7 +7,7 @@ public extension Skeleton.FeatureModule {
                                destinations: Constants.destinations,
                                deploymentTargets: .custom,
                                dependencies: .init(core: [.routes(), .networking(), .components()],
-                                                   bridge: [],
+                                                   deviceCapabilities: [.locations()],
                                                    external: []),
                                testDependencies: .init(test: [.coreTesting()]),
                                synthesizers: [])
@@ -17,8 +17,7 @@ public extension Skeleton.FeatureModule {
         Skeleton.FeatureModule(name: "AppSettings",
                                destinations: Constants.destinations,
                                deploymentTargets: .custom,
-                               dependencies: .init(core: [.routes(), .networking(), .components(), .locations()],
-                                                   bridge: [],
+                               dependencies: .init(core: [.routes(), .networking(), .components()],
                                                    external: [.kingfisher()]),
                                testDependencies: .init(test: [.coreTesting()]),
                                synthesizers: [.files(extensions: ["json"])])
