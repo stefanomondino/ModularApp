@@ -23,6 +23,6 @@ public final class Feature<Container: FeatureContainer>: Routes.Feature {
         dependencies = container
         self.container = await container.container
         await setupRoutes()
-        setupUseCases()
+        await setupUseCases()
     }
 }

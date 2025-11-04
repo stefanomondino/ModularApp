@@ -6,4 +6,4 @@ configurations:
   - ../../../.sourcery/AutoMockable.stencil
   output: Sources/Mocks/Generated/AutoMockable.swift
   args:
-    autoMockableImports: ["Locations"]
+    autoMockableImports: []
