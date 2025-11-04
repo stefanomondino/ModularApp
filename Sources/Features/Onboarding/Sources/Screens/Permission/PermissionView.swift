@@ -14,11 +14,13 @@ struct PermissionView<ViewModel: PermissionViewModel>: View {
     @State var viewModel: ViewModel
     var body: some View {
         ZStack {
-            Color.clear.ignoresSafeArea()
+            Color.yellow.ignoresSafeArea()
             Text(viewModel.title)
             Pill.Button("Activate", style: .standard) {
                 viewModel.activate()
             }
+        }.onFirstAppear {
+            await viewModel.start()
         }
     }
 }

@@ -14,11 +14,20 @@ extension AppContainer {
             state.router
         }
 
-        await routeContainer.register(for: NavigationRouteDefinition.self) { _ in
-            SwiftUINavigationRoute {
-                DummyView()
+        await routeContainer.register(for: RestartRouteDefinition.self) { [self] _ in
+            let viewModel = await StartViewModel(router: unsafeResolve(),
+                                                 useCase: unsafeResolve())
+            return SwiftUIRestartRoute {
+                StartView(viewModel: viewModel)
             }
         }
+
+        await routeContainer.register(for: HomeRouteDefinition.self) { [self] _ in
+            SwiftUIRestartRoute {
+                HomeView()
+            }
+        }
+
         await routeContainer.register(for: ModalRouteDefinition.self) { _ in
             SwiftUIModalRoute {
                 DummyView().navigationStack()

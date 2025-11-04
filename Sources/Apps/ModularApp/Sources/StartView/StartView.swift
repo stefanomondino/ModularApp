@@ -6,18 +6,17 @@
 //  Copyright © 2025 Stefano Mondino. All rights reserved.
 //
 
+import Components
 import Foundation
+import Routes
 import SwiftUI
 
 struct StartView: View {
     @State var viewModel: StartViewModel
     var body: some View {
-        VStack {
-            Text("Welcome to the Modular App! Click me")
-                .onTapGesture {
-                    viewModel.goToAppSettings()
-                }
-        }
-        .navigationStack(router: viewModel.router)
+        Color.clear.ignoresSafeArea()
+            .onFirstAppear {
+                await viewModel.start()
+            }
     }
 }

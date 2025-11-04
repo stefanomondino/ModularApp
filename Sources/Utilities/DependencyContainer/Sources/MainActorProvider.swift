@@ -36,7 +36,6 @@ public extension MainActorProvider {
     @MainActor func resolve<Value: Sendable>(_ key: Key,
                                              type _: Value.Type = Value.self,
                                              default defaultValue: Value) -> Value {
-        print("\(Value.self) for \(key)")
         guard let value = (storage[key]?() as? Value) else {
             register(for: key) { defaultValue }
             return defaultValue

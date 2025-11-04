@@ -71,6 +71,7 @@ public final class CLLocationDataSource: LocationDataSource {
 
     public init(manager: CLLocationManager = .init()) {
         self.manager = manager
+        manager.delegate = delegate
         status.send(.init(manager.authorizationStatus))
         delegate.dataSource = self
     }

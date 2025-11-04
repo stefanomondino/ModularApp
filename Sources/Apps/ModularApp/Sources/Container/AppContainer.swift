@@ -24,7 +24,8 @@ final class AppContainer: DependencyContainer {
 
     var features: [any Routes.Feature] = []
     @MainActor lazy var state: AppLifecycle = .init(router: .init(container: routeContainer,
-                                                                  name: "AppContainer"))
+                                                                  name: "AppContainer"),
+                                                    container: container)
 
     @MainActor func setup() async {
         await Logger.shared.add(logger: ConsoleLogger(logLevel: .verbose))
@@ -45,6 +46,11 @@ final class AppContainer: DependencyContainer {
         await setupRoutes()
         await setupDataSources()
         await setupRepositories()
+
+        await register(for: StartUseCase.self, scope: .singleton) { @MainActor [self] in
+            await StartUseCaseImplementation(permissions: unsafeResolve())
+        }
+
         await setupFeatures()
         await state.start()
     }

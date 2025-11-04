@@ -11,21 +11,9 @@ extension App {
         @Environment(\.appState) var appState: AppLifecycle
 
         var body: some View {
-            if let viewModel = appState.startViewModel {
-                StartView(viewModel: viewModel)
-                    .onRestart {
-                        await appState.start()
-                    }
-                    .environment(\.router, appState.router)
-                    .id(viewModel.identifier)
-            } else {
-                LaunchScreenView().ignoresSafeArea()
-                ProgressView()
-                    .foregroundStyle(.white)
-                    .padding(32)
-                    .background(Color.red.opacity(0.5))
-                    .cornerRadius(8)
-            }
+            LaunchScreenView().ignoresSafeArea()
+                .restartable()
+                .environment(\.router, appState.router)
         }
     }
 }

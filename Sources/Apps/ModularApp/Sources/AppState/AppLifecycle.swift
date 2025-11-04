@@ -7,28 +7,31 @@
 //
 
 import DataStructures
+import DependencyContainer
 import Foundation
 import Observation
 import Routes
 
-@Observable @MainActor final class AppLifecycle: Service {
+@Observable @MainActor final class AppLifecycle: Service, DependencyContainer {
     static var empty: AppLifecycle {
-        .init(router: .init(container: .init(), name: "Empty AppState Router"))
+        .init(router: .init(container: .init(), name: "Empty AppState Router"),
+              container: .init())
     }
 
     var serviceIdentifier: any ServiceIdentifier { ObjectIdentifier(Self.self) }
 
     let router: Router
     var backgroundDate = Date()
-
+    let container: ObjectContainer
     var startViewModel: StartViewModel?
     /// Creates a new AppState instance.
     /// - Parameter router: a router connected to the app state.
-    init(router: Router) {
+    init(router: Router, container: ObjectContainer) {
         self.router = router
+        self.container = container
     }
 
     func start() async {
-        startViewModel = await StartViewModel(router: router)
+        router.send(.restart())
     }
 }

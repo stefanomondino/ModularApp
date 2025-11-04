@@ -8,23 +8,28 @@
 import Foundation
 import SwiftUI
 
-struct RestartModifier: ViewModifier {
+struct RestartRouteModifier: ViewModifier {
     @Environment(\.router) private var router
-    let onRestart: () async -> Void
+    @State private var restartRoute: SwiftUIRestartRoute?
     func body(content: Content) -> some View {
-        content.task {
-            guard let router else { return }
-            for await definition in router.definitionStream {
-                if definition is RestartRouteDefinition {
-                    await onRestart()
+        ZStack {
+            content.task {
+                guard let router else { return }
+                for await definition in router.definitionStream {
+                    if let route = await router.resolve(definition) as? SwiftUIRestartRoute {
+                        self.restartRoute = route
+                    }
                 }
+            }
+            if let restartRoute {
+                AnyView(restartRoute.view())
             }
         }
     }
 }
 
 public extension View {
-    func onRestart(perform action: @escaping () async -> Void) -> some View {
-        modifier(RestartModifier(onRestart: action))
+    func restartable() -> some View {
+        modifier(RestartRouteModifier())
     }
 }

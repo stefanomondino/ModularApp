@@ -16,7 +16,7 @@ extension Feature {
                 router: unsafeResolve(),
                 permissionsUseCase: unsafeResolve()
             )
-            return SwiftUINavigationRoute {
+            return SwiftUIRestartRoute {
                 PermissionView(viewModel: viewModel)
             }
         }

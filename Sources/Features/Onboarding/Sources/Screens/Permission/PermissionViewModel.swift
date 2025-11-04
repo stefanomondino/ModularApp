@@ -12,6 +12,7 @@ import Routes
 // sourcery: AutoMockable
 @MainActor protocol PermissionViewModel {
     func activate()
+    func start() async
     var title: String { get }
 }
 
@@ -24,6 +25,9 @@ import Routes
          permissionsUseCase: PermissionsUseCase) async {
         self.router = router
         self.permissionsUseCase = permissionsUseCase
+    }
+
+    func start() async {
         permission = await permissionsUseCase.nextPermission()
         if permission == nil {
             router.send(.restart())
@@ -33,10 +37,7 @@ import Routes
     func activate() {
         Task { @MainActor in
             _ = try await permission?.ask()
-            self.permission = await permissionsUseCase.nextPermission()
-            if permission == nil {
-                router.send(.restart())
-            }
+            await start()
         }
     }
 }

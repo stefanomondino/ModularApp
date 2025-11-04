@@ -65,25 +65,12 @@ public actor ConsoleLogger: LoggerType {
         }
         let fileString: String? = logFileLines ? "\(trimmedFile):\(line) (\(function))" : nil
 
-        if #available(iOS 14.0, *) {
-            let logLevel: OSLogType = switch level {
-            case .debug: .debug
-            case .error: .error
-            default: .info
-            }
-            let logger = os.Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: tag ?? "")
-            logger.log(level: logLevel, "\([fileString, description, "--------------"].compactMap { $0 }.joined(separator: "\n"))")
-        } else {
-            let date = dateFormatter.string(from: Date())
-            let tagString: String? = if let tag { "[\(tag)]" } else { nil }
-            let string =
-                """
-                \([[[tagString, date].compactMap { $0 }.joined(separator: " "),
-                    [fileString].compactMap { $0 }.joined()].joined(separator: " - "),
-                   description].compactMap { $0 }.joined(separator: " -> ")
-                )
-                """
-            print(string)
+        let logLevel: OSLogType = switch level {
+        case .debug: .debug
+        case .error: .error
+        default: .info
         }
+        let logger = os.Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: tag ?? "")
+        logger.log(level: logLevel, "\([fileString, description, "--------------"].compactMap { $0 }.joined(separator: "\n"))")
     }
 }

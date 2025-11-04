@@ -13,13 +13,21 @@ import Routes
 @Observable @MainActor final class StartViewModel {
     let router: Router
     let identifier = UUID()
-    init(router: Router) async {
+    let useCase: StartUseCase
+    var destination: StartDestination = .splash
+
+    init(router: Router,
+         useCase: StartUseCase) async {
         self.router = router
+        self.useCase = useCase
     }
 
-    func goToAppSettings() {
-        if true {
-            router.send(.onboarding())
+    func start() async {
+        let destination = await useCase.destination()
+        switch destination {
+        case .onboarding: router.send(.onboarding())
+        case .home: router.send(.home())
+        default: break
         }
     }
 }

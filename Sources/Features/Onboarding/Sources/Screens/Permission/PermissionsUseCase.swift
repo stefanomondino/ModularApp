@@ -20,11 +20,6 @@ final class PermissionsUseCaseImplementation: PermissionsUseCase {
     }
 
     func nextPermission() async -> Permission? {
-        for permission in permissions.permissions {
-            if await permission.shouldAsk() {
-                return permission
-            }
-        }
-        return nil
+        await permissions.permissionsToAsk().first
     }
 }
