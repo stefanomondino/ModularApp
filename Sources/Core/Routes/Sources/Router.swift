@@ -42,14 +42,12 @@ public final class Router {
         self.container = container
         Task {
             for await route in definitionStream {
-                print("Router \(name) emitted route \(route)")
+                Logger.log("Router \(name) emitted route \(route)", level: .verbose, tag: .routes)
             }
         }
     }
 
-    var definitionStream: ShareableAsyncStream<RouteDefinition> {
-        routes.asAsyncStream()
-    }
+    private(set) lazy var definitionStream = routes.share()
 
     public func send(_ route: RouteDefinition) {
         routes.send(route)

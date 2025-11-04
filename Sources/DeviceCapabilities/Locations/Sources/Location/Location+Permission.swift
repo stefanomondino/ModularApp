@@ -16,4 +16,12 @@ public extension Permission {
             await dataSource.askForPermissions(mode: .whenInUse).alreadyGranted(for: .authorizedWhenInUse)
         }
     }
+
+    static func locationAlways(_ dataSource: LocationDataSource) -> Self {
+        .init {
+            await dataSource.shouldAskForPermissions()
+        } ask: {
+            await dataSource.askForPermissions(mode: .always).alreadyGranted(for: .authorizedAlways)
+        }
+    }
 }

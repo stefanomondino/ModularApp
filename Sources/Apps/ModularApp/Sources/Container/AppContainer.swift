@@ -10,6 +10,7 @@ import AppSettings
 import DependencyContainer
 import DesignSystem
 import Foundation
+import Logger
 import Onboarding
 import Routes
 
@@ -26,7 +27,7 @@ final class AppContainer: DependencyContainer {
                                                                   name: "AppContainer"))
 
     @MainActor func setup() async {
-        try? await Task.sleep(for: .seconds(2))
+        await Logger.shared.add(logger: ConsoleLogger(logLevel: .verbose))
         Design.shared.setup()
         await register(for: Design.self) {
             Design.shared
@@ -42,6 +43,8 @@ final class AppContainer: DependencyContainer {
         }
         await setupNetworking()
         await setupRoutes()
+        await setupDataSources()
+        await setupRepositories()
         await setupFeatures()
         await state.start()
     }

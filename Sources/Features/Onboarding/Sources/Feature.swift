@@ -26,13 +26,17 @@ public final class Feature<Container: FeatureContainer>: Routes.Feature {
         await register(for: TestService.self, scope: .singleton) {
             TestService()
         }
+
+        await register(for: PermissionsUseCase.self, scope: .singleton) { [self] in
+            await PermissionsUseCaseImplementation(permissions: unsafeResolve())
+        }
+
         await setupRoutes()
     }
 }
 
 final class TestService: Service {
     func didFinishLaunching(with _: LaunchDelegateOptions?) -> Bool {
-        print("TestService didFinishLaunching")
         return true
     }
 }

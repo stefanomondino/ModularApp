@@ -5,9 +5,10 @@
 //  Created by Stefano Mondino on 04/11/25.
 //
 
+import Components
+import DesignSystem
 import Foundation
 import SwiftUI
-import DesignSystem
 
 struct PermissionView<ViewModel: PermissionViewModel>: View {
     @State var viewModel: ViewModel
@@ -15,12 +16,15 @@ struct PermissionView<ViewModel: PermissionViewModel>: View {
         ZStack {
             Color.clear.ignoresSafeArea()
             Text(viewModel.title)
+            Pill.Button("Activate", style: .standard) {
+                viewModel.activate()
+            }
         }
     }
 }
 
 #Preview(traits: .design(.baseTypography)) {
     PermissionView(viewModel: PermissionViewModelMock {
-        $0.title = "Permission Title"
+        $0.title = "Permission no"
     })
 }

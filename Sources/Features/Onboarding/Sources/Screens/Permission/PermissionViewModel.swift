@@ -4,16 +4,39 @@
 //
 //  Created by Stefano Mondino on 04/11/25.
 //
+import DataStructures
 import Foundation
 import Observation
+import Routes
 
 // sourcery: AutoMockable
-protocol PermissionViewModel {
+@MainActor protocol PermissionViewModel {
+    func activate()
     var title: String { get }
 }
 
 @Observable final class PermissionViewModelImplementation: PermissionViewModel {
     let title: String = "Permission"
+    var permission: Permission?
+    let permissionsUseCase: PermissionsUseCase
+    let router: Router
+    init(router: Router,
+         permissionsUseCase: PermissionsUseCase) async {
+        self.router = router
+        self.permissionsUseCase = permissionsUseCase
+        permission = await permissionsUseCase.nextPermission()
+        if permission == nil {
+            router.send(.restart())
+        }
+    }
 
-    init() {}
+    func activate() {
+        Task { @MainActor in
+            _ = try await permission?.ask()
+            self.permission = await permissionsUseCase.nextPermission()
+            if permission == nil {
+                router.send(.restart())
+            }
+        }
+    }
 }

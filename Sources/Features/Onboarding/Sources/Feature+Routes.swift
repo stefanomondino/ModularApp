@@ -11,8 +11,11 @@ import Routes
 extension Feature {
     func setupRoutes() async {
         let routeContainer = await dependencies.routeContainer()
-        await routeContainer.register(for: OnboardingRouteDefinition.self) { _ in
-            let viewModel = PermissionViewModelImplementation()
+        await routeContainer.register(for: OnboardingRouteDefinition.self) { [self] _ in
+            let viewModel = await PermissionViewModelImplementation(
+                router: unsafeResolve(),
+                permissionsUseCase: unsafeResolve()
+            )
             return SwiftUINavigationRoute {
                 PermissionView(viewModel: viewModel)
             }

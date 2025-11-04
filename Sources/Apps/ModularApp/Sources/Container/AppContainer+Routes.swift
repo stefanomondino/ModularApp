@@ -10,6 +10,10 @@ import SwiftUI
 
 extension AppContainer {
     func setupRoutes() async {
+        await register(for: Router.self) { @MainActor [self] in
+            state.router
+        }
+
         await routeContainer.register(for: NavigationRouteDefinition.self) { _ in
             SwiftUINavigationRoute {
                 DummyView()

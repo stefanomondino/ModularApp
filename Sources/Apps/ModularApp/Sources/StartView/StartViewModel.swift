@@ -7,11 +7,12 @@
 //
 
 import Foundation
-import Routes
 import Onboarding
+import Routes
 
 @Observable @MainActor final class StartViewModel {
     let router: Router
+    let identifier = UUID()
     init(router: Router) async {
         self.router = router
     }

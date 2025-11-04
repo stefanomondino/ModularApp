@@ -7,9 +7,6 @@ import UIKit
 #elseif os(OSX)
 import AppKit
 #endif
-#if canImport(ToolKit) 
-    import ToolKit
-#endif
 {% for import in argument.autoMockableImports %}
 import {{ import }}
 {% endfor %}
