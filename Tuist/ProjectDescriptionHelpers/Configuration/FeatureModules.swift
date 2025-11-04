@@ -7,7 +7,7 @@ public extension Skeleton.FeatureModule {
                                destinations: Constants.destinations,
                                deploymentTargets: .custom,
                                dependencies: .init(core: [.routes(), .networking(), .components()],
-                                                   deviceCapabilities: [.locations()],
+                                                   deviceCapabilities: [.locations(), .camera()],
                                                    external: []),
                                testDependencies: .init(test: [.coreTesting()]),
                                synthesizers: [])

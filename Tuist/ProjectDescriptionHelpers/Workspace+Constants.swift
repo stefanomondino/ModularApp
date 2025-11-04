@@ -21,7 +21,7 @@ public enum Constants {
                                                             // murray: core integration
                                                             .components()]
 
-@MainActor public let deviceCapabilityModules: [Skeleton.DeviceCapabilityModule] = [.locations()
+@MainActor public let deviceCapabilityModules: [Skeleton.DeviceCapabilityModule] = [.locations(), .camera()
                                                                                     // murray: device capability integration]
 ]
 

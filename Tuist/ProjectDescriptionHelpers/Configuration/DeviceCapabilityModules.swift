@@ -13,5 +13,17 @@ public extension Skeleton.DeviceCapabilityModule {
               synthesizers: [],
               hasMacros: false)
     }
+    
+    static func camera() -> Self {
+        .init(name: "Camera",
+              destinations: Constants.destinations,
+              deploymentTargets: .custom,
+              swiftVersion: .v6,
+              dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()]),
+              testDependencies: .init(test: [.coreTesting()],
+                                      external: []),
+              synthesizers: [],
+              hasMacros: false)
+    }
     // murray: declaration
 }
