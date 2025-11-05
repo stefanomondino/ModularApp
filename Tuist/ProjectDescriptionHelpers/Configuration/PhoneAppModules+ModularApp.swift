@@ -51,6 +51,7 @@ public extension Skeleton {
                                                                  "NSUserTrackingUsageDescription": "att_description",
                                                                  "NSLocationWhenInUseUsageDescription": "location_in_use_description",
                                                                  "NSLocationAlwaysAndWhenInUseUsageDescription": "location_always_description",
+                                                                 "NSFaceIDUsageDescription": "location_always_description",
                                                                  "UILaunchStoryboardName": "LaunchScreen",
                                                                  "UIRequiredDeviceCapabilities": ["armv7"],
                                                                  "UIStatusBarHidden": false,
