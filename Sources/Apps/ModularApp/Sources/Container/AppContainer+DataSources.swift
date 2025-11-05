@@ -12,6 +12,7 @@ import Locations
 import Onboarding
 import Camera
 import Notifications
+import Tracking
 
 extension AppContainer {
     func setupDataSources() async {
@@ -25,6 +26,10 @@ extension AppContainer {
         
         await register(for: NotificationsDataSource.self, scope: .singleton) { @MainActor in
             PushNotificationPermissions()
+        }
+        
+        await register(for: TrackingDataSource.self, scope: .singleton) { @MainActor in
+            TrackingPermissions()
         }
     }
 }

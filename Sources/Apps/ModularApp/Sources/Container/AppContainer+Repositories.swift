@@ -10,11 +10,12 @@ import DependencyContainer
 import Foundation
 import Onboarding
 import Notifications
+import Tracking
 
 extension AppContainer {
     func setupRepositories() async {
         await register(for: PermissionsRepository.self, scope: .singleton) { [self] in
-            await PermissionsRepositoryImplementation(permissions: [.locationWhenInUse(unsafeResolve()), .cameraPermissions(unsafeResolve()), .pushNotificationPermissions(unsafeResolve())])
+            await PermissionsRepositoryImplementation(permissions: [.locationWhenInUse(unsafeResolve()), .cameraPermissions(unsafeResolve()), .pushNotificationPermissions(unsafeResolve()), .trackingPermissions(unsafeResolve())])
         }
     }
 }
