@@ -14,6 +14,7 @@ import Logger
 import Onboarding
 import Routes
 
+import Authorization
 // murray: import
 
 @MainActor
@@ -59,7 +60,8 @@ final class AppContainer: DependencyContainer {
     func setupFeatures() async {
         await features.append(Onboarding.Feature(self))
         await features.append(AppSettings.Feature(self))
-        // murray: registration
+        await features.append(Authorization.Feature(self))
+// murray: registration
     }
 }
 
@@ -78,4 +80,5 @@ extension AppContainer: Onboarding.FeatureContainer {
 }
 
 extension AppContainer: AppSettings.FeatureContainer {}
+extension AppContainer: Authorization.FeatureContainer {}
 // murray: container conformance

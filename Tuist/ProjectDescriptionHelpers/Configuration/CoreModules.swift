@@ -48,5 +48,17 @@ public extension Skeleton.CoreModule {
               synthesizers: [],
               hasMacros: false)
     }
-    // murray: declaration
+    static func forms() -> Self {
+    .init(name: "Forms",
+    destinations: Constants.destinations,
+    deploymentTargets: .custom,
+    swiftVersion: .v6,
+    dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+                        core: [.components()]),
+    testDependencies: .init(test: [.coreTesting()],
+                            external: []),
+    synthesizers: [],
+    hasMacros: false)
+}
+// murray: declaration
 }

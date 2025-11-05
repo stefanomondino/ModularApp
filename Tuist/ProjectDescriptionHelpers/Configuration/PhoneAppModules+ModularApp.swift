@@ -70,7 +70,8 @@ public extension Skeleton {
                                                          isTestable: true)],
                                     organizationName: "Stefano Mondino",
                                     dependencies: Dependencies(feature: [.onboarding(),
-                                                                         // murray: feature integration
+                                                                         .authorization(),
+// murray: feature integration
                                                                          .appSettings()],
                                                                external: []),
                                     supplementarySources: [],

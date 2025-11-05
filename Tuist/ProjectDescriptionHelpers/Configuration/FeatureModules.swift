@@ -23,5 +23,15 @@ public extension Skeleton.FeatureModule {
               synthesizers: [.files(extensions: ["json"])])
     }
 
-    // murray: declaration
+    static func authorization() -> Self {
+  .init(name: "Authorization",
+               destinations: Constants.destinations,
+               deploymentTargets: .custom,
+               dependencies: .init(core: [.routes(), .networking(), .forms()],
+                                           deviceCapabilities: [],
+                                           external: []),
+              testDependencies: .init(test: [.coreTesting()]),
+               synthesizers: [])
+}
+// murray: declaration
 }
