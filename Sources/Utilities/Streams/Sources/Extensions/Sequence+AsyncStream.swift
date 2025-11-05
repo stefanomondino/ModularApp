@@ -110,20 +110,20 @@ public extension AsyncThrowingStream where Failure == Error, Element: Sendable {
     }
 }
 
-public extension AsyncSequence where Element: Sendable {
-    /// Type erases the `AsyncSequence` into an `AsyncStream`
-    /// - Returns: An `AsyncStream` created from the base `AsyncSequence`
-    ///
-    /// - Note: AsyncSequences do not expose their error type.
-    /// So this function is available for both throwing and non-throwing `AsyncSequences`.
-    /// It will produce an `assertionFailure` at runtime if the base sequence throws.
-    func asAsyncStream(file: StaticString = #file, line: UInt = #line) -> AsyncStream<Element> {
-        AsyncStream(from: self, file: file, line: line)
-    }
-
-    /// Type erases the `AsyncSequence` into an `AsyncThrowingStream`
-    /// - Returns: An `AsyncThrowingStream` from the base `AsyncSequence`
-    func asAsyncThrowingStream() -> AsyncThrowingStream<Element, Error> {
-        AsyncThrowingStream(from: self)
-    }
-}
+// public extension AsyncSequence where Element: Sendable {
+//    /// Type erases the `AsyncSequence` into an `AsyncStream`
+//    /// - Returns: An `AsyncStream` created from the base `AsyncSequence`
+//    ///
+//    /// - Note: AsyncSequences do not expose their error type.
+//    /// So this function is available for both throwing and non-throwing `AsyncSequences`.
+//    /// It will produce an `assertionFailure` at runtime if the base sequence throws.
+//    func asAsyncStream(file: StaticString = #file, line: UInt = #line) -> AsyncStream<Element> {
+//        AsyncStream(from: self, file: file, line: line)
+//    }
+//
+//    /// Type erases the `AsyncSequence` into an `AsyncThrowingStream`
+//    /// - Returns: An `AsyncThrowingStream` from the base `AsyncSequence`
+//    func asAsyncThrowingStream() -> AsyncThrowingStream<Element, Error> {
+//        AsyncThrowingStream(from: self)
+//    }
+// }

@@ -54,6 +54,9 @@ public protocol BiometricDataSource: Sendable {
 
 public extension Permission {
     static func biometricPermissions(_ dataSource: BiometricDataSource) -> Self {
-        Permission { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
+        Permission(.biometric) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
+}
+public extension Permission.Identifier {
+    static var biometric: Self { "biometric" }
 }

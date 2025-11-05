@@ -51,6 +51,10 @@ public protocol TrackingDataSource: Sendable {
 
 public extension Permission {
     static func trackingPermissions(_ dataSource: TrackingDataSource) -> Self {
-        Permission { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
+        Permission(.tracking) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
+}
+
+public extension Permission.Identifier {
+    static var tracking: Self { "tracking" }
 }

@@ -41,6 +41,9 @@ public protocol NotificationsDataSource: Sendable {
 
 public extension Permission {
     static func pushNotificationPermissions(_ dataSource: NotificationsDataSource) -> Self {
-        Permission { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
+        Permission(.pushNotifications) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
+}
+public extension Permission.Identifier {
+    static var pushNotifications: Self { "pushNotifications" }
 }

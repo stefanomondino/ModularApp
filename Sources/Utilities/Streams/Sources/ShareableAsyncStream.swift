@@ -33,9 +33,9 @@ public struct ShareableAsyncStream<Element: Sendable>: ShareableStream {
             }.share()
     }
 
-    public init(_ callback: @Sendable @escaping () async -> Self) {
-        underlyingStream = AsyncStream { await callback().asAsyncStream() }.share()
-    }
+//    public init(_ callback: @Sendable @escaping () async -> Self) {
+//        underlyingStream = AsyncStream { await callback().asAsyncStream() }.share()
+//    }
 
     public static func empty() -> Self {
         self.init {

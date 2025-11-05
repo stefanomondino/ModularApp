@@ -22,10 +22,8 @@ public final class PermissionsRepositoryImplementation: PermissionsRepository {
 
     public func permissionsToAsk() async -> [Permission] {
         var permissionsToAsk: [Permission] = []
-        for permission in permissions {
-            if await permission.shouldAsk() {
-                permissionsToAsk.append(permission)
-            }
+        for permission in permissions where await permission.shouldAsk() {
+            permissionsToAsk.append(permission)
         }
         return permissionsToAsk
     }

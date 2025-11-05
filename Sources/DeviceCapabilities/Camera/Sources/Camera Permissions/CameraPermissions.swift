@@ -40,6 +40,10 @@ public protocol CameraDataSource: Sendable {
 
 public extension Permission {
     static func cameraPermissions(_ dataSource: CameraDataSource) -> Self {
-        Permission { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
+        Permission(.camera) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
+}
+
+public extension Permission.Identifier {
+    static var camera: Self { "camera" }
 }

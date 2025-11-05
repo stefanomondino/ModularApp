@@ -8,6 +8,7 @@ import DataStructures
 import Foundation
 import Observation
 import Routes
+import Locations
 
 // sourcery: AutoMockable
 @MainActor protocol PermissionViewModel {
@@ -17,9 +18,15 @@ import Routes
 }
 
 @Observable final class PermissionViewModelImplementation: PermissionViewModel {
-    let title: String = "Permission"
     var permission: Permission?
     let permissionsUseCase: PermissionsUseCase
+    var title: String {
+        switch permission?.identifier ?? "" {
+        case .locationWhenInUse:
+            "Ciao"
+        default: ""
+        }
+    }
     let router: Router
     init(router: Router,
          permissionsUseCase: PermissionsUseCase) async {
