@@ -8,17 +8,10 @@
 
 import Foundation
 import Onboarding
-
+import Routes
 // sourcery: AutoMockable
 protocol StartUseCase: Sendable {
-    func destination() async -> StartDestination
-}
-
-enum StartDestination {
-    case splash
-    case login
-    case onboarding
-    case home
+    func destination() async -> Router.Identifier
 }
 
 final class StartUseCaseImplementation: StartUseCase {
@@ -28,8 +21,8 @@ final class StartUseCaseImplementation: StartUseCase {
         self.permissions = permissions
     }
 
-    func destination() async -> StartDestination {
+    func destination() async -> Router.Identifier {
         let permissions = await permissions.permissionsToAsk()
-        return permissions.isEmpty ? .home : .onboarding
+        return permissions.isEmpty ? .home() : .onboarding()
     }
 }

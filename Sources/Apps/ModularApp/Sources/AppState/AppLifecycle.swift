@@ -20,8 +20,6 @@ import Routes
     var serviceIdentifier: any ServiceIdentifier { ObjectIdentifier(Self.self) }
 
     let router: Router
-    var backgroundDate = Date()
-    var startViewModel: StartViewModel?
     /// Creates a new AppState instance.
     /// - Parameter router: a router connected to the app state.
     init(router: Router) {

@@ -14,7 +14,6 @@ import Routes
     let router: Router
     let identifier = UUID()
     let useCase: StartUseCase
-    var destination: StartDestination = .splash
 
     init(router: Router,
          useCase: StartUseCase) async {
@@ -23,11 +22,7 @@ import Routes
     }
 
     func start() async {
-        let destination = await useCase.destination()
-        switch destination {
-        case .onboarding: router.send(.onboarding())
-        case .home: router.send(.home())
-        default: break
-        }
+        await router.send(useCase.destination())
+     
     }
 }

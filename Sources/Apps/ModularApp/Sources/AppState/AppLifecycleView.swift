@@ -17,7 +17,3 @@ extension App {
         }
     }
 }
-
-#Preview(traits: .design(.app)) {
-    OnboardingView(viewModel: OnboardingView.ViewModel())
-}
