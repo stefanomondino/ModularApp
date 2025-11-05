@@ -11,6 +11,7 @@ import Foundation
 import Locations
 import Onboarding
 import Camera
+import Notifications
 
 extension AppContainer {
     func setupDataSources() async {
@@ -20,6 +21,10 @@ extension AppContainer {
         
         await register(for: CameraDataSource.self, scope: .singleton) { @MainActor in
             CameraPermissions()
+        }
+        
+        await register(for: NotificationsDataSource.self, scope: .singleton) { @MainActor in
+            PushNotificationPermissions()
         }
     }
 }
