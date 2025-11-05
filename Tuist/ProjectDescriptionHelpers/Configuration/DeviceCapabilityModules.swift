@@ -51,5 +51,18 @@ public extension Skeleton.DeviceCapabilityModule {
               synthesizers: [],
               hasMacros: false)
     }
+
+    static func biometric() -> Self {
+        .init(name: "Biometric",
+              destinations: Constants.destinations,
+              deploymentTargets: .custom,
+              swiftVersion: .v6,
+              dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+                                  external: []),
+              testDependencies: .init(test: [.coreTesting()],
+                                      external: []),
+              synthesizers: [],
+              hasMacros: false)
+    }
     // murray: declaration
 }
