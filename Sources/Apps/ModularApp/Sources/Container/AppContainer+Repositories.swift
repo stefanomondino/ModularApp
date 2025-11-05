@@ -11,11 +11,12 @@ import Foundation
 import Onboarding
 import Notifications
 import Tracking
+import Biometric
 
 extension AppContainer {
     func setupRepositories() async {
         await register(for: PermissionsRepository.self, scope: .singleton) { [self] in
-            await PermissionsRepositoryImplementation(permissions: [.locationWhenInUse(unsafeResolve()), .cameraPermissions(unsafeResolve()), .pushNotificationPermissions(unsafeResolve()), .trackingPermissions(unsafeResolve())])
+            await PermissionsRepositoryImplementation(permissions: [.locationWhenInUse(unsafeResolve()), .cameraPermissions(unsafeResolve()), .pushNotificationPermissions(unsafeResolve()), .trackingPermissions(unsafeResolve()), .biometricPermissions(unsafeResolve())])
         }
     }
 }

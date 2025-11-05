@@ -13,6 +13,7 @@ import Onboarding
 import Camera
 import Notifications
 import Tracking
+import Biometric
 
 extension AppContainer {
     func setupDataSources() async {
@@ -30,6 +31,10 @@ extension AppContainer {
         
         await register(for: TrackingDataSource.self, scope: .singleton) { @MainActor in
             TrackingPermissions()
+        }
+        
+        await register(for: BiometricDataSource.self, scope: .singleton) { @MainActor in
+            BiometricPermissions()
         }
     }
 }
