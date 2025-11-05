@@ -10,11 +10,16 @@ import DependencyContainer
 import Foundation
 import Locations
 import Onboarding
+import Camera
 
 extension AppContainer {
     func setupDataSources() async {
         await register(for: LocationDataSource.self, scope: .singleton) { @MainActor in
             CLLocationDataSource(manager: .init())
+        }
+        
+        await register(for: CameraDataSource.self, scope: .singleton) { @MainActor in
+            CameraPermissions()
         }
     }
 }
