@@ -22,11 +22,12 @@
             return image ?? UIImage()
         }
 
-        static func rectangle(rect: CGRect,
+        static func rectangle(size: CGSize,
                               strokeColor: UIColor = .clear,
                               fillColor: UIColor = .clear,
                               lineWidth: CGFloat = 0,
                               cornerRadius: CGFloat = 0) -> UIImage {
+            let rect = CGRect(origin: .zero, size: size)
             let bezier = if cornerRadius > 0 {
                 UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)
             } else {

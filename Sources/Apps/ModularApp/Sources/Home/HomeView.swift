@@ -11,6 +11,7 @@ import Foundation
 import Routes
 import SwiftUI
 import Images
+
 struct HomeView: View {
     @Environment(Design.self) var design
     @Environment(\.colorScheme) var colorScheme
@@ -24,7 +25,9 @@ struct HomeView: View {
                 Text("Color: \(colorScheme == .dark ? "Dark" : "Light")")
             }
         }.background {
-            RemoteImage(URL(string: "https://picsum.photos/1080/1920?t=\(seed)")) {
+            RemoteImage(URL(string: "https://picsum.photos/1080/1920?t=\(seed)"),
+                        placeholder: Images.Image.rectangle(size: .init(width: 10, height: 10),
+                                                            fillColor: .brown)) {
                 $0.view.resizable()
                     .scaledToFill()
                     .ignoresSafeArea()

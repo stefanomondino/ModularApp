@@ -19,13 +19,15 @@ public protocol ImageStreamable: Sendable {
     func imageIdentifier() -> String
     func imageStream() -> ImageStream
 }
+
 public extension ImageStreamable where Self: AnyObject {
     func imageIdentifier() -> String {
         "\(Unmanaged.passUnretained(self).toOpaque())"
     }
 }
-public extension Image {
-    func imageStream() -> ImageStream {
+
+extension DesignSystem.Image: ImageStreamable {
+    public func imageStream() -> ImageStream {
         .just(self)
     }
 }

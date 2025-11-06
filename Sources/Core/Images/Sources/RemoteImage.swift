@@ -58,7 +58,7 @@ public struct RemoteImage<Content: View>: View {
                 let startTime = Date()
                 isDownloaded = false
                 if imageResult == nil {
-                    imageResult = .placeholder(Image.rectangle(rect: .init(origin: .zero, size: .init(width: 1, height: 1))))
+                    imageResult = .placeholder(Image.rectangle(size: .init(width: 1, height: 1)))
                 }
                 if let placeholder {
                     for await value in placeholder.imageStream() {
@@ -80,7 +80,7 @@ public struct RemoteImage<Content: View>: View {
         }
     }
     
-    private var image: ImageBuilder?
+    private let image: ImageBuilder?
     private let placeholder: ImageBuilder?
     let customization: (Customization) -> Content
     @State private var viewModel: ViewModel = .init()
@@ -94,10 +94,13 @@ public struct RemoteImage<Content: View>: View {
     }
     
     public init(_ remoteImage: (any ImageStreamable)?,
+                placeholder: (any ImageStreamable)? = nil,
                 isHighDensity: Bool = true,
                 customizing customization: @escaping (Customization) -> Content) {
-        image = ImageBuilder(remoteImage: remoteImage, isHighDensity: isHighDensity)
-        placeholder = nil
+        image = ImageBuilder(remoteImage: remoteImage,
+                             isHighDensity: isHighDensity)
+        self.placeholder = ImageBuilder(remoteImage: placeholder)
+        
         self.customization = customization
         self.id = remoteImage?.imageIdentifier() ?? UUID().uuidString
     }
