@@ -2,11 +2,11 @@
 // Images.swift
 //
 
-import Foundation
 import AsyncAlgorithms
-import Streams
-import Logger
 import DesignSystem
+import Foundation
+import Logger
+import Streams
 
 public typealias Image = DesignSystem.Image
 public extension Logger.Tag {

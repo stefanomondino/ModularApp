@@ -5,15 +5,16 @@
 //  Created by Stefano Mondino on 06/11/25.
 //
 
-import Kingfisher
-import Streams
-import Logger
 import Foundation
+import Kingfisher
+import Logger
+import Streams
 
 extension URL: ImageStreamable {
     public func imageIdentifier() -> String {
-        self.absoluteString
+        absoluteString
     }
+
     public func imageStream() -> ImageStream {
         ShareableAsyncStream { continuation in
             do {

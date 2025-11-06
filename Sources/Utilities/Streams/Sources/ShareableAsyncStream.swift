@@ -32,12 +32,12 @@ public struct ShareableAsyncStream<Element: Sendable>: ShareableStream {
                 callback(continuation)
             }.share()
     }
-    
+
     public init(_ callback: @Sendable @escaping (Continuation) async -> Void) {
         underlyingStream =
             AsyncStream<Element> { continuation in
                 let task = Task {
-                 await callback(continuation)
+                    await callback(continuation)
                 }
                 continuation.onTermination = { _ in
                     task.cancel()
@@ -57,10 +57,10 @@ public struct ShareableAsyncStream<Element: Sendable>: ShareableStream {
 //            continuation.onTermination = {
 //                task.cancel()
 //            }
-//            
+//
 //        }
 //        self.underlyingStream = stream.share()
-////        underlyingStream = AsyncStream { await callback().asAsyncStream() }.share()
+    ////        underlyingStream = AsyncStream { await callback().asAsyncStream() }.share()
 //    }
 
     public static func empty() -> Self {

@@ -8,9 +8,9 @@
 
 import DesignSystem
 import Foundation
+import Images
 import Routes
 import SwiftUI
-import Images
 
 struct HomeView: View {
     @Environment(Design.self) var design
@@ -18,7 +18,6 @@ struct HomeView: View {
     @State private var seed = UUID()
     var body: some View {
         ZStack {
-
             Color.clear
             VStack {
                 Text("Home View")
@@ -38,8 +37,8 @@ struct HomeView: View {
             }
         }
         .background {
-                        Design.AppColor.primary.swiftUIColor.ignoresSafeArea()
-                            .ignoresSafeArea()
+            Design.AppColor.primary.swiftUIColor.ignoresSafeArea()
+                .ignoresSafeArea()
         }
         .onTapGesture {
             seed = .init()
