@@ -21,14 +21,16 @@ import Authorization
 final class AppContainer: DependencyContainer {
     let container = ObjectContainer()
     let routeContainer = Router.Container()
-    var services: [String: any Service] {
+    let serviceManager: ServiceManager = .init()
+    private var services: [any Service] {
         get async { await unsafeResolve() }
     }
     
     var features: [any Routes.Feature] = []
     @MainActor lazy var state: AppLifecycle = .init(router: .init(container: routeContainer,
                                                                   name: "AppContainer"),
-                                                    design: .init())
+                                                    design: .init(),
+                                                    serviceManager: serviceManager)
 
     @MainActor func setup() async {
         await Logger.shared.add(logger: ConsoleLogger(logLevel: .verbose))
@@ -40,11 +42,10 @@ final class AppContainer: DependencyContainer {
         await register(for: AppConfiguration.self, scope: .singleton) {
             EnvironmentImplementation()
         }
-        await register(for: [String: any Service].self) { @MainActor [self] in
-            await ([state] +
+        await register(for: [any Service].self) { @MainActor [self] in
+            await ([] +
                 features
                 .asyncFlatMap { await $0.services })
-                .asDictionaryOfValues(indexedBy: \.serviceIdentifier.stringValue)
         }
         await setupNetworking()
         await setupRoutes()
@@ -56,6 +57,9 @@ final class AppContainer: DependencyContainer {
         }
 
         await setupFeatures()
+        
+        await serviceManager.register(services)
+        
         await state.start()
     }
 

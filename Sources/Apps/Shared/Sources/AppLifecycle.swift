@@ -13,21 +13,24 @@ import Observation
 import Routes
 import DesignSystem
 
-@Observable @MainActor final class AppLifecycle: Service {
-    static var empty: AppLifecycle {
-        .init(router: .init(container: .init(), name: "Empty AppState Router"),
-              design: .init())
-    }
+@Observable @MainActor final class AppLifecycle: Lifecycle {
+        
+//    static var empty: AppLifecycle {
+//        .init(router: .init(container: .init(), name: "Empty AppState Router"),
+//              design: .init())
+//    }
 
-    var serviceIdentifier: any ServiceIdentifier { ObjectIdentifier(Self.self) }
     let design: Design
     let router: Router
+    let serviceManager: ServiceManager
     /// Creates a new AppState instance.
     /// - Parameter router: a router connected to the app state.
     init(router: Router,
-         design: Design) {
+         design: Design,
+         serviceManager: ServiceManager ) {
         self.router = router
         self.design = design
+        self.serviceManager = serviceManager
     }
 
     func start() async {

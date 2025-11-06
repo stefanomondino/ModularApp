@@ -11,6 +11,7 @@ import Foundation
 import Routes
 import SwiftUI
 
+/// An intermediate placeholder view deciding which is the next entrypoint of the app according to some business logic.
 struct StartView: View {
     @State var viewModel: StartViewModel
     var body: some View {

@@ -13,4 +13,5 @@ import SwiftUI
 import UIKit
 
 @MainActor
+// unused with the new SwiftUI App lifecycle
 final class SceneDelegate: UIResponder, UISceneDelegate {}
