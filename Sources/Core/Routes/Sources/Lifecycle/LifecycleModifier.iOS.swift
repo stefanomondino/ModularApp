@@ -1,13 +1,13 @@
 //
-//  LifecycleModifier.swift
+//  LifecycleModifier.iOS.swift
 //  Routes
 //
 //  Created by Stefano Mondino on 06/11/25.
 //
 
-import UIKit
-import SwiftUI
 import DesignSystem
+import SwiftUI
+import UIKit
 
 @MainActor
 public protocol Lifecycle: AnyObject, Observable {
@@ -19,7 +19,7 @@ public protocol Lifecycle: AnyObject, Observable {
 public extension View {
     func lifecycle<AppState: Lifecycle>(_ lifecycle: AppState) -> some View {
         modifier(LifecycleModifier<AppState>())
-            .environment(lifecycle)   
+            .environment(lifecycle)
     }
 }
 
@@ -51,7 +51,6 @@ private struct LifecycleModifier<AppState: Lifecycle>: ViewModifier {
             .restartable()
             .environment(design)
             .environment(\.colorScheme, design.colorScheme ?? colorScheme)
-            
             .environment(\.router, appState.router)
     }
 }

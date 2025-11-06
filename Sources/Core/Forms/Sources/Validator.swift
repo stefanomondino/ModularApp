@@ -12,6 +12,7 @@ public struct Validator<Value: Sendable>: Sendable {
     public init(validate: @escaping @MainActor @Sendable (Value) async throws -> Void) {
         self.validate = validate
     }
+
     public static func none() -> Validator<Value> {
         Validator<Value> { _ in }
     }

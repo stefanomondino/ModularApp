@@ -1,28 +1,28 @@
 //
-//  CameraPermissions.swift
+//  AVCameraDataSource.swift
 //  Camera
 //
 //  Created by Renoy Chowdhury on 04/11/25.
 //
 
-import Foundation
 import AVFoundation
 import DataStructures
+import Foundation
 
 public final class AVCameraDataSource: CameraDataSource {
     var currentState: AVAuthorizationStatus { AVCaptureDevice.authorizationStatus(for: .video) }
-    
+
     public init() {}
-    
+
     public func shouldAskPermission() async -> Bool {
         currentState == .notDetermined
     }
-    
+
     public func askForPremission() async -> Bool {
         await authorizationCheck()
         return true
     }
-    
+
     public func authorizationCheck() async {
         switch currentState {
         case .notDetermined:

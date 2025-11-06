@@ -17,21 +17,21 @@ public extension Skeleton.FeatureModule {
         .init(name: "AppSettings",
               destinations: Constants.destinations,
               deploymentTargets: .custom,
-              dependencies: .init(core: [.routes(), .networking(), .components()],
-                                  external: [.kingfisher()]),
+              dependencies: .init(core: [.routes(), .networking(), .components(), .images()],
+                                  external: []),
               testDependencies: .init(test: [.coreTesting()]),
               synthesizers: [.files(extensions: ["json"])])
     }
 
     static func authorization() -> Self {
-  .init(name: "Authorization",
-               destinations: Constants.destinations,
-               deploymentTargets: .custom,
-               dependencies: .init(core: [.routes(), .networking(), .forms()],
-                                           deviceCapabilities: [],
-                                           external: []),
+        .init(name: "Authorization",
+              destinations: Constants.destinations,
+              deploymentTargets: .custom,
+              dependencies: .init(core: [.routes(), .networking(), .forms()],
+                                  deviceCapabilities: [],
+                                  external: []),
               testDependencies: .init(test: [.coreTesting()]),
-               synthesizers: [])
-}
-// murray: declaration
+              synthesizers: [])
+    }
+    // murray: declaration
 }

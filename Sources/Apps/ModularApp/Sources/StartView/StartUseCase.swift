@@ -9,6 +9,7 @@
 import Foundation
 import Onboarding
 import Routes
+
 // sourcery: AutoMockable
 protocol StartUseCase: Sendable {
     func destination() async -> Router.Identifier

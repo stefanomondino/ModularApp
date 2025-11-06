@@ -2,8 +2,8 @@
 // Notifications.swift
 //
 
-import Foundation
 import DataStructures
+import Foundation
 import UserNotifications
 
 @MainActor
@@ -13,16 +13,16 @@ public final class UNNotificationsDataSource: NotificationsDataSource {
     public init(center: UNUserNotificationCenter) {
         self.center = center
     }
-    
+
     public func shouldAskPermission() async -> Bool {
-        return await currentStatus() == .notDetermined
+        await currentStatus() == .notDetermined
     }
-    
+
     public func askForPremission() async -> Bool {
         await authorizationCheck()
         return true
     }
-    
+
     public func authorizationCheck() async {
         switch await currentStatus() {
         case .notDetermined:
@@ -31,9 +31,9 @@ public final class UNNotificationsDataSource: NotificationsDataSource {
         @unknown default: break
         }
     }
-    
+
     private func currentStatus() async -> UNAuthorizationStatus {
-        return await center.notificationSettings().authorizationStatus
+        await center.notificationSettings().authorizationStatus
     }
 }
 
@@ -47,6 +47,7 @@ public extension Permission {
         Permission(.pushNotifications) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
 }
+
 public extension Permission.Identifier {
     static var pushNotifications: Self { "pushNotifications" }
 }

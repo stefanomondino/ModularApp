@@ -6,18 +6,17 @@
 //  Copyright © 2025 Stefano Mondino. All rights reserved.
 //
 
+import Components
 import DesignSystem
 import Routes
 import SwiftUI
-import Components
 
 @main
 struct App: SwiftUI.App {
-        
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
-    
+
     var appState: AppLifecycle { appDelegate.container.state }
-    
+
     var body: some Scene {
         WindowGroup {
             LaunchScreenView()

@@ -2,11 +2,9 @@
 // FormsTests.swift
 //
 
+@testable import Forms
 import Foundation
 import Testing
-@testable import Forms
 
 @Suite
-struct FormsTests {
-
-}
+struct FormsTests {}

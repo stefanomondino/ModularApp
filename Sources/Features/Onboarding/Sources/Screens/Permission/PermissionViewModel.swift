@@ -6,9 +6,9 @@
 //
 import DataStructures
 import Foundation
+import Locations
 import Observation
 import Routes
-import Locations
 
 // sourcery: AutoMockable
 @MainActor protocol PermissionViewModel {
@@ -27,6 +27,7 @@ import Locations
         default: ""
         }
     }
+
     let router: Router
     init(router: Router,
          permissionsUseCase: PermissionsUseCase) async {

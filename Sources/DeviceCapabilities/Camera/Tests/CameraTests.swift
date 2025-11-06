@@ -1,5 +1,5 @@
 //
-// LocationsTests.swift
+// CameraTests.swift
 //
 
 import Foundation

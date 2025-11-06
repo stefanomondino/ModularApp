@@ -14,7 +14,6 @@ extension Design {
     typealias AppColor = ModularAppAsset.Colors
 
     @MainActor func setupColor() {
-        
         color
             .register(for: .primary) { AppColor.primary }
             .register(for: .app) { "#56F30E" }

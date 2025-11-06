@@ -23,6 +23,5 @@ import Routes
 
     func start() async {
         await router.send(useCase.destination())
-     
     }
 }

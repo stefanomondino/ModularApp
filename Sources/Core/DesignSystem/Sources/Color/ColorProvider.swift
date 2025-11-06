@@ -19,6 +19,7 @@ public extension Color {
             self.value = value
         }
     }
+
     typealias Provider = ColorProvider
     @Observable
     final class LightProvider: ColorProvider {
@@ -28,6 +29,7 @@ public extension Color {
             self.defaultValue = defaultValue
         }
     }
+
     @Observable
     final class DarkProvider: ColorProvider {
         public var storage: Storage<Color.Key> = .init()

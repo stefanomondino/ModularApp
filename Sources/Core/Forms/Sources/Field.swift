@@ -1,5 +1,5 @@
 //
-// Forms.swift
+// Field.swift
 //
 
 import Foundation
@@ -25,17 +25,17 @@ public extension Field {
 
 @MainActor
 public struct FieldBuilder: Identifiable {
-    public let id: UUID = UUID()
+    public let id: UUID = .init()
     public let buildView: @MainActor @Sendable () -> any SwiftUI.View
     public let validate: @Sendable () async throws -> Void
     public init<Value: Field>(field: Value, buildView: @MainActor @Sendable @escaping (Value) -> any SwiftUI.View) {
         self.buildView = { buildView(field) }
-        self.validate = { try await field.validate() }
+        validate = { try await field.validate() }
     }
-    
+
     public init(buildView: @MainActor @Sendable @escaping () -> any SwiftUI.View) {
         self.buildView = buildView
-        self.validate = {}
+        validate = {}
     }
 }
 
@@ -48,6 +48,7 @@ public extension FieldBuilder {
             Fields.Text.View(viewModel: field)
         }
     }
+
     static func checkbox(value: Property<Bool>,
                          properties: Fields.Checkbox.Properties) -> FieldBuilder {
         let field = Fields.Checkbox.ViewModel(value, properties: properties)
@@ -55,7 +56,7 @@ public extension FieldBuilder {
             Fields.Checkbox.View(viewModel: field)
         }
     }
-    
+
     static func view(buildView: @MainActor @Sendable @escaping () -> any SwiftUI.View) -> FieldBuilder {
         .init(buildView: buildView)
     }

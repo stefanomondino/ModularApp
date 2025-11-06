@@ -1,15 +1,15 @@
 //
-//  TextField.swift
+//  Checkbox.swift
 //  Forms
 //
 //  Created by Stefano Mondino on 05/11/25.
 //
 
-import SwiftUI
 import Streams
+import SwiftUI
 
-extension Fields {
-    public enum Checkbox {
+public extension Fields {
+    enum Checkbox {
         public struct View<ViewModel: Field>: SwiftUI.View where ViewModel.Element == Bool, ViewModel.Properties == Fields.Checkbox.Properties {
             @State var viewModel: ViewModel
             public var body: some SwiftUI.View {
@@ -21,7 +21,7 @@ extension Fields {
                 }
             }
         }
-        
+
         public struct Properties: Sendable, Identifiable {
             public let id = UUID()
             public let title: String
@@ -31,7 +31,7 @@ extension Fields {
                 self.placeholder = placeholder
             }
         }
-        
+
         @Observable public final class ViewModel: Field {
             public typealias Properties = Fields.Checkbox.Properties
             public let value: Property<Bool>
@@ -44,16 +44,15 @@ extension Fields {
                 self.properties = properties
                 self.validator = validator
             }
-            
         }
     }
 }
 
 #Preview {
     Fields.Checkbox.View(viewModel: Fields.Checkbox.ViewModel(.init(false),
-                                                      properties: .init(title: "Ciao",
-                                                                       placeholder: "Inserisci testo")))
+                                                              properties: .init(title: "Ciao",
+                                                                                placeholder: "Inserisci testo")))
     Fields.Checkbox.View(viewModel: Fields.Checkbox.ViewModel(.init(true),
-                                                      properties: .init(title: "Ciao",
-                                                                       placeholder: "Inserisci altro testo")))
+                                                              properties: .init(title: "Ciao",
+                                                                                placeholder: "Inserisci altro testo")))
 }

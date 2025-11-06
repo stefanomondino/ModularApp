@@ -5,11 +5,11 @@
 //  Created by Stefano Mondino on 05/11/25.
 //
 
-import SwiftUI
 import Streams
+import SwiftUI
 
-extension Fields {
-    public enum Text {
+public extension Fields {
+    enum Text {
         public struct View<ViewModel: Field>: SwiftUI.View where ViewModel.Element == String, ViewModel.Properties == Fields.Text.Properties {
             @State var viewModel: ViewModel
             public var body: some SwiftUI.View {
@@ -20,7 +20,7 @@ extension Fields {
                 }
             }
         }
-        
+
         public struct Properties: Sendable, Identifiable {
             public let id = UUID()
             public let title: String
@@ -30,7 +30,7 @@ extension Fields {
                 self.placeholder = placeholder
             }
         }
-        
+
         @Observable public final class ViewModel: Field {
             public typealias Properties = Fields.Text.Properties
             public let value: Property<String>
@@ -43,7 +43,6 @@ extension Fields {
                 self.properties = properties
                 self.validator = validator
             }
-            
         }
     }
 }
@@ -51,5 +50,5 @@ extension Fields {
 #Preview {
     Fields.Text.View(viewModel: Fields.Text.ViewModel(.init(""),
                                                       properties: .init(title: "Ciao",
-                                                                       placeholder: "Inserisci testo")))
+                                                                        placeholder: "Inserisci testo")))
 }

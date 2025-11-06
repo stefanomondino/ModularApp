@@ -5,9 +5,9 @@
 //  Created by Stefano Mondino on 05/11/25.
 //
 
-import SwiftUI
 import DataStructures
 import Streams
+import SwiftUI
 
 @Observable
 public final class Form: Sendable {
@@ -15,6 +15,7 @@ public final class Form: Sendable {
     init(_ fields: [FieldBuilder]) {
         self.fields = fields
     }
+
     func validate() async -> [Swift.Error] {
         var errors: [Swift.Error] = []
         for fieldBuilder in fields {
@@ -34,6 +35,7 @@ public extension Form {
         public init(_ form: Form) {
             self.form = form
         }
+
         public var body: some SwiftUI.View {
             VStack {
                 ForEach(form.fields) { fieldBuilder in
@@ -45,13 +47,11 @@ public extension Form {
 }
 
 #Preview {
-    @Previewable @State var text: String = ""
-    @Previewable @State var form = Form([
-        .textField(value: .init(""), properties: .init(title: "Test without validation")),
-        .textField(value: .init(""), properties: .init(title: "Test with validation"), validator: .nonEmpty("Test with validation")),
-        .checkbox(value: .init(true), properties: .init(title: "Flag")),
-        .view { Text("Hello World") }
-        ])
+    @Previewable @State var text = ""
+    @Previewable @State var form = Form([.textField(value: .init(""), properties: .init(title: "Test without validation")),
+                                         .textField(value: .init(""), properties: .init(title: "Test with validation"), validator: .nonEmpty("Test with validation")),
+                                         .checkbox(value: .init(true), properties: .init(title: "Flag")),
+                                         .view { Text("Hello World") }])
     VStack {
         Form.View(form)
         Text(text)

@@ -3,7 +3,6 @@
 //  App
 //
 //  Created by Stefano Mondino on 17/07/18.
-//  Copyright © 2018 Deltatre. All rights reserved.
 //
 
 import Foundation

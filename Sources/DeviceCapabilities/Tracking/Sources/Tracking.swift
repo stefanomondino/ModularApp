@@ -2,25 +2,25 @@
 // Tracking.swift
 //
 
-import Foundation
 import AppTrackingTransparency
 import DataStructures
+import Foundation
 
 public final class ATTTrackingDataSource: TrackingDataSource {
     public init() {}
-    
+
     public func shouldAskPermission() async -> Bool {
         await currentStatus() == .notDetermined
     }
-    
+
     public func askForPremission() async -> Bool {
         await authorizationCheck()
         return true
     }
-    
+
     public func authorizationCheck() async {
         let status = await currentStatus()
-        
+
         switch status {
         case .notDetermined:
             await requestTrackingAuthorization()
@@ -30,7 +30,7 @@ public final class ATTTrackingDataSource: TrackingDataSource {
             break
         }
     }
-    
+
     private func requestTrackingAuthorization() async {
         await withCheckedContinuation { continuation in
             ATTrackingManager.requestTrackingAuthorization { _ in
@@ -38,9 +38,9 @@ public final class ATTTrackingDataSource: TrackingDataSource {
             }
         }
     }
-    
+
     private func currentStatus() async -> ATTrackingManager.AuthorizationStatus {
-        return ATTrackingManager.trackingAuthorizationStatus
+        ATTrackingManager.trackingAuthorizationStatus
     }
 }
 

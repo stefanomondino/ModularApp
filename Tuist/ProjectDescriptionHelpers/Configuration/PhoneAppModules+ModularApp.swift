@@ -57,7 +57,7 @@ public extension Skeleton {
                                                                  "UIStatusBarHidden": false,
                                                                  "UIRequiresFullScreen": true,
                                                                  "UIStatusBarStyle": "UIStatusBarStyleLightContent",
-                                                                //  "UIUserInterfaceStyle": "Light",
+                                                                 //  "UIUserInterfaceStyle": "Light",
                                                                  "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationLandscapeLeft", "UIInterfaceOrientationLandscapeRight"],
                                                                  "LSRequiresIPhoneOS": true,
                                                                  "UIBackgroundModes": ["audio", "fetch", "remote-notification"],
@@ -71,7 +71,7 @@ public extension Skeleton {
                                     organizationName: "Stefano Mondino",
                                     dependencies: Dependencies(feature: [.onboarding(),
                                                                          .authorization(),
-// murray: feature integration
+                                                                         // murray: feature integration
                                                                          .appSettings()],
                                                                external: []),
                                     supplementarySources: [],

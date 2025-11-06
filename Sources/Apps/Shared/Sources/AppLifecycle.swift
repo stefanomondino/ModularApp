@@ -8,13 +8,12 @@
 
 import DataStructures
 import DependencyContainer
+import DesignSystem
 import Foundation
 import Observation
 import Routes
-import DesignSystem
 
 @Observable @MainActor final class AppLifecycle: Lifecycle {
-        
 //    static var empty: AppLifecycle {
 //        .init(router: .init(container: .init(), name: "Empty AppState Router"),
 //              design: .init())
@@ -27,7 +26,7 @@ import DesignSystem
     /// - Parameter router: a router connected to the app state.
     init(router: Router,
          design: Design,
-         serviceManager: ServiceManager ) {
+         serviceManager: ServiceManager) {
         self.router = router
         self.design = design
         self.serviceManager = serviceManager

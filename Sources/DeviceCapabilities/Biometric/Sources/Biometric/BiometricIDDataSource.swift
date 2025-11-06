@@ -1,13 +1,13 @@
 //
-//  BiometricPermissions.swift
+//  BiometricIDDataSource.swift
 //  Biometric
 //
 //  Created by Renoy Chowdhury on 05/11/25.
 //
 
+import DataStructures
 import Foundation
 import LocalAuthentication
-import DataStructures
 
 public final class BiometricIDDataSource: BiometricDataSource {
     public init() {}
@@ -37,7 +37,7 @@ public final class BiometricIDDataSource: BiometricDataSource {
         try await withCheckedThrowingContinuation { continuation in
             let context = LAContext()
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
-                if let error = error {
+                if let error {
                     continuation.resume(throwing: error)
                 } else {
                     continuation.resume(returning: success)
@@ -57,6 +57,7 @@ public extension Permission {
         Permission(.biometric) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
 }
+
 public extension Permission.Identifier {
     static var biometric: Self { "biometric" }
 }

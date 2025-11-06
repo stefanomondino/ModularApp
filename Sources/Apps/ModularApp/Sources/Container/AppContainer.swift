@@ -15,6 +15,7 @@ import Onboarding
 import Routes
 
 import Authorization
+
 // murray: import
 
 @MainActor
@@ -25,7 +26,7 @@ final class AppContainer: DependencyContainer {
     private var services: [any Service] {
         get async { await unsafeResolve() }
     }
-    
+
     var features: [any Routes.Feature] = []
     @MainActor lazy var state: AppLifecycle = .init(router: .init(container: routeContainer,
                                                                   name: "AppContainer"),
@@ -34,7 +35,7 @@ final class AppContainer: DependencyContainer {
 
     @MainActor func setup() async {
         await Logger.shared.add(logger: ConsoleLogger(logLevel: .verbose))
-        
+
         await register(for: Design.self) { @MainActor in
             self.state.design
         }
@@ -57,9 +58,9 @@ final class AppContainer: DependencyContainer {
         }
 
         await setupFeatures()
-        
+
         await serviceManager.register(services)
-        
+
         await state.start()
     }
 
@@ -67,7 +68,7 @@ final class AppContainer: DependencyContainer {
         await features.append(Onboarding.Feature(self))
         await features.append(AppSettings.Feature(self))
         await features.append(Authorization.Feature(self))
-// murray: registration
+        // murray: registration
     }
 }
 

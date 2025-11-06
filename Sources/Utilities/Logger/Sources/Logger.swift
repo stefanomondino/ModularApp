@@ -35,7 +35,46 @@ public actor Logger {
                   line: line,
                   function: function))
     }
+    
+    public static func debug(_ message: Any,
+                           tag: Tag = .none,
+                           file: String = #file,
+                           line: UInt = #line,
+                           function: String = #function) {
+        log(.init(message: String(describing: message),
+                  level: .verbose,
+                  tag: tag,
+                  file: file,
+                  line: line,
+                  function: function))
+    }
+    
+    public static func warning(_ message: Any,
+                           tag: Tag = .none,
+                           file: String = #file,
+                           line: UInt = #line,
+                           function: String = #function) {
+        log(.init(message: String(describing: message),
+                  level: .warning,
+                  tag: tag,
+                  file: file,
+                  line: line,
+                  function: function))
+    }
 
+    public static func error(_ message: Any,
+                           tag: Tag = .none,
+                           file: String = #file,
+                           line: UInt = #line,
+                           function: String = #function) {
+        log(.init(message: String(describing: message),
+                  level: .error,
+                  tag: tag,
+                  file: file,
+                  line: line,
+                  function: function))
+    }
+    
     public static func log(_ logLine: LogLine) {
         Task { await shared.log(logLine) }
     }

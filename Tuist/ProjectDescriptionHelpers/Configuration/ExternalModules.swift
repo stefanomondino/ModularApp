@@ -3,7 +3,7 @@ import SkeletonPlugin
 
 extension Skeleton.ExternalModule {
     static func kingfisher() -> Skeleton.ExternalModule {
-        .external(name: "Kingfisher")
+        .external(name: "Kingfisher", isPrivate: true)
     }
 
     static func keychainAccess() -> Skeleton.ExternalModule {

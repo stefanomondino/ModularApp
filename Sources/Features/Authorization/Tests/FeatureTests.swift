@@ -2,6 +2,6 @@
 // FeatureTests.swift
 //
 
+@testable import Authorization
 import DependencyContainer
 import Routes
-@testable import Authorization

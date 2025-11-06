@@ -5,7 +5,6 @@
 import Foundation
 
 public struct Permission: Sendable {
-    
     public typealias Identifier = ExtensibleIdentifier<String, Self>
     public let identifier: Identifier
     public let shouldAsk: @Sendable () async -> Bool
