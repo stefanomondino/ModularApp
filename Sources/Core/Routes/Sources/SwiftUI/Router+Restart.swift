@@ -10,6 +10,7 @@ import SwiftUI
 
 struct RestartRouteModifier: ViewModifier {
     @Environment(\.router) private var router
+    @Environment(\.colorScheme) var colorScheme
     @State private var restartRoute: SwiftUIRestartRoute?
     func body(content: Content) -> some View {
         ZStack {

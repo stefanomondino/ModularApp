@@ -6,10 +6,13 @@ import Foundation
 import DataStructures
 import UserNotifications
 
-public final class UNPushNotification: NotificationsDataSource {
-    private var center: UNUserNotificationCenter { UNUserNotificationCenter.current() }
+@MainActor
+public final class UNNotificationsDataSource: NotificationsDataSource {
+    private let center: UNUserNotificationCenter
 
-    public init() {}
+    public init(center: UNUserNotificationCenter) {
+        self.center = center
+    }
     
     public func shouldAskPermission() async -> Bool {
         return await currentStatus() == .notDetermined

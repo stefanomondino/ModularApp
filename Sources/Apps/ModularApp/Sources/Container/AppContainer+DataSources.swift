@@ -26,7 +26,7 @@ extension AppContainer {
         }
         
         await register(for: NotificationsDataSource.self, scope: .singleton) { @MainActor in
-            UNPushNotification()
+            UNNotificationsDataSource(center: .current())
         }
         
         await register(for: TrackingDataSource.self, scope: .singleton) { @MainActor in

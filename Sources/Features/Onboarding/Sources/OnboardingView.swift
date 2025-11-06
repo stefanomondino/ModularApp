@@ -3,7 +3,7 @@ import DesignSystem
 import SwiftUI
 
 public struct OnboardingView: View {
-    @Environment(\.design) var design
+    @Environment(Design.self) var design
     @State var viewModel: OnboardingViewModel
 
     public init(viewModel: OnboardingViewModel) {
@@ -53,12 +53,12 @@ public extension OnboardingView {
         }
 
         public func onTap() {
-            Design.shared.typography.register(for: .h1) {
-                Typography(family: .code,
-                           weight: .black,
-                           size: .init(integerLiteral: (24 ... 50).randomElement() ?? 24),
-                           textCase: .uppercase)
-            }
+//            Design.shared.typography.register(for: .h1) {
+//                Typography(family: .code,
+//                           weight: .black,
+//                           size: .init(integerLiteral: (24 ... 50).randomElement() ?? 24),
+//                           textCase: .uppercase)
+//            }
 
 //            title = ["Onboarding Title", "New Title"].randomElement() ?? "Default Title"
         }

@@ -10,6 +10,8 @@ import DependencyContainer
 import Foundation
 import SwiftUI
 
+public protocol ColorProvider: DesignValueProvider where Key == Color.Key, Value == ColorConvertible {}
+
 public extension Color {
     struct Key: ExtensibleIdentifierType, ExpressibleByStringInterpolation {
         public let value: String
@@ -17,9 +19,17 @@ public extension Color {
             self.value = value
         }
     }
-
+    typealias Provider = ColorProvider
     @Observable
-    final class Provider: DesignValueProvider {
+    final class LightProvider: ColorProvider {
+        public var storage: Storage<Color.Key> = .init()
+        public let defaultValue: ColorConvertible
+        public init(defaultValue: ColorConvertible = "#000000") {
+            self.defaultValue = defaultValue
+        }
+    }
+    @Observable
+    final class DarkProvider: ColorProvider {
         public var storage: Storage<Color.Key> = .init()
         public let defaultValue: ColorConvertible
         public init(defaultValue: ColorConvertible = "#000000") {

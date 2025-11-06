@@ -46,7 +46,7 @@ public extension Pill.Key {
 
 public extension Pill {
     struct Button<Label: View>: View {
-        @Environment(\.design) var design
+        @Environment(Design.self) var design
         let action: @Sendable () async -> Void
         let title: () -> Label
         let style: (Design) -> Style
@@ -110,7 +110,7 @@ public extension Pill {
 }
 
 #Preview(traits: .design(.baseTypography)) {
-    @Previewable @Environment(\.design) var design
+    @Previewable @Environment(Design.self) var design
     VStack {
         Pill.Button("Title",
                     style: .init(foregroundColor: design.color.primary,

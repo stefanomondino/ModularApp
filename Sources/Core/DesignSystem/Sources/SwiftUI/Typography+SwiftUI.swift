@@ -40,7 +40,7 @@ struct TypographyModifier: ViewModifier {
     }
 
     @Environment(\.sizeCategory) var sizeCategory
-    @Environment(\.design) var design: Design
+    @Environment(Design.self) var design: Design
 
     fileprivate let value: AccessValue
     fileprivate let dynamic: Bool

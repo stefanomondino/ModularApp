@@ -9,12 +9,19 @@
 import Foundation
 import Routes
 import SwiftUI
+import DesignSystem
 
 struct HomeView: View {
+    @Environment(Design.self) var design
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         ZStack {
-            Color.blue.ignoresSafeArea()
-            Text("Home View")
+            Design.AppColor.primary.swiftUIColor.ignoresSafeArea()
+                .ignoresSafeArea()
+            VStack {
+                Text("Home View")
+                Text("Color: \(colorScheme == .dark ? "Dark" : "Light")")
+            }
         }
     }
 }

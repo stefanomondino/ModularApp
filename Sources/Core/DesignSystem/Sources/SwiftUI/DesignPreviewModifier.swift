@@ -53,6 +53,6 @@ public struct DesignPreviewModifier: PreviewModifier {
     }
 
     public func body(content: Content, context: Design) -> some View {
-        content.environment(\.design, customize(context))
+        content.environment(customize(context))
     }
 }

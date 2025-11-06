@@ -59,7 +59,7 @@ extension ColorConvertible {
 }
 
 struct BackgroundColorModifier: ViewModifier {
-    @Environment(\.design) var design: Design
+    @Environment(Design.self) var design: Design
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.colorSchemeContrast) var colorSchemeContrast
     let key: Color.Key
@@ -70,7 +70,7 @@ struct BackgroundColorModifier: ViewModifier {
 }
 
 struct ForegroundColorModifier: ViewModifier {
-    @Environment(\.design) var design: Design
+    @Environment(Design.self) var design: Design
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.colorSchemeContrast) var colorSchemeContrast
     let key: Color.Key

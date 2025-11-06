@@ -24,17 +24,19 @@ final class AppContainer: DependencyContainer {
     var services: [String: any Service] {
         get async { await unsafeResolve() }
     }
-
+    
     var features: [any Routes.Feature] = []
     @MainActor lazy var state: AppLifecycle = .init(router: .init(container: routeContainer,
-                                                                  name: "AppContainer"))
+                                                                  name: "AppContainer"),
+                                                    design: .init())
 
     @MainActor func setup() async {
         await Logger.shared.add(logger: ConsoleLogger(logLevel: .verbose))
-        Design.shared.setup()
-        await register(for: Design.self) {
-            Design.shared
+        
+        await register(for: Design.self) { @MainActor in
+            self.state.design
         }
+        await unsafeResolve(Design.self).setup()
         await register(for: AppConfiguration.self, scope: .singleton) {
             EnvironmentImplementation()
         }

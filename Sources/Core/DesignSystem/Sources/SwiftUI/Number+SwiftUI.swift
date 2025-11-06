@@ -32,7 +32,7 @@ public extension View {
 }
 
 struct PaddingModifier: ViewModifier {
-    @Environment(\.design) var design: Design
+    @Environment(Design.self) var design: Design
     let edges: Edge.Set?
     let key: NumberValue.Key
     let provider: NumberValue.Provider?
@@ -47,7 +47,7 @@ struct PaddingModifier: ViewModifier {
 }
 
 struct CornerRadiusModifier: ViewModifier {
-    @Environment(\.design) var design: Design
+    @Environment(Design.self) var design: Design
     let key: NumberValue.Key
     let provider: NumberValue.Provider?
 

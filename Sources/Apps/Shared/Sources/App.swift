@@ -9,18 +9,20 @@
 import DesignSystem
 import Routes
 import SwiftUI
+import Components
 
 @main
 struct App: SwiftUI.App {
+        
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
     @Environment(\.scenePhase) private var scenePhase
+    
     var appState: AppLifecycle { appDelegate.container.state }
-
+    
     var body: some Scene {
         WindowGroup {
             LifecycleView()
                 .environment(\.appState, appState)
-                .environment(\.design, Design.shared)
                 .onChange(of: scenePhase) { _, phase in
                     switch phase {
                     case .background: appDelegate.applicationDidEnterBackground(UIApplication.shared)
@@ -30,6 +32,26 @@ struct App: SwiftUI.App {
                         break
                     }
                 }
+        }
+    }
+}
+
+extension App {
+    // Color scheme does not work directly on App - needs to be applied on a subview
+    struct LifecycleView: View {
+        var design: DesignSystem.Design { appState.design } 
+        @Environment(\.appState) var appState: AppLifecycle
+        @Environment(\.colorScheme) var colorScheme
+        var body: some View {
+            LaunchScreenView()
+                .ignoresSafeArea()
+                .restartable()
+                .environment(\.router, appState.router)
+                .onChange(of: colorScheme, initial: true) {
+                    design.updateSystemColorScheme(colorScheme)
+                }
+                .environment(appState.design)
+                .environment(\.colorScheme, design.colorScheme ?? colorScheme)
         }
     }
 }

@@ -32,7 +32,7 @@ extension Design {
 }
 
 #Preview(traits: .design(.app)) {
-    @Previewable @Environment(\.design) var design
+    @Previewable @Environment(Design.self) var design
     VStack(spacing: 16) {
         ForEach([Pill.Key.standard, .secondary, .outline], id: \.self) {
             Pill.Button("Test", style: $0)

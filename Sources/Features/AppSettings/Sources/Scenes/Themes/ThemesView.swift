@@ -21,7 +21,7 @@ extension Themes {
 extension Themes {
     struct ViewContents<ViewModel: ThemesSceneViewModel>: View {
         @Bindable var viewModel: ViewModel
-        @Environment(\.design) var design: Design
+        @Environment(Design.self) var design: Design
         init(viewModel: ViewModel) {
             self.viewModel = viewModel
         }

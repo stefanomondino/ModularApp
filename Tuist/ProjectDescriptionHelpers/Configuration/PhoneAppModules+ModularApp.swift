@@ -57,7 +57,7 @@ public extension Skeleton {
                                                                  "UIStatusBarHidden": false,
                                                                  "UIRequiresFullScreen": true,
                                                                  "UIStatusBarStyle": "UIStatusBarStyleLightContent",
-                                                                 "UIUserInterfaceStyle": "Light",
+                                                                //  "UIUserInterfaceStyle": "Light",
                                                                  "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationLandscapeLeft", "UIInterfaceOrientationLandscapeRight"],
                                                                  "LSRequiresIPhoneOS": true,
                                                                  "UIBackgroundModes": ["audio", "fetch", "remote-notification"],
