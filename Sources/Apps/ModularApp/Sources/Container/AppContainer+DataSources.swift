@@ -22,7 +22,7 @@ extension AppContainer {
         }
         
         await register(for: CameraDataSource.self, scope: .singleton) { @MainActor in
-            CameraPermissions()
+            AVCameraDataSource()
         }
         
         await register(for: NotificationsDataSource.self, scope: .singleton) { @MainActor in

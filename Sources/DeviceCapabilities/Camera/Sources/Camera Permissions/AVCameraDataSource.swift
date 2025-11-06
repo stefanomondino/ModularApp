@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import DataStructures
 
-public final class CameraPermissions: CameraDataSource {
+public final class AVCameraDataSource: CameraDataSource {
     var currentState: AVAuthorizationStatus { AVCaptureDevice.authorizationStatus(for: .video) }
     
     public init() {}
@@ -39,7 +39,7 @@ public protocol CameraDataSource: Sendable {
 }
 
 public extension Permission {
-    static func cameraPermissions(_ dataSource: CameraDataSource) -> Self {
+    static func camera(_ dataSource: CameraDataSource) -> Self {
         Permission(.camera) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
 }
