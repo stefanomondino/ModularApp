@@ -16,7 +16,11 @@ import Biometric
 extension AppContainer {
     func setupRepositories() async {
         await register(for: PermissionsRepository.self, scope: .singleton) { [self] in
-            await PermissionsRepositoryImplementation(permissions: [.locationWhenInUse(unsafeResolve()), .camera(unsafeResolve()), .pushNotificationPermissions(unsafeResolve()), .trackingPermissions(unsafeResolve()), .biometricPermissions(unsafeResolve())])
+            await PermissionsRepositoryImplementation(permissions: [.locationWhenInUse(unsafeResolve()),
+                .camera(unsafeResolve()),
+                .pushNotifications(unsafeResolve()),
+                .tracking(unsafeResolve()),
+                .biometricId(unsafeResolve())])
         }
     }
 }

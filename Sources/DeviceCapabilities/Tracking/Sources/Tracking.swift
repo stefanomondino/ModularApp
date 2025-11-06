@@ -6,7 +6,7 @@ import Foundation
 import AppTrackingTransparency
 import DataStructures
 
-public final class TrackingPermissions: TrackingDataSource {
+public final class ATTTrackingDataSource: TrackingDataSource {
     public init() {}
     
     public func shouldAskPermission() async -> Bool {
@@ -50,7 +50,7 @@ public protocol TrackingDataSource: Sendable {
 }
 
 public extension Permission {
-    static func trackingPermissions(_ dataSource: TrackingDataSource) -> Self {
+    static func tracking(_ dataSource: TrackingDataSource) -> Self {
         Permission(.tracking) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
 }

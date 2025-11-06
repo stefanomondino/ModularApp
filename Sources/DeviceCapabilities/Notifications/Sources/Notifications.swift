@@ -6,7 +6,7 @@ import Foundation
 import DataStructures
 import UserNotifications
 
-public final class PushNotificationPermissions: NotificationsDataSource {
+public final class UNPushNotification: NotificationsDataSource {
     private var center: UNUserNotificationCenter { UNUserNotificationCenter.current() }
 
     public init() {}
@@ -40,7 +40,7 @@ public protocol NotificationsDataSource: Sendable {
 }
 
 public extension Permission {
-    static func pushNotificationPermissions(_ dataSource: NotificationsDataSource) -> Self {
+    static func pushNotifications(_ dataSource: NotificationsDataSource) -> Self {
         Permission(.pushNotifications) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
 }

@@ -26,15 +26,15 @@ extension AppContainer {
         }
         
         await register(for: NotificationsDataSource.self, scope: .singleton) { @MainActor in
-            PushNotificationPermissions()
+            UNPushNotification()
         }
         
         await register(for: TrackingDataSource.self, scope: .singleton) { @MainActor in
-            TrackingPermissions()
+            ATTTrackingDataSource()
         }
         
         await register(for: BiometricDataSource.self, scope: .singleton) { @MainActor in
-            BiometricPermissions()
+            BiometricIDDataSource()
         }
     }
 }

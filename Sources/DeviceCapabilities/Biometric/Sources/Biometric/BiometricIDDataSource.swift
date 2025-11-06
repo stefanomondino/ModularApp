@@ -9,7 +9,7 @@ import Foundation
 import LocalAuthentication
 import DataStructures
 
-public final class BiometricPermissions: BiometricDataSource {
+public final class BiometricIDDataSource: BiometricDataSource {
     public init() {}
 
     public func shouldAskPermission() async -> Bool {
@@ -53,7 +53,7 @@ public protocol BiometricDataSource: Sendable {
 }
 
 public extension Permission {
-    static func biometricPermissions(_ dataSource: BiometricDataSource) -> Self {
+    static func biometricId(_ dataSource: BiometricDataSource) -> Self {
         Permission(.biometric) { await dataSource.shouldAskPermission() } ask: { await dataSource.askForPremission() }
     }
 }
