@@ -7,11 +7,13 @@
 
 import DesignSystem
 import SwiftUI
+import Translations
 import UIKit
 
 @MainActor
 public protocol Lifecycle: AnyObject, Observable {
     var design: Design { get }
+    var vocabulary: Vocabulary { get }
     var router: Router { get }
     var serviceManager: ServiceManager { get }
 }
@@ -27,6 +29,7 @@ private struct LifecycleModifier<AppState: Lifecycle>: ViewModifier {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(AppState.self) var appState
     var design: Design { appState.design }
+    var vocabulary: Vocabulary { appState.vocabulary }
     var serviceManager: ServiceManager { appState.serviceManager }
     @Environment(\.colorScheme) var colorScheme
     func body(content: Content) -> some View {
@@ -50,6 +53,7 @@ private struct LifecycleModifier<AppState: Lifecycle>: ViewModifier {
             }
             .restartable()
             .environment(design)
+            .environment(vocabulary)
             .environment(\.colorScheme, design.colorScheme ?? colorScheme)
             .environment(\.router, appState.router)
     }

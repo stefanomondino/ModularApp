@@ -7,3 +7,4 @@ set -euo pipefail
 rm -rf Sources/Apps/*/Sources/Environments
 tuist scaffold environments
 tuist generate --open
+mise run graph

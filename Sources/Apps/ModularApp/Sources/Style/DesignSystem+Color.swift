@@ -14,22 +14,24 @@ extension Design {
     typealias AppColor = ModularAppAsset.Colors
 
     @MainActor func setupColor() {
-        color
-            .register(for: .primary) { AppColor.primary }
-            .register(for: .app) { "#56F30E" }
-            .register(for: .background) {
-                AppColor.background
-//                DesignSystem.RadialGradient(colors: [AppColor.background, SwiftUI.Color.blue],
-//                                            center: .center,
-//                                            startRadius: 0,
-//                                            endRadius: 300)
-            }
-            .register(for: .secondary, type: ColorConvertible.self) {
-                DesignSystem.RadialGradient(colors: [UIColor.red, UIColor.green],
-                                            center: .center,
-                                            startRadius: 0,
-                                            endRadius: 100)
-            }
+        for color in [darkColor as ColorProvider, lightColor] {
+            color.register(for: .primary) { AppColor.primary }
+                .register(for: .background) {
+                    AppColor.background
+                    //                DesignSystem.RadialGradient(colors: [AppColor.background, SwiftUI.Color.blue],
+                    //                                            center: .center,
+                    //                                            startRadius: 0,
+                    //                                            endRadius: 300)
+                }
+                .register(for: .secondary, type: ColorConvertible.self) {
+                    DesignSystem.RadialGradient(colors: [UIColor.red, UIColor.green],
+                                                center: .center,
+                                                startRadius: 0,
+                                                endRadius: 100)
+                }
+        }
+        darkColor.register(for: .app) { "#FF00FF" }
+        lightColor.register(for: .app) { "#00FF00" }
     }
 }
 

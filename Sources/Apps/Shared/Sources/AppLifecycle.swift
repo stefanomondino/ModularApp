@@ -12,6 +12,7 @@ import DesignSystem
 import Foundation
 import Observation
 import Routes
+import Translations
 
 @Observable @MainActor final class AppLifecycle: Lifecycle {
 //    static var empty: AppLifecycle {
@@ -22,13 +23,16 @@ import Routes
     let design: Design
     let router: Router
     let serviceManager: ServiceManager
+    let vocabulary: Vocabulary
     /// Creates a new AppState instance.
     /// - Parameter router: a router connected to the app state.
     init(router: Router,
          design: Design,
+         vocabulary: Vocabulary,
          serviceManager: ServiceManager) {
         self.router = router
         self.design = design
+        self.vocabulary = vocabulary
         self.serviceManager = serviceManager
     }
 

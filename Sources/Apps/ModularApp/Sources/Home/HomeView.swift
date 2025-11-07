@@ -6,6 +6,7 @@
 //  Copyright © 2025 Stefano Mondino. All rights reserved.
 //
 
+import Components
 import DesignSystem
 import Foundation
 import Images
@@ -16,29 +17,29 @@ struct HomeView: View {
     @Environment(Design.self) var design
     @Environment(\.colorScheme) var colorScheme
     @State private var seed = UUID()
+
     var body: some View {
         ZStack {
             Color.clear
             VStack {
-                Text("Home View")
+                LocalizedText(.hello)
                 Text("Color: \(colorScheme == .dark ? "Dark" : "Light")")
-            }
-        }.background {
-            RemoteImage(URL(string: "https://picsum.photos/1080/1920?t=\(seed)"),
-                        placeholder: Images.Image.rectangle(size: .init(width: 10, height: 10),
-                                                            fillColor: .brown)) {
-                $0.view.resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-                    .overlay {
-                        Color.black.opacity(0.3).ignoresSafeArea()
-                    }
-                    .fade(if: $0.isDownloaded)
+                    .foregroundColor(.app)
             }
         }
+//        .background {
+//            RemoteImage(URL(string: "https://picsum.photos/1080/1920?t=\(seed)")) {
+//                $0.view.resizable()
+//                    .scaledToFill()
+//                    .ignoresSafeArea()
+//                    .overlay {
+//                        Color.black.opacity(0.3).ignoresSafeArea()
+//                    }
+//                    .fade(if: $0.isDownloaded)
+//            }
+//        }
         .background {
-            Design.AppColor.primary.swiftUIColor.ignoresSafeArea()
-                .ignoresSafeArea()
+            design.color.get(.primary).swiftUIColor.ignoresSafeArea()
         }
         .onTapGesture {
             seed = .init()

@@ -7,14 +7,14 @@
 //
 
 import AppSettings
+import Authorization
 import DependencyContainer
 import DesignSystem
 import Foundation
 import Logger
 import Onboarding
 import Routes
-
-import Authorization
+import Translations
 
 // murray: import
 
@@ -31,6 +31,7 @@ final class AppContainer: DependencyContainer {
     @MainActor lazy var state: AppLifecycle = .init(router: .init(container: routeContainer,
                                                                   name: "AppContainer"),
                                                     design: .init(),
+                                                    vocabulary: .init(),
                                                     serviceManager: serviceManager)
 
     @MainActor func setup() async {
@@ -60,6 +61,8 @@ final class AppContainer: DependencyContainer {
         await setupFeatures()
 
         await serviceManager.register(services)
+
+        state.vocabulary.register(for: "test") { Translation("Ciao {name}") }
 
         await state.start()
     }

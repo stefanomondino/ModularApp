@@ -18,7 +18,7 @@ public extension Skeleton.CoreModule {
               destinations: Constants.destinations,
               deploymentTargets: .custom,
               swiftVersion: .v6,
-              dependencies: .init(core: [.designSystem()]),
+              dependencies: .init(core: [.designSystem(), .images(), .translations()]),
               testDependencies: .init(test: [.coreTesting()]),
               synthesizers: [],
               hasMacros: false)
@@ -30,7 +30,7 @@ public extension Skeleton.CoreModule {
               deploymentTargets: .custom,
               swiftVersion: .v6,
               dependencies: .init(utilities: [],
-                                  core: [.designSystem()]),
+                                  core: [.designSystem(), .translations()]),
               testDependencies: .init(test: [.coreTesting()]),
               synthesizers: [],
               hasMacros: true)
@@ -70,6 +70,19 @@ public extension Skeleton.CoreModule {
               dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
                                   core: [.designSystem()],
                                   external: [.kingfisher()]),
+              testDependencies: .init(test: [.coreTesting()],
+                                      external: []),
+              synthesizers: [],
+              hasMacros: false)
+    }
+
+    static func translations() -> Self {
+        .init(name: "Translations",
+              destinations: Constants.destinations,
+              deploymentTargets: .custom,
+              swiftVersion: .v6,
+              dependencies: .init(utilities: [.dataStructures(), .logger(), .dependencyContainer(), .streams()],
+                                  core: []),
               testDependencies: .init(test: [.coreTesting()],
                                       external: []),
               synthesizers: [],
