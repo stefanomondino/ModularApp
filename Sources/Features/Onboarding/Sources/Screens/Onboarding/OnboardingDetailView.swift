@@ -41,19 +41,7 @@ public struct OnboardingDetailView: View {
                     .font(.title2)
                     .padding(.vertical, 20)
                 Button {
-                    withAnimation {
-                        if !didFirstTap {
-                            didActivateAction?()
-                            didFirstTap = true
-                        } else {
-                            if item.selectedPage == count - 1 {
-                                reachEnd?()
-                            } else {
-                                next += 1
-                            }
-                        }
-                        
-                    }
+                    withAnimation { !didFirstTap ? handleFirstTap() : handleNextStep() }
                 } label: {
                     Text(item.buttonTitle)
                         .frame(height: 54)
@@ -62,9 +50,23 @@ public struct OnboardingDetailView: View {
                         .cornerRadius(10)
                         .padding(.horizontal)
                 }
-                
             }
             .multilineTextAlignment(.center)
+        }
+    }
+}
+
+extension OnboardingDetailView {
+    private func handleFirstTap() {
+        didActivateAction?()
+        didFirstTap = true
+    }
+    
+    private func handleNextStep() {
+        if item.selectedPage == count - 1 {
+            reachEnd?()
+        } else {
+            next += 1
         }
     }
 }
