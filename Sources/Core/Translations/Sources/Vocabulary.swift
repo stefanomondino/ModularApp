@@ -25,11 +25,17 @@ public final class Vocabulary: MainActorProvider {
         resolve(key, type: Translation.self, default: Translation(key.value))
     }
 
+    public func register(_ dictionary: [Key: Translation]) {
+        for (key, value) in dictionary {
+            register(for: key) { value }
+        }
+    }
+
     public func translation(_ key: Key) -> Translation {
         get(key)
     }
 }
 
 public extension Vocabulary.Key {
-    static var hello: Self { "hello.xls" }
+    static var hello: Self { "hello" }
 }

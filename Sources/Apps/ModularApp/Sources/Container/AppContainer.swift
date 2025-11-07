@@ -62,7 +62,7 @@ final class AppContainer: DependencyContainer {
 
         await serviceManager.register(services)
 
-        state.vocabulary.register(for: "test") { Translation("Ciao {name}") }
+        state.vocabulary.register(["hello": "Ciao"])
 
         await state.start()
     }
